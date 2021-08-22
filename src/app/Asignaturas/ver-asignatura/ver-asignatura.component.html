@@ -1,0 +1,59 @@
+
+<!--
+boton de nueva previa
+boton horario
+añadir evaluacion
+    
+-->
+<div class="container mt-5">
+    <div class="row">
+      
+      <div class="col-sm">
+        <div class="card bg-light mb-3">
+            <div class="card-header h4">Editar Adignatura</div>
+            <div class="card-body">
+              <div class="card-title h3">{{asignatura.nombre}}
+            </div>
+              <div class="container">
+                <div class="d-flex justify-content-center">
+                    <form [formGroup]="profileForm" (ngSubmit)="editarAsignatura()" class="mt-1">
+
+                        <label>Código:</label>
+                            <input formControlName="codigo" type="text"  class=" mb-2 form-control" [(ngModel)]="asignaturaEditar.codigo" value={{asignaturaEditar.codigo}} readonly/>
+                            
+                        <label>Nombre:</label>
+                            <input formControlName="nombre" type="text"  class="mb-2 form-control" [(ngModel)]="asignaturaEditar.nombre" value={{asignaturaEditar.nombre}} />
+                 
+                        <label>Creditos:</label>
+                            <input formControlName="creditos"  class="mb-2 form-control" [(ngModel)]="asignaturaEditar.creditos" value={{asignaturaEditar.creditos}}/>             
+                        <!--<label>programa:
+                            <input [(ngModel)]="asignaturaEditar.programa" value={{asignaturaEditar.programa}}/>
+                        </label><br>-->
+                        <label>Se aprueba por:</label>
+                            <select  class="mb-2 form-control custom-select" formControlName="apruebaPor" [(ngModel)]="asignaturaEditar.apruebaPor">
+                                <option value="Parciales">Parciales</option>
+                                <option value="Laboratorios">Laboratorios</option>
+                                <option value="Defensas">Defensas</option>
+                                <option value="Obligatorios">Obligatorios</option>
+                                <option value="Exámen">Exámen</option>
+                            </select>
+                            <label>Nombre del docente a cargo </label>
+                            <input formControlName="nombreDocente" type="text"  class="mb-2 form-control"  [(ngModel)]="asignaturaEditar.nombreDoc" value={{asignaturaEditar.nombreDoc}}/>
+                        
+                            <label>Correo del docente </label>
+                            <input type="text" formControlName="correoDocente" class="mb-2 form-control"  [(ngModel)]="asignaturaEditar.correoDoc" value={{asignaturaEditar.correoDoc}}/>
+                            
+                            <label>Fecha limite de inscripción </label>
+                            <input  type="date" formControlName="fechaInscripcion" class="mb-2 form-control" [(ngModel)]="fecha" value={{fecha}} required/>
+                            <div class="form-group">
+                        <button type="button" class="btn btn-primary mt-2 float-left" (click)="volver()">Volver</button>
+                        <button class="btn btn-primary ml-2 mt-2 float-right" type="submit" [disabled]="!profileForm.valid"> Confirmar</button> 
+                        </div>
+                </form>
+                </div>
+                </div>
+            </div>
+          </div>
+      </div>
+  </div>
+  

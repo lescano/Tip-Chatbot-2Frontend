@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    
+    <div class="col-sm">
+      <div class="card mt-4">
+        <div class="card-body">
+          <div class="card-title h3">
+            Registrar nueva asignatura
+          </div>
+          <div class="container">
+              
+              <div class="d-flex justify-content-center">
+                <form [formGroup]="profileForm" (ngSubmit)="addAsig()" class="mt-1">
+                  <label>Código</label>
+                  <input formControlName="codigo" type="text" placeholder="Código" class="mb-2 form-control">
+                  <label>Nombre</label>
+                  <input formControlName="nombre" type="text" placeholder="Nombre" class="mb-2 form-control">
+                  <label>Creditos que otorga</label>
+                  <input formControlName="creditos" type="text" placeholder="Creditos" class="mb-2 form-control" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
+                  <!-- <input formControlName="programa" type="text" placeholder="Insertar Contraseña" class="mb-2 form-control"><br>-->
+
+                  <!--<input formControlName="apruebaPor" type="text"  placeholder="apruebaPor" class="mb-2">  <br>   
+
+                    -->
+                    <label>Se aprueba por </label>
+                    <select  formControlName="apruebaPor" class="mb-2 custom-select" >
+                    <option value="Parciales" >Parciales</option>
+                    <option value="Laboratorios">Laboratorios</option>
+                    <option value="Defensas">Defensas</option>
+                    <option value="Obligatorios">Obligatorios</option>
+                    <option value="Exámen">Exámen</option>
+                  </select>
+                  <label>Nombre del docente a cargo </label>
+                  <input formControlName="nombreDocente" type="text" placeholder="Nombre del Docente"
+                    class="mb-2 form-control">
+                    <label>Correo del docente </label>
+                  <input formControlName="correoDocente" type="text" placeholder="Correo del Docente"
+                    class="mb-2 form-control">
+                    <label>Fecha limite de inscripción </label>
+                  <input formControlName="fechaInscripcion" type="date" placeholder="Fecha de inscripcion"
+                    class="mb-2 form-control">
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary float-left" (click)="cancelar()"> Cancelar</button>
+                    <button class=" btn btn-primary float-right" type="submit" [disabled]="!profileForm.valid">
+                      Guardar</button>
+                  </div>
+                  
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+</div>

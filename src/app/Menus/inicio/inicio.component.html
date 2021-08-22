@@ -1,0 +1,19 @@
+<div class="text-center">
+    <h2 class="font-weight-bold mt-5">Bienvenido al ChatBot! del TIP</h2>
+    <div *ngIf="!islogin()">
+        <div class="d-flex justify-content-center pt-2">
+            <div class="card cuadrado col mx-4 p-2">
+                <app-login></app-login>
+                <h6>No tienes cuenta?</h6>
+                <a routerLink="/chat">Ingresar como invitado</a>
+                <a routerLink="/register" class="ml-2">Registrarse</a>
+                <p class="mt-5 mb-3 text-muted">&copy; 2020 Tecnólogo en Informatica</p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="islogin()">
+        <img src="https://image.freepik.com/vector-gratis/lindo-robot-sonriente-chat-bot-signos-comunicacion-ilustracion-personaje-dibujos-animados-plano-moderno-aislado-blanco-burbuja-hablar-bot-chat-comunicacion-servicio-soporte-voz_92289-518.jpg" class="img-fluid" alt="Responsive image">
+        <br>
+        <a routerLink="/chat"> Ir al Chat</a>
+    </div>
+    </div>

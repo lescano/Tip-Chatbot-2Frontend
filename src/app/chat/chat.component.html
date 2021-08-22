@@ -1,0 +1,52 @@
+<body class="chat">
+	<div class="chat-title">
+		<!--<h2>{{titulo}}</h2>
+		<h3>{{descripcion}}</h3>-->
+	</div>
+	<div class="d-flex justify-content-center mt-4">
+		
+		<div class="col-9 card scrolleable" id="chat">
+
+			<div class="messages">
+				<div>
+					<ul class="enviados">
+						<div class="container">
+							<div class="aling">
+								<p>¡Hola! Soy el asistente virtual del TIP ¿En que puedo ayudarte?<br>
+								- Puedes realizarme una consulta de la carrera del Tecnólogo en Informática.<br>
+								- Si tu pregunta requiere estar logueado, te lo haré saber!<br>
+								- Puedes escribir el nombre de una asignatura y te daré opciones.<br>
+								- Si escribes "Wiki RPyL" y lo que quieras buscar te mostraré resultados de la wiki creada por los estudiantes. :D<br>
+								</p>
+							</div>
+						</div>
+
+						<div *ngFor="let m of mensajes">
+							<div class="container ">
+								<div class="aling {{m.tono}}">
+									<div [innerHTML]="m.msj"></div>
+									<div *ngIf="m.botones"><button (click)='profesor()' class='option mt-1'>¿Quién la dicta?</button><button (click)='horarios()' class='option mt-1 ml-1'>Horarios</button><button (click)='evaluaciones()' class='option mt-1 ml-1'>Evaluaciones</button><button (click)="limite()" class='option mt-1 ml-1'>Límite de inscripción</button><button (click)="creditos()" class='option mt-1 ml-1'>Créditos que otorga</button><button (click)="cursada()" class='option mt-1 ml-1'>¿Puedo cursarla?</button></div>
+									<span class="time-right">{{m.hora}}</span>
+								</div>
+							</div>
+
+						</div>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="d-flex justify-content-center mt-3">
+		<div class="col-9">
+			<div class="form-group d-flex">
+				<input type="text" [(ngModel)]="contenidoMensaje" name="" id="entrada"
+					placeholder="Escriba aquí..." class="form-control mb-2 submit-component" (keydown.enter)="enviarMensaje()">
+				<input  type="submit" name="enviar" class=" btn btn-primary ml-2 submit-component mover"
+					(click)="enviarMensaje()"  value="Enviar">
+
+			</div>
+		</div>
+	</div>
+
+</body>

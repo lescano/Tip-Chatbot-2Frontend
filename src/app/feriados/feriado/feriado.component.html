@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm">
+        <div class="card bg-light mb-3" >
+            <div class="card-header h4">Lista de feriados</div>
+            <div class="card-body">      
+              
+              <button class="btn btn-primary mb-2" routerLink="/nuevoFeriado"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo feriado</button>
+              <table class="table table-responsive-xl">
+                <thead >
+                  <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Motívo</th>
+                    <th scope="col">Borrar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let feriado of listado">
+                    <td>{{feriado.fecha}}</td>
+                    <td>{{feriado.motivo}}</td>
+                    <td><button class="btn btn-danger" (click)="borrarFeriado(feriado.id)"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</button></td>
+                  </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+

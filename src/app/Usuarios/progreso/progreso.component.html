@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-sm-1"></div>
+      <div class="col-sm">
+        <div class="card bg-light mb-3" >
+            <div class="card-header h4">Mi progreso academico</div>
+
+          <div class="card-body">      
+            <Button class="btn btn-primary mb-2" (click)="nuevoEstado()"><i class="fa fa-plus" aria-hidden="true"></i> Añadir nueva asignatura</Button>
+          <table class="table table-responsive-xl">
+                <tr>
+                  <th scope="col">Código</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Correo del docente</th>      
+                  <th scope="col">Estado</th>
+
+                  <th scope="col">Acciones</th>
+                </tr>
+              <tbody>
+                <tr *ngFor="let asignatura of asignaturas; index as i">
+                  
+                  <td>{{asignatura.codigo}}</td>
+                  <td>{{asignatura.nombre}}</td>
+                  <td>{{asignatura.correoDoc}}</td>
+                  <td>{{estados[i].estado}} </td>
+                                 
+                  <div class="dropright">
+                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Modificar
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <button class="dropdown-item" (click)="cambiarEstado('Cursando',i,asignatura)"><i class="fa fa-plus" aria-hidden="true"></i> Cursando</button>
+                      <button class="dropdown-item" (click)="cambiarEstado('Exámen',i,asignatura)"><i class="fa fa-minus" aria-hidden="true"></i> Exámen</button>
+                      <button class="dropdown-item" (click)="cambiarEstado('Exonerada',i,asignatura)"><i class="fa fa-check" aria-hidden="true"></i> Exonerada</button>
+                      <button class="dropdown-item" (click)="cambiarEstado('Quitar',i,asignatura)"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</button>
+                    </div>
+                  </div>
+
+              </tbody>
+              </table>
+            
+
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+</div>

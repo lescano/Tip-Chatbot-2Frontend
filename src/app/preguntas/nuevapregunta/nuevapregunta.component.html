@@ -1,0 +1,70 @@
+<div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="card mt-4">
+          <div class="card-body">
+            <div class="card-title h3">
+              Nueva pregunta
+            </div>
+            <div class="container">
+              <div class="d-flex justify-content-center">
+                <div class="">
+                  
+                    <form [formGroup]="profileForm" (ngSubmit)="addPregunta()" class="mt-1">
+                      <div class="form-group">
+                    <label>Nombre de la pregunta</label>
+                    <input formControlName="nombre" type="text" class="form-control">
+                  </div>
+                    <div class="form-group">
+                    <label>Agregar formas de preguntar</label>
+                    <button type="button" class="btn btn-primary ml-3" data-toggle="modal" data-target="#exampleModal">
+                      +
+                    </button>
+                    <button type="button" class="btn btn-primary ml-3" (click)="quitar()">
+                      -
+                    </button>
+                    
+                    <div *ngFor="let pregunta of formasPregunta">
+                      <input type="text" value="{{pregunta}}" class="form-control mt-1 mb-1" disabled>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label>Respuesta</label>
+                    <textarea formControlName="respuesta" class="form-control rounded-0" rows="5"></textarea>
+                  </div>
+                    <div class="form-group mt-3">
+                    <button type="button" class="btn btn-primary float-left" routerLink="/preguntas" > Cancelar</button>
+                    <button class=" btn btn-primary float-right" type="submit" [disabled]="!profileForm.valid"> Guardar</button>
+                    </div>
+                  </form>
+              </div>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar forma de preguntar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="secondForm" class="mt-1">
+          <textarea formControlName="pregunta" class="form-control rounded-0" rows="2"></textarea>
+        </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarForma()">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>

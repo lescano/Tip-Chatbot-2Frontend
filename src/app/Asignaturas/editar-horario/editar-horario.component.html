@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-1">
+      </div>
+      <div class="col-sm">
+        <div class="card bg-light mb-3">
+            <div class="card-header h4">Editar Horario</div>
+            <div class="card-body">
+              <div class="container m-2">
+              
+                    <div class="d-flex justify-content-center">
+                    <div class="col-5">
+                        
+                        <form [formGroup]="profileForm" (ngSubmit)="editarHorario()" class="mt-1">
+                        <label>Semetre:</label>
+                        <select formControlName="semestre" [(ngModel)]="horarioEditar.semestre" class="mb-2 form-control custom-select">
+                            <option value="1">Primer</option>
+                            <option value="2">Segundo</option>
+                            <option value="3">Tercer</option>
+                            <option value="4">Cuarto</option>
+                            <option value="5">Quinto</option>
+                            <option value="6">Sexto</option>
+                          </select>
+                            
+                        <br>
+                        <label>Dia:</label>
+                            <select formControlName="dia" [(ngModel)]="horarioEditar.dia" class="mb-2 form-control custom-select">
+                                <option value="Lunes">Lunes</option>
+                                <option value="Martes">Martes</option>
+                                <option value="Miércoles">Miércoles</option>
+                                <option value="Jueves">Jueves</option>
+                                <option value="Viernes">Viernes</option>
+                            
+                              </select>         
+                       <br>
+                        <label>Hora desde:</label>
+                            <input type="string" class="form-control" formControlName="horaD" [(ngModel)]="horarioEditar.horaDesde" value={{horarioEditar.horaDesde}}>
+                        <br>
+                        <label>Hora hasta:</label>
+                            <input type="string" class="form-control" formControlName="horaH" [(ngModel)]="horarioEditar.horaHasta" value={{horarioEditar.horaHasta}}>
+                        <br>
+                        <button type="button" class="btn btn-primary mt-2" (click)="cancelar()">Cancelar</button>
+                        <button class="btn btn-primary ml-2 mt-2" type="submit" [disabled]="!profileForm.valid">Confirmar</button>
+                    </form>
+                    </div>
+                </div>
+              
+            </div>
+            </div>
+          </div>
+      </div>
+      <div class="col-sm-1">
+      </div>
+  </div>
