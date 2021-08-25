@@ -69,8 +69,8 @@ export class ProgresoComponent implements OnInit {
     }
    
   }
-  nuevoEstado(){
+  /*nuevoEstado(){
     this.router.navigate(['/agregarAsig']);
-  }
+  }*/
 
 }
