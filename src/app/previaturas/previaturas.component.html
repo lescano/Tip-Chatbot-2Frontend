@@ -1,0 +1,32 @@
+<div class="container mt-4">
+    <div class="row">
+      <div class="col">
+        <div class="card bg-light mb-3" >
+            <div class="card-header h4">Previaturas</div>
+          <div class="card-body">     
+            <input type="text" name="usuario" id="usuario" placeholder="Usuario:">
+            <input type="text" name="asignatura" id="asignatura" placeholder="Asignatura:">
+          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table  table-responsive-xl table-striped ">
+              <thead >
+                <tr>
+                  <th scope="col">Asignatura</th>
+                  <th scope="col">Habilitado</th>
+                  <th scope="col">Previa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let asignatura of asignaturas; index as i">
+                  
+                  <td>{{asignatura.previas}}</td>
+                  <td>{{asignatura.nombre}}</td>
+                  <td>{{asignatura.nombre}}</td>
+                  <!--td>{{asignatura.previas}}</td-->
+                </tr>
+              </tbody>
+              </table>
+            
+
+        </div>
+      </div>
+    </div>
+</div>
