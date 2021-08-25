@@ -23,6 +23,8 @@ import { FeriadoComponent } from './feriados/feriado/feriado.component';
 import { NuevapreguntaComponent } from './preguntas/nuevapregunta/nuevapregunta.component';
 import { NuevoFeriadoComponent } from './feriados/nuevo-feriado/nuevo-feriado.component';
 import { ExcelComponent } from './excels/excel/excel.component';
+import { PreviaturasComponent } from './previaturas/previaturas.component';
+
 
 
 
@@ -50,7 +52,9 @@ const routes: Routes = [
   { path: 'nuevaPregunta', component: NuevapreguntaComponent},
   { path: 'feriados', component: FeriadoComponent},
   { path: 'nuevoFeriado', component: NuevoFeriadoComponent},
-  { path: 'excels', component: ExcelComponent}
+  { path: 'excels', component: ExcelComponent},
+  { path: 'previaturas', component: PreviaturasComponent}
+
 ];
 
 @NgModule({
