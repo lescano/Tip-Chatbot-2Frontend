@@ -6,7 +6,7 @@ import { AsignaturaService } from '../Services/asignatura.service';
 import { Subject } from 'rxjs';
 import { AsignaturasAdminComponent } from '../Asignaturas/asignaturas-admin/asignaturas-admin.component';
 import { FormGroup,FormControl,FormBuilder,Validators} from '@angular/forms';
-import { PreviaService } from '../Services/previa.service';
+//import { PreviaService } from '../Services/previa.service';
 import { ChatService } from '../Services/chat.service';
 import { UsuarioService } from '../Services/usuario.service';
 
@@ -40,7 +40,7 @@ export class PreviaturasComponent implements OnInit {
 
   constructor(
     private asignaturaService: AsignaturaService,
-    private previaService: PreviaService,
+    //private previaService: PreviaService,
     private chatService: ChatService,
     private usuarioService: UsuarioService){}
 
