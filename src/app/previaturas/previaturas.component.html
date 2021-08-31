@@ -2,28 +2,49 @@
     <div class="row">
       <div class="col">
         <div class="card bg-light mb-3" >
-            <div class="card-header h4">Previaturas</div>
+          <div class="card-header h4">Previaturas</div>
           <div class="card-body">     
-            <input type="text" name="usuario" id="usuario" placeholder="Usuario:">
-            <input type="text" name="asignatura" id="asignatura" placeholder="Asignatura:">
-          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table  table-responsive-xl table-striped ">
+            <!--input type="text" name="usuario" id="usuario" placeholder="Usuario:">
+            <input type="text" name="asignatura" id="asignatura" placeholder="Asignatura:"-->
+            <form [formGroup]="previaForm" (ngSubmit)="getPrevia()" class="mt-1">
+              <!--label>Usuario</label>
+              <input formControlName="buscUsuarios1" type="text" placeholder="Ingresar documento..." class="mb-2 form-control"-->
+              <label>Usuarios</label>
+              <!--input type="text" placeholder="Ingresar documento..." class="mb-2 form-control"-->
+              <select  formControlName="buscUsuarios" class="mb-2 custom-select" placeholder="Usuarios">
+                <option *ngFor="let usuario of usuarios; index as i" value="{{usuario.id}}:{{usuario.cedula}}:{{usuario.nombre}}:{{usuario.apellido}}" >{{usuario.nombre}} {{usuario.apellido}}</option>
+              </select>
+              <label>Asignatura</label>
+              <select  formControlName="buscAsignatura" class="mb-2 custom-select" placeholder="Asignatura">
+                <option *ngFor="let asignatura of asignaturas; index as i" value="{{asignatura.codigo}}:{{asignatura.nombre}}" >{{asignatura.nombre}}</option>
+              </select>
+              <div class="form-group">
+                <button class=" btn btn-primary float-right" type="submit" [disabled]="!previaForm.valid">
+                  Buscar</button>
+              </div>
+            </form><br><br>
+            <div *ngIf=asignatura class="card bg-light mb-3">
+              <div class="card-header h5">
+                Resultado de la busqueda:
+              </div>
+              <div class="card-body">
+                <p>{{nombre_usuario}} {{apellido_usuario}} ({{cedula_usuario}}) {{puede_cursar}} {{asignatura}}</p>
+              </div>
+            </div>
+          <!--table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table  table-responsive-xl table-striped ">
               <thead >
                 <tr>
                   <th scope="col">Asignatura</th>
                   <th scope="col">Habilitado</th>
-                  <th scope="col">Previa</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let asignatura of asignaturas; index as i">
-                  
-                  <td>{{asignatura.previas}}</td>
-                  <td>{{asignatura.nombre}}</td>
-                  <td>{{asignatura.nombre}}</td>
-                  <!--td>{{asignatura.previas}}</td-->
+                <tr *ngFor="let obj of puede_cursar; index as j">
+                  <td>{{obj.asignatura}}</td>
+                  <td>{{obj.habilitado}}</td>
                 </tr>
               </tbody>
-              </table>
+            </table-->
             
 
         </div>

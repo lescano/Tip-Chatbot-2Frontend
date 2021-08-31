@@ -7,8 +7,8 @@ import {AuthService} from './auth.service';
   providedIn: 'root',
 })
 export class ChatService {
-  //private httpUrl = 'http://localhost:8080/';
-  private httpUrl = 'https://chatbot-tip-backend.herokuapp.com/';
+  private httpUrl = 'http://localhost:8080/';
+  //private httpUrl = 'https://chatbot-tip-backend.herokuapp.com/';
   messages: string[] = [];
     constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -58,6 +58,18 @@ export class ChatService {
   cursada(codigo) {
     const headers = { 'Authorization': '*'};
     var id= this.auth.getActualUser();
+    if(id == null || id == undefined){
+      id = "0";
+    }
+    return this.http.post<any>(this.httpUrl + 'preguntas/FAQcal8',{codigo:codigo,id:id});
+  }
+
+  //es exactamente la misma llamada que la anterior, 
+  //solo que el id del usuario que se quiere buscar es distinto del usuario logueado
+  //por lo que el id es necesario paraslo como parametro
+  cursada2(codigo, id) {
+    const headers = { 'Authorization': '*'};
+    //var id= this.auth.getActualUser();
     if(id == null || id == undefined){
       id = "0";
     }
