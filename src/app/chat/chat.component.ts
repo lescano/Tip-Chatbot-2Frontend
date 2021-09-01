@@ -131,7 +131,7 @@ export class ChatComponent implements OnInit {
     }else{
       minutosf = new Date().getMinutes();
     }
-    this.mensajes.push({id:"boot",botones:false,msj:"No puedo entender más de 255 caractéres :(" ,tono:"claro",hora:horaf+":"+minutosf});
+    this.mensajes.push({id:"boot",botones:false,msj:"No puedo entender más de 255 caractéres 😞" ,tono:"claro",hora:horaf+":"+minutosf});
     setTimeout(() => {  var chatHistory = document.getElementById("chat");
     chatHistory.scrollTop = chatHistory.scrollHeight; }, 50);
   }
