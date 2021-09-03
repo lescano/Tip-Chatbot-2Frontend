@@ -8,22 +8,20 @@ import { variablesGlobales } from "./variablesGlobales";
   providedIn: 'root'
 })
 export class AuthService {
-  //private httpUrl = 'http://localhost:8080/';
-  private httpUrl = 'https://chatbot-tip-backend.herokuapp.com/';
 
   constructor(private http: HttpClient,
     private router:Router) { 
     }
 
-
   getActualUser(){
     return localStorage.getItem("actualUser");
   }
+  
   setActualUser(id:string){ 
     localStorage.setItem("actualUser",id);
   }
   registerUser(cedula,nombre,apellido,password){
-    return this.http.post<any>(this.httpUrl + 'usuario/nuevo', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/nuevo', {
       cedula:cedula,
       nombre:nombre,
       apellido:apellido,
@@ -31,14 +29,15 @@ export class AuthService {
       admin:false,
       });
   }
+
   loginUser(cedula,password){
-    return this.http.post<any>(this.httpUrl + 'usuario/login', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/login', {
       cedula:cedula,
       contrasenia:password,
       });
   }
   getUser(){
-    return this.http.post<any>(this.httpUrl + 'usuario/detalle', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/detalle', {
       id:this.getActualUser(),
       });
   }
@@ -46,7 +45,7 @@ export class AuthService {
     return !!localStorage.getItem("token");
   }
   isAdmin(){
-    return this.http.post<any>(this.httpUrl + 'usuario/verify', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/verify', {
       id:this.getActualUser(),
       });
   }
@@ -54,7 +53,7 @@ export class AuthService {
     return localStorage.getItem("token");
   }
   updateUser(cedula,nombre,apellido){
-    return this.http.post<any>(this.httpUrl + 'usuario/update', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/update', {
       id:this.getActualUser(),
       cedula:cedula,
       nombre:nombre,
@@ -62,14 +61,14 @@ export class AuthService {
       });
   }
   updateContrasenia(actual,contrasenia){
-    return this.http.post<any>(this.httpUrl + 'usuario/updatePassword', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/updatePassword', {
       id:this.getActualUser(),
       actual:actual,
       contrasenia:contrasenia,
       });
   }
   eliminarUsuario(){
-    return this.http.post<any>(this.httpUrl + 'usuario/delete', {
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/delete', {
       id:this.getActualUser(),
       });
   }

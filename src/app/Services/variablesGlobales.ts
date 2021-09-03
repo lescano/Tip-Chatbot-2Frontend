@@ -1,6 +1,7 @@
 export namespace variablesGlobales {
     var actualUser;
     var horariosGlobales;
+    
     /*private static instance: variablesGlobales;
     private constructor() { }
     public static getInstance(): variablesGlobales {
@@ -11,6 +12,16 @@ export namespace variablesGlobales {
         return variablesGlobales.instance;
     }*/
 
+    export function getHttpUrl(){
+       return 'http://localhost:8080/';
+        //return 'https://chatbot-tip-backend.herokuapp.com/';
+    }
+
+    export function getHttpUrlInterprete(){
+        return 'http://localhost:5000/';
+         //return 'https://chatbot-tip-backend.herokuapp.com/';
+     }
+ 
 
     export function getActualUser(){
         return this.actualUser;
