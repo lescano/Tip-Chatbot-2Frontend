@@ -6,7 +6,7 @@
             <div class="card-header h4">Mi progreso academico</div>
 
           <div class="card-body">      
-            <Button class="btn btn-primary mb-2" (click)="nuevoEstado()"><i class="fa fa-plus" aria-hidden="true"></i> Añadir nueva asignatura</Button>
+            <!--Button class="btn btn-primary mb-2" (click)="nuevoEstado()"><i class="fa fa-plus" aria-hidden="true"></i> Añadir nueva asignatura</Button-->
           <table class="table table-responsive-xl">
                 <tr>
                   <th scope="col">Código</th>
@@ -25,15 +25,15 @@
                   <td>{{estados[i].estado}} </td>
                                  
                   <div class="dropright">
-                    <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <!--button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Modificar
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    </button-->
+                    <!--div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <button class="dropdown-item" (click)="cambiarEstado('Cursando',i,asignatura)"><i class="fa fa-plus" aria-hidden="true"></i> Cursando</button>
                       <button class="dropdown-item" (click)="cambiarEstado('Exámen',i,asignatura)"><i class="fa fa-minus" aria-hidden="true"></i> Exámen</button>
                       <button class="dropdown-item" (click)="cambiarEstado('Exonerada',i,asignatura)"><i class="fa fa-check" aria-hidden="true"></i> Exonerada</button>
                       <button class="dropdown-item" (click)="cambiarEstado('Quitar',i,asignatura)"><i class="fa fa-trash" aria-hidden="true"></i> Quitar</button>
-                    </div>
+                    </div-->
                   </div>
 
               </tbody>

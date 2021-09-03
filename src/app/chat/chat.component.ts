@@ -103,7 +103,7 @@ export class ChatComponent implements OnInit {
             this.responderErrorVacio(errorMessage);
             this.contenidoMensaje = "";
         } else if (this.contenidoMensaje.length > 255) {
-            let errorMessage = "No puedo entender más de 255 caractéres :(";
+            let errorMessage = "No puedo entender más de 255 caractéres 😞";
             this.mensajes.push({ id: "tu", msj: this.contenidoMensaje, tono: "obscuro", hora: this.getDateTimeMesssage() });
             this.responderErrorLargo(errorMessage);
             this.contenidoMensaje = "";
@@ -142,7 +142,7 @@ export class ChatComponent implements OnInit {
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }, 50);
     }
-
+    
     responderErrorVacio(message) {
         this.mensajes.push({ id: "boot", botones: false, msj: message, tono: "claro", hora: this.getDateTimeMesssage() });
         setTimeout(() => {

@@ -73,4 +73,15 @@ export class ChatService {
     clear() {
         //this.messages = [];
     }
+    //es exactamente la misma llamada que la anterior, 
+    //solo que el id del usuario que se quiere buscar es distinto del usuario logueado
+    //por lo que el id es necesario paraslo como parametro
+    cursada2(codigo, id) {
+        const headers = { 'Authorization': '*' };
+        //var id= this.auth.getActualUser();
+        if (id == null || id == undefined) {
+            id = "0";
+        }
+        return this.http.post<any>(variablesGlobales.getHttpUrl + 'preguntas/FAQcal8', { codigo: codigo, id: id });
+    }
 }
