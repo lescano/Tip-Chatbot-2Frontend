@@ -10,10 +10,17 @@
               <!--label>Usuario</label>
               <input formControlName="buscUsuarios1" type="text" placeholder="Ingresar documento..." class="mb-2 form-control"-->
               <label>Usuarios</label>
+              <input list="idUsuariosLista" formControlName="buscUsuarios" class="mb-2 custom-select" placeholder="Usuarios"/>
+
+              <datalist id="idUsuariosLista">
+                <!--option *ngFor="let usuario of usuarios; index as i" value="{{usuario.id}}:{{usuario.cedula}}:{{usuario.nombre}}:{{usuario.apellido}}" >{{usuario.nombre}} {{usuario.apellido}}</option-->
+                <option *ngFor="let usuario of usuarios; index as i" value="{{usuario.cedula}}" >{{usuario.nombre}} {{usuario.apellido}}</option>
+              </datalist>
+
               <!--input type="text" placeholder="Ingresar documento..." class="mb-2 form-control"-->
-              <select  formControlName="buscUsuarios" class="mb-2 custom-select" placeholder="Usuarios">
+              <!--select  formControlName="buscUsuarios" class="mb-2 custom-select" placeholder="Usuarios">
                 <option *ngFor="let usuario of usuarios; index as i" value="{{usuario.id}}:{{usuario.cedula}}:{{usuario.nombre}}:{{usuario.apellido}}" >{{usuario.nombre}} {{usuario.apellido}}</option>
-              </select>
+              </select-->
               <label>Asignatura</label>
               <select  formControlName="buscAsignatura" class="mb-2 custom-select" placeholder="Asignatura">
                 <option *ngFor="let asignatura of asignaturas; index as i" value="{{asignatura.codigo}}:{{asignatura.nombre}}" >{{asignatura.nombre}}</option>
@@ -23,7 +30,7 @@
                   Buscar</button>
               </div>
             </form><br><br>
-            <div *ngIf=asignatura class="card bg-light mb-3">
+            <div *ngIf="puede_cursar" class="card bg-light mb-3">
               <div class="card-header h5">
                 Resultado de la busqueda:
               </div>

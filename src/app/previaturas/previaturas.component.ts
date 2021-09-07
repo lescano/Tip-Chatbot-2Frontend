@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Asignatura } from '../Clases/asignatura';
 import { Usuario } from '../Clases/usuario';
-import { Previa } from '../Clases/previa';
 import { AsignaturaService } from '../Services/asignatura.service';
 import { Subject } from 'rxjs';
-import { AsignaturasAdminComponent } from '../Asignaturas/asignaturas-admin/asignaturas-admin.component';
 import { FormGroup,FormControl,FormBuilder,Validators} from '@angular/forms';
-import { PreviaService } from '../Services/previa.service';
 import { ChatService } from '../Services/chat.service';
 import { UsuarioService } from '../Services/usuario.service';
+
 
 
 
@@ -34,13 +32,14 @@ export class PreviaturasComponent implements OnInit {
   dtTrigger = new Subject();
   puede_cursar = "";
   asignatura = "";
+  id_usuario;
   cedula_usuario = "";
   nombre_usuario = "";
   apellido_usuario = "";
+  asignaturas_pendientes;
 
   constructor(
     private asignaturaService: AsignaturaService,
-    private previaService: PreviaService,
     private chatService: ChatService,
     private usuarioService: UsuarioService){}
 
@@ -81,7 +80,7 @@ export class PreviaturasComponent implements OnInit {
   }
 
   //esta funcion se llama cuando se hace el submit del form
-  getPrevia(){
+  async getPrevia(){
     console.log("a"+this.previaForm.value.buscUsuarios);
     console.log("p"+this.previaForm.value.buscAsignatura);
     if(this.previaForm.value.buscUsuarios != "" && this.previaForm.value.buscAsignatura != ""){
@@ -92,30 +91,32 @@ export class PreviaturasComponent implements OnInit {
       let codigo_asignatura = buscAsignatura[0];
       this.asignatura = buscAsignatura[1];
 
-      //datos 
-      let buscUsuarios = this.previaForm.value.buscUsuarios.split(":");
-      let id_usuario = buscUsuarios[0];
-      this.cedula_usuario = buscUsuarios[1];
-      this.nombre_usuario = buscUsuarios[2];
-      this.apellido_usuario = buscUsuarios[3];
-      this.chatService.cursada2(codigo_asignatura,id_usuario)
-      .subscribe(
-        dato =>{
-          if(dato.Reply == "No, no estás en condiciones de realizar esta materia"){
-            this.puede_cursar = "no se encuentra habilitado a cursar";
-          }
-          else{
-            this.puede_cursar = "se encuentra habilitado a cursar";
-          }
-          this.dtTrigger.next();
-        }
-      );
-
+      //con la cedula del alumno que es la que traigo en el value, 
+      //hago una consulta al backend para traer todos los dato de ese objeto usuario
+      this.cedula_usuario = this.previaForm.value.buscUsuarios;
       
-      
+      let usuario_objeto;
+      this.usuarioService.getUsuario(this.cedula_usuario).subscribe(data => {
+        usuario_objeto = data.usuario;
+        this.id_usuario = usuario_objeto.id;
+        this.nombre_usuario = usuario_objeto.nombre;
+        this.apellido_usuario = usuario_objeto.apellido;
 
-    }
+        //llamada al chat service para que resuva la consulta
+        this.chatService.cursada2(codigo_asignatura, usuario_objeto.id)
+        .subscribe(
+          dato =>{
+            if(dato.Reply == "No, no estás en condiciones de realizar esta materia"){
+              this.puede_cursar = "no se encuentra habilitado a cursar";
+            }
+            else{
+              this.puede_cursar = "se encuentra habilitado a cursar";
+            }
+            this.dtTrigger.next();
+          }
+        );
+      });
+    }        
+    
   }
-
-
 }
