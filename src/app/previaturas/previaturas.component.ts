@@ -4,10 +4,6 @@ import { Usuario } from '../Clases/usuario';
 import { AsignaturaService } from '../Services/asignatura.service';
 import { Subject } from 'rxjs';
 import { FormGroup,FormControl,FormBuilder,Validators} from '@angular/forms';
-<<<<<<< HEAD
-=======
-//import { PreviaService } from '../Services/previa.service';
->>>>>>> 50db1a22bc16da34566d1fed1e5c0322188661a0
 import { ChatService } from '../Services/chat.service';
 import { UsuarioService } from '../Services/usuario.service';
 
@@ -44,10 +40,6 @@ export class PreviaturasComponent implements OnInit {
 
   constructor(
     private asignaturaService: AsignaturaService,
-<<<<<<< HEAD
-=======
-    //private previaService: PreviaService,
->>>>>>> 50db1a22bc16da34566d1fed1e5c0322188661a0
     private chatService: ChatService,
     private usuarioService: UsuarioService){}
 
