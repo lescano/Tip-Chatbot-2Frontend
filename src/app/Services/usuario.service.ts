@@ -16,16 +16,19 @@ export class UsuarioService {
   getUsuarios(){
     return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/listado', {});
   }
+
   borrarUsuario(id){
     return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/delete', {
       id:id,
       });
   }
-  //getUsuario(id: number): Observable<Usuario> {
-    // TODO: send the message _after_ fetching the hero
-    //this.messageService.add(`HeroService: fetched hero id=${id}`);
-    //return of(USUARIOS.find(hero => hero.id === id));
-  //}
+
+  //busco un usuario por cedula
+  getUsuario(cedula){ 
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/detalleC', {
+      cedula: cedula,
+      });
+  }
   updateEstadoAsignatura(id,estado){
     return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/updateUA', {
       id:id,
@@ -50,4 +53,11 @@ export class UsuarioService {
       });
   }
 
+  //traer cuales son las materias (previas) que le falta aprobar al usuario para poder cursar otra
+  getAsignaturasPendientes(id, codigo_asignatura){
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/pendientes', {
+      id:id,
+      codigo:codigo_asignatura
+      });
+  }
 }

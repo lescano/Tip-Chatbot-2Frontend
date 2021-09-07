@@ -90,6 +90,6 @@ export class ChatService {
         if (id == null || id == undefined) {
             id = "0";
         }
-        return this.http.post<any>(variablesGlobales.getHttpUrl + 'preguntas/FAQcal8', { codigo: codigo, id: id });
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'preguntas/FAQcal8', { codigo: codigo, id: id });
     }
 }
