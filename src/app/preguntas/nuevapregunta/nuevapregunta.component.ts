@@ -25,6 +25,10 @@ export class NuevapreguntaComponent implements OnInit {
       ])
   });
   formasPregunta = new Array();
+  emojis:any[] = [{em:"👆"},{em:"👇"},{em:"👈"},{em:"👉"},{em:"👋"},{em:"👋"},{em:"👌"},{em:"👍"},
+  {em:"👎"},{em:"🙌"},{em:"👏"},{em:"👐"},{em:"💪"},{em:"😅"},{em:"😂"},{em:"😉"},{em:"😊"},{em:"😕"},{em:"😔"},
+  {em:"😦"},{em:"😬"},{em:"🤓"},{em:"🤨"},{em:"🤫"},{em:"🤗"},{em:"🌝"},{em:"🎉"},{em:"👀"},{em:"👨‍🎓"},
+  {em:"☕"},{em:"💡"},{em:"📆"},{em:"📍"},{em:"📞"},{em:"📧"},{em:"📱"},{em:"🔑"},{em:"🔒"},{em:"🔔"},{em:"🎖️"}];     
  
   constructor(private preguntaService: PreguntaService,
     private fb: FormBuilder,
@@ -48,6 +52,12 @@ export class NuevapreguntaComponent implements OnInit {
   quitar(): void{
     this.formasPregunta.pop();
   }
+
+  addEmoji(i): void{
+    this.profileForm.value.respuesta += this.emojis[i].em;
+    this.profileForm.get('respuesta').setValue(this.profileForm.value.respuesta);
+  }
+
   addPregunta() : void{
    // console.log(this.formasPregunta);
     

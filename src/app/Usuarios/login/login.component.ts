@@ -44,7 +44,8 @@ export class LoginComponent implements OnInit {
         //alert(data.usuario.id);
         //variablesGlobales.setActualUser(data.usuario.id);
         //this.auth.setActualUser("aloja");
-        
+
+        console.log('Chatbot BackEnd up!');
         this.auth.setActualUser(data.usuario.id);
         localStorage.setItem("token",data.token);
         this.router.navigate(['/chat']);      

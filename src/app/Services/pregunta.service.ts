@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {AuthService} from './auth.service';
-
+import { variablesGlobales } from './variablesGlobales';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PreguntaService {
-    //private httpUrl = 'http://localhost:8080/';
-    private httpUrl = 'https://chatbot-tip-backend.herokuapp.com/';
+    
+    //private httpUrl = 'https://chatbot-tip-backend.herokuapp.com/';
 
     constructor(private http: HttpClient, private auth: AuthService) {
 
@@ -19,18 +19,18 @@ export class PreguntaService {
     const headers = { 'Authorization': '*'};
 
   
-    return this.http.get<any>(this.httpUrl + 'listar-intent');
+    return this.http.get<any>(variablesGlobales.getHttpUrlInterprete() + 'listar-intent');
   }
 
   nuevaPregunta(nombre,pregunta,respuesta){
-    return this.http.post<any>(this.httpUrl + 'nuevo-intent', {
+    return this.http.post<any>(variablesGlobales.getHttpUrlInterprete() + 'nuevo-intent', {
       nombreIntent:nombre,
       pregunta:pregunta,
       respuesta:respuesta
       });
   }
   borrar(id){
-    return this.http.post<any>(this.httpUrl + 'borrar-intent', {
+    return this.http.post<any>(variablesGlobales.getHttpUrlInterprete() + 'borrar-intent', {
       idIntent:id,
       });
   }
