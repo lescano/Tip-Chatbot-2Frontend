@@ -10,7 +10,6 @@
     </button>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup">
       <ul class="navbar-nav ml-auto" *ngIf="islogin()">
-      
           <li *ngIf="isAdmin()" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <i class="fa fa-lock" aria-hidden="true"></i>  Administración 
@@ -18,7 +17,11 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" routerLink="/usuarios"><i class="fa fa-users" aria-hidden="true"></i> Administrar Usuarios</a>
               <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/estadisticas"><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadisticas Usuario</a>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" routerLink="/asignaturasAdmin"><i class="fa fa-university" aria-hidden="true"></i> Administrar Asignaturas</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/estadisticas-asignatura"><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadisticas Asignatura</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" routerLink="/preguntas"><i class="fa fa-question-circle" aria-hidden="true"></i> Administrar Preguntas</a>
               <div class="dropdown-divider"></div>

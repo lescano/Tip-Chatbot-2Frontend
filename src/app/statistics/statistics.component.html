@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-center">
+    <div class="card m-2 shadow w-75">
+        <div class="card-body">
+            <h5 class="card-title text-primary">Estadisticas de usuario </h5>
+            <h6 class="card-subtitle mb-2 text-muted mt-2">Cantidad de preguntas por período de tiempo</h6>
+            <div class="d-flex flex-row-reverse">
+                <button (click)="filterDateCountQuestions()" class="btn btn-primary mb-3 ml-2">Filtrar</button>
+                <div class="form-group row ">
+                    <label for="inputEndDate" class="mt-2">Hasta</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" [(ngModel)]="endDate" id="inputEndDate">
+                    </div>
+                </div>
+                <div class="form-group row mr-3">
+                    <label for="inputInitDate" class="mt-2">Desde</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" [(ngModel)]="startDate" id="inputStartDate">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <table class="table table-sm w-75">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <td class="text-center">Periodo</td>
+                            <td class="text-center">Mensajes procesados</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of rowArrayConsults; let i = index">
+                            <td class="text-center">{{ row.period }}</td>
+                            <td class="text-center">{{ row.value}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted mt-4">Cantidad de preguntas por Usuario</h6>
+            <hr>
+            <input class="form-control w-50 shadow-sm mb-2" (input)="filterUserTable($event.target.value)"
+                [(ngModel)]="textToSearchUser" type="text" placeholder="Buscar usuario...">
+            <div class="d-flex justify-content-center">
+                <table class="table table-sm w-75">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <td class="text-center">Documento</td>
+                            <td class="text-center">Usuario</td>
+                            <td class="text-center">Cantidad preguntas</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let row of rowArrayUsers; let i = index">
+                            <td class="text-center">{{ row.ci }}</td>
+                            <td class="text-center">{{ row.nombre }}</td>
+                            <td class="text-center">{{ row.cantQuerys }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

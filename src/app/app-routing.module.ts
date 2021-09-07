@@ -24,8 +24,8 @@ import { NuevapreguntaComponent } from './preguntas/nuevapregunta/nuevapregunta.
 import { NuevoFeriadoComponent } from './feriados/nuevo-feriado/nuevo-feriado.component';
 import { ExcelComponent } from './excels/excel/excel.component';
 import { PreviaturasComponent } from './previaturas/previaturas.component';
-
-
+import { StatisticsComponent } from './statistics/statistics.component';
+import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
 
 
 
@@ -53,8 +53,9 @@ const routes: Routes = [
   { path: 'feriados', component: FeriadoComponent},
   { path: 'nuevoFeriado', component: NuevoFeriadoComponent},
   { path: 'excels', component: ExcelComponent},
-  { path: 'previaturas', component: PreviaturasComponent}
-
+  { path: 'previaturas', component: PreviaturasComponent},
+  { path: 'estadisticas', component: StatisticsComponent},
+  { path: 'estadisticas-asignatura', component: StaticsAsignaturasComponent}
 ];
 
 @NgModule({

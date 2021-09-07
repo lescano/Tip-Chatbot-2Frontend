@@ -39,6 +39,8 @@ import { NuevoFeriadoComponent } from './feriados/nuevo-feriado/nuevo-feriado.co
 import { ExcelComponent } from './excels/excel/excel.component';
 import { DataTablesModule } from 'angular-datatables';
 import { PreviaturasComponent } from './previaturas/previaturas.component';
+import { StatisticsComponent } from './statistics/statistics.component';
+import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,7 @@ import { PreviaturasComponent } from './previaturas/previaturas.component';
     LoginComponent,
     RegisterComponent,
     NavbarComponent, 
-    PerfilComponent, AsignaturasAdminComponent, NuevaAsignaturaComponent, VerAsignaturaComponent, HorariosAsignaturasComponent, NuevoHorarioComponent, EditarHorarioComponent, EvaluacionesAsignaturaComponent, NuevaEvaluacionComponent, ProgresoComponent, AgregarAsignaturaUsuarioComponent, PreguntaComponent, NuevapreguntaComponent, FeriadoComponent, NuevoFeriadoComponent, ExcelComponent, PreviaturasComponent
+    PerfilComponent, AsignaturasAdminComponent, NuevaAsignaturaComponent, VerAsignaturaComponent, HorariosAsignaturasComponent, NuevoHorarioComponent, EditarHorarioComponent, EvaluacionesAsignaturaComponent, NuevaEvaluacionComponent, ProgresoComponent, AgregarAsignaturaUsuarioComponent, PreguntaComponent, NuevapreguntaComponent, FeriadoComponent, NuevoFeriadoComponent, ExcelComponent, PreviaturasComponent, StatisticsComponent, StaticsAsignaturasComponent
   ],
   imports: [
     BrowserModule,

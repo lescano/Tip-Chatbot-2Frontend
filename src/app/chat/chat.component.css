@@ -53,6 +53,7 @@ html {
   .time-right {
     float: right;
     color: #6e6e6e;
+    font-size: 14px;
   }
   
   /* Style time text */

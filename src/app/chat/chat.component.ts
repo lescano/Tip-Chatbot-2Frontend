@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-//import { ConsoleReporter } from 'jasmine';
 import { ChatService } from '../Services/chat.service';
 import { AuthService } from '../Services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser'
+import { variablesGlobales } from '../Services/variablesGlobales';
 
 @Component({
     selector: 'app-chat',
     templateUrl: './chat.component.html',
     styleUrls: ['./chat.component.css']
 })
+
 export class ChatComponent implements OnInit {
 
     titulo = "ChatBot TIP";
@@ -26,9 +27,8 @@ export class ChatComponent implements OnInit {
     ngOnInit(): void {
         this.messageService.loadPreviousChat().subscribe(data => {
             data.listHistory.forEach(itemHistoy => {
-                console.log(itemHistoy.fecha)
-                this.mensajes.push({ id: "tu", msj: itemHistoy.pregunta, tono: "obscuro", hora: itemHistoy.fecha });
-                this.mensajes.push({ id: "boot", botones: false, msj: itemHistoy.respuesta, tono: "claro", hora: itemHistoy.fecha });
+                this.mensajes.push({ id: "tu", msj: itemHistoy.pregunta, tono: "obscuro", hora: itemHistoy.hora + " " + itemHistoy.fecha });
+                this.mensajes.push({ id: "boot", botones: false, msj: itemHistoy.respuesta, tono: "claro", hora: itemHistoy.hora + " " + itemHistoy.fecha });
             });
             this.getInitMessage();
         });
@@ -51,7 +51,11 @@ export class ChatComponent implements OnInit {
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.horarios(this.codigo).subscribe(data => {
-            this.responder(data.Reply, false);
+            let dateTime = this.getDateTimeMesssage();
+            let arrayDateTime = dateTime.split(" ");
+            this.messageService.insertNewHistory("Horarios " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, false);
+            });
         });
     }
 
@@ -59,7 +63,11 @@ export class ChatComponent implements OnInit {
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.profesor(this.codigo).subscribe(data => {
-            this.responder(data.Reply, false);
+            let dateTime = this.getDateTimeMesssage();
+            let arrayDateTime = dateTime.split(" ");
+            this.messageService.insertNewHistory("Profesor " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, false);
+            });
         });
     }
 
@@ -67,7 +75,11 @@ export class ChatComponent implements OnInit {
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.evaluaciones(this.codigo).subscribe(data => {
-            this.responder(data.Reply, false);
+            let dateTime = this.getDateTimeMesssage();
+            let arrayDateTime = dateTime.split(" ");
+            this.messageService.insertNewHistory("Evaluaciones " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, false);
+            });
         });
     }
 
@@ -75,7 +87,11 @@ export class ChatComponent implements OnInit {
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.cursada(this.codigo).subscribe(data => {
-            this.responder(data.Reply, false);
+            let dateTime = this.getDateTimeMesssage();
+            let arrayDateTime = dateTime.split(" ");
+            this.messageService.insertNewHistory("Cursé " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, false);
+            });
         });
     }
 
@@ -83,7 +99,11 @@ export class ChatComponent implements OnInit {
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.creditos(this.codigo).subscribe(data => {
-            this.responder(data.Reply, false);
+            let dateTime = this.getDateTimeMesssage();
+            let arrayDateTime = dateTime.split(" ");
+            this.messageService.insertNewHistory("Creditos " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, false);
+            });
         });
     }
 
@@ -91,7 +111,11 @@ export class ChatComponent implements OnInit {
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.limite(this.codigo).subscribe(data => {
-            this.responder(data.Reply, false);
+            let dateTime = this.getDateTimeMesssage();
+            let arrayDateTime = dateTime.split(" ");
+            this.messageService.insertNewHistory("Limite de inscripción " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, false);
+            });
         });
     }
 
@@ -142,7 +166,7 @@ export class ChatComponent implements OnInit {
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }, 50);
     }
-    
+
     responderErrorVacio(message) {
         this.mensajes.push({ id: "boot", botones: false, msj: message, tono: "claro", hora: this.getDateTimeMesssage() });
         setTimeout(() => {
@@ -163,21 +187,32 @@ export class ChatComponent implements OnInit {
 
 
     getDateTimeMesssage() {
-        let horaf;
-        let minutosf;
+        let currentDateTime = new Date();
 
-        if (new Date().getHours() < 10) {
-            horaf = "0" + new Date().getHours();
-        } else {
-            horaf = new Date().getHours();
-        }
-        if (new Date().getMinutes() < 10) {
-            minutosf = "0" + new Date().getMinutes();
-        } else {
-            minutosf = new Date().getMinutes();
-        }
 
-        return horaf + ":" + minutosf;
+        let day = currentDateTime.getDate();
+        let month = currentDateTime.getMonth() + 1;
+        let year = currentDateTime.getFullYear();
+
+        let stringDay;
+        if (day < 10)
+            stringDay = "0" + day;
+        else stringDay = day;
+
+        let stringMonth;
+        if (month < 10) stringMonth = "0" + month;
+        else stringMonth = month;
+
+        let hours = currentDateTime.getHours();
+        let minutes = currentDateTime.getMinutes();
+        let stringHours;
+        if (hours < 10) stringHours = "0" + hours;
+        else stringHours = hours;
+
+        let stringMinutes;
+        if (minutes < 10) stringMinutes = "0" + minutes;
+        else stringMinutes = minutes;
+
+        return stringHours + ":" + stringMinutes + " " + stringDay + "/" + stringMonth + "/" + year;
     }
-
 }

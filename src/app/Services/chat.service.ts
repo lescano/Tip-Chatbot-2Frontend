@@ -29,12 +29,20 @@ export class ChatService {
 
     loadPreviousChat() {
         const headers = { 'Authorization': '*' };
-        var id = this.auth.getActualUser();
+        let id = this.auth.getActualUser();
         if (id != null || id != undefined) {
             return this.http.post<any>(variablesGlobales.getHttpUrl() + 'historial/getUserHistory', { idUser: id });
         }
     }
 
+    insertNewHistory(question, answer, currentDate, currentTime, subjectCode){
+        const headers = { 'Authorization': '*' };
+        let id = this.auth.getActualUser();
+        let arrayCurrentDate = currentDate.split('/');
+        currentDate = arrayCurrentDate[2] + "" + arrayCurrentDate[1] +  "" + arrayCurrentDate[0];
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'historial/insertUserHistory', {idUser: id, question: question, answer: answer, currentDate: currentDate, currentTime: currentTime, subjectCode: subjectCode});
+    }
+    
     profesor(codigo) {
         const headers = { 'Authorization': '*' };
 
