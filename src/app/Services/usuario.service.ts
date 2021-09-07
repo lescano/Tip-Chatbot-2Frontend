@@ -53,4 +53,11 @@ export class UsuarioService {
       });
   }
 
+  //traer cuales son las materias (previas) que le falta aprobar al usuario para poder cursar otra
+  getAsignaturasPendientes(id, codigo_asignatura){
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/pendientes', {
+      id:id,
+      codigo:codigo_asignatura
+      });
+  }
 }

@@ -36,24 +36,17 @@
               </div>
               <div class="card-body">
                 <p>{{nombre_usuario}} {{apellido_usuario}} ({{cedula_usuario}}) {{puede_cursar}} {{asignatura}}</p>
+                <div *ngIf="puede_cursar == 'no se encuentra habilitado a cursar'" >
+                  <table class="row-border hover table  table-responsive-xl table-striped ">
+                    <tbody>
+                      <tr *ngFor="let obj of asignaturas_pendientes">
+                        <td>{{obj}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          <!--table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table  table-responsive-xl table-striped ">
-              <thead >
-                <tr>
-                  <th scope="col">Asignatura</th>
-                  <th scope="col">Habilitado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let obj of puede_cursar; index as j">
-                  <td>{{obj.asignatura}}</td>
-                  <td>{{obj.habilitado}}</td>
-                </tr>
-              </tbody>
-            </table-->
-            
-
         </div>
       </div>
     </div>

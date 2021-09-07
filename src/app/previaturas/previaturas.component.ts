@@ -26,12 +26,13 @@ export class PreviaturasComponent implements OnInit {
     ])
   });
 
-  usuarios: Usuario[];
-  asignaturas :Asignatura[];
+  usuarios: Usuario[]; //listado de todos los usuarios
+  asignaturas :Asignatura[]; //listado de todas las asignaturas
   dtOptions: DataTables.Settings = {};
   dtTrigger = new Subject();
   puede_cursar = "";
-  asignatura = "";
+  codigo_asignatura;
+  asignatura = ""; //se guarda el nombre de la asignatura que se buscó ej: Principios de programación
   id_usuario;
   cedula_usuario = "";
   nombre_usuario = "";
@@ -88,7 +89,7 @@ export class PreviaturasComponent implements OnInit {
       //en el value del form traigo todos los datos de la asignatura como del usuario para presentarlos mejor
       //datos asignatura
       let buscAsignatura = this.previaForm.value.buscAsignatura.split(":");
-      let codigo_asignatura = buscAsignatura[0];
+      this.codigo_asignatura = buscAsignatura[0];
       this.asignatura = buscAsignatura[1];
 
       //con la cedula del alumno que es la que traigo en el value, 
@@ -103,11 +104,12 @@ export class PreviaturasComponent implements OnInit {
         this.apellido_usuario = usuario_objeto.apellido;
 
         //llamada al chat service para que resuva la consulta
-        this.chatService.cursada2(codigo_asignatura, usuario_objeto.id)
+        this.chatService.cursada2(this.codigo_asignatura, usuario_objeto.id)
         .subscribe(
           dato =>{
             if(dato.Reply == "No, no estás en condiciones de realizar esta materia"){
               this.puede_cursar = "no se encuentra habilitado a cursar";
+              this.buscarAsignaturasPendientes();
             }
             else{
               this.puede_cursar = "se encuentra habilitado a cursar";
@@ -116,7 +118,17 @@ export class PreviaturasComponent implements OnInit {
           }
         );
       });
-    }        
-    
+    } 
+  }
+
+
+  //esta funcion es la que trae cuales materias le faltan cursar al alumno,
+  //que son previas de la materia que se buscó antes
+  buscarAsignaturasPendientes(){
+    this.usuarioService.getAsignaturasPendientes(this.id_usuario, this.codigo_asignatura)
+      .subscribe(data => {
+        this.asignaturas_pendientes = data.Reply;
+      });
+
   }
 }
