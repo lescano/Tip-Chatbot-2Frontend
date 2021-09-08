@@ -36,10 +36,10 @@ export class ChatComponent implements OnInit {
 
     getInitMessage() {
         let message = "¡Hola! Soy el asistente virtual del Tip.";
-        message += "<br>-Puedes realizarme consultas sobre la carrera del Tecnnólogo en Informática.";
-        message += "<br>-Algunas preguntas requieren que estes registrado, me encargare de que lo sepas!";
-        message += "<br>-Consultame sobre las materias y te dare opciones.";
-        message += "<br>¡Estoy para ayudarte!";
+        message += "<br>📍 Puedes realizarme consultas sobre la carrera del Tecnnólogo en Informática.";
+        message += "<br>📍 Algunas preguntas requieren que estes registrado, me encargare de que lo sepas!";
+        message += "<br>📍 Consultame sobre las materias y te dare opciones.";
+        message += "<br>¡Estoy para ayudarte! 😄";
         this.mensajes.push({ id: "boot", botones: false, msj: message, tono: "claro", hora: this.getDateTimeMesssage() });
         setTimeout(() => {
             var chatHistory = document.getElementById("chat");
@@ -122,7 +122,7 @@ export class ChatComponent implements OnInit {
     enviarMensaje() {
 
         if (!this.contenidoMensaje || this.contenidoMensaje == "") {
-            let errorMessage = "Escribe una consulta por favor";
+            let errorMessage = "Escribe una consulta por favor ⚠️";
             this.mensajes.push({ id: "tu", msj: this.contenidoMensaje, tono: "obscuro", hora: this.getDateTimeMesssage() });
             this.responderErrorVacio(errorMessage);
             this.contenidoMensaje = "";
