@@ -1,8 +1,25 @@
 <div class="d-flex justify-content-center">
-    <div class="card mt-2 shadow w-75">
+    <div class="card mt-2 mb-3 shadow w-75">
+        <div class="card-header bg-primary text-white">
+            <h5 class="text-white mt-1">Estadísticas de Asignatura</h5>
+        </div>
         <div class="card-body">
-            <h5 class="card-title text-primary">Estadisticas Asignaturas</h5>
-            <h6 class="card-subtitle mb-2 text-muted mt-2 mb-2">Cantidad de preguntas por materia</h6>
+            <div class="d-flex flex-row-reverse">
+                <button class="btn btn-primary shadow-sm mb-3 ml-2">Filtrar</button>
+                <div class="form-group row ">
+                    <label for="inputEndDate" class="mt-2">Hasta</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control shadow-sm" id="inputEndDate">
+                    </div>
+                </div>
+                <div class="form-group row mr-3">
+                    <label for="inputInitDate" class="mt-2">Desde</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control shadow-sm" id="inputStartDate">
+                    </div>
+                </div>
+            </div>
+            <h6 class="card-subtitle mb-2 text-muted mb-2">Cantidad de preguntas por materia</h6>
             <div class="d-flex justify-content-center mt-2">
                 <table class="table table-sm w-75">
                     <thead class="bg-primary text-white">
@@ -22,7 +39,7 @@
             <h6 class="card-subtitle mb-2 text-muted mt-4">Preguntas realizadas por asignatura</h6>
             <hr>
             <div class="form-group w-50">
-                <select class="form-control" id="exampleFormControlSelect1"
+                <select class="form-control shadow-sm" id="exampleFormControlSelect1"
                     (change)="filterQuestionsBySubject($event.target.value)">
                     <option [value]="item.codigo" *ngFor="let item of arraySubjects">{{ item.nombre }}</option>
                 </select>

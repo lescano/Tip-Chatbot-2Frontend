@@ -69,10 +69,7 @@ html {
   }
 
  #chat{
- /* background-image: url("https://previews.123rf.com/images/aldanna/aldanna1512/aldanna151200004/50116383-sin-fisuras-m%C3%B3vil-aplicaciones-patr%C3%B3n-con-la-m%C3%BAsica-el-chat-la-galer%C3%ADa-la-burbuja-de-hablar-correo-electr%C3%B3nico-lupa.jpg");
-  */
   background-image: url("https://i.redd.it/qwd83nc4xxf41.jpg");
-  
  }
 
  .submit-component{
@@ -103,7 +100,7 @@ html {
  @media (max-width: 800px) {
 
   #chat{
-    max-width: 100%;
+    max-width: 80%;
     margin: 0%;
     padding: 0%;
   }

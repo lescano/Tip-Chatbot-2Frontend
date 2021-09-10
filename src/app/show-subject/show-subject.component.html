@@ -1,0 +1,117 @@
+<div class="d-flex justify-content-center">
+    <div class="card bg-light shadow mt-2 mb-2 w-75">
+        <div class="card-header bg-primary">
+            <div class="d-flex justify-content-between">
+                <h5 class="text-white mt-1">{{subjectSelected.nombre}}</h5>
+                <div>
+                    <button class="btn btn-primary btn-sm shadow mr-2" (click)="goToCreateMaterial()">
+                        <i class="fa fa-file-code-o" aria-hidden="true"></i> Materiales
+                    </button>
+                    <button class="btn btn-primary btn-sm shadow mr-2" (click)="editarEvaluaciones()"><i
+                            class="fa fa-book" aria-hidden="true"></i> Evaluaciones</button>
+                    <button class="btn btn-primary btn-sm shadow mr-2" (click)="editarHorarios()"><i
+                            class="fa fa-clock-o" aria-hidden="true"></i> Horarios</button>
+                    <button class="btn btn-warning btn-sm shadow mr-2" (click)="editarSelect()"><i
+                            class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
+                    <button class="btn btn-danger btn-sm shadow" (click)="borrarSelect()"><i
+                            class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <fieldset disabled>
+                <div class="d-flex flex-row-reverse">
+                    <div class="form-group">
+                        <label>Fecha inscripción límite</label>
+                        <input type="email" class="form-control text-center shadow-sm" value="{{fechaInscripcion}}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="inputEmail4">Créditos</label>
+                        <input type="text" class="form-control shadow-sm text-center"
+                            value="{{ subjectSelected.creditos }}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Docente</label>
+                        <input type="text" class="form-control shadow-sm" value="{{ subjectSelected.nombreDoc }}">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Correo</label>
+                        <input type="text" class="form-control shadow-sm" value="{{ subjectSelected.correoDoc }}">
+                    </div>
+                </div>
+            </fieldset>
+            <div *ngIf="subjectSelected.materiales.length != 0">
+                <hr>
+                <h6 class="card-subtitle mb-2 text-primary">Materiales</h6>
+                <table class="table table-sm">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="text-center" scope="col">Titulo</th>
+                            <th class="text-center" scope="col">Descripción</th>
+                            <th class="text-center" scope="col">Acceso</th>
+                            <th class="text-center" scope="col">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let material of arrayMaterials">
+                            <td class="text-center">{{ material.titulo }}</td>
+                            <td class="text-center">{{ material.descripcion }}</td>
+                            <td class="text-center"><a class="btn btn-link btn-sm" href="{{ material.url }}"
+                                    target="_blank">Link</a></td>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-sm mr-2">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="subjectSelected.evaluaciones.length != 0">
+                <hr>
+                <h6 class="card-subtitle mb-2 text-primary">Evaluaciones</h6>
+                <table class="table table-sm">
+                    <tbody class="bg-primary text-white">
+                        <tr>
+                            <th scope="col">Evaluacion</th>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td class="text-center"></td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+            <div *ngIf="subjectSelected.previas.length != 0">
+                <hr>
+                <h6 class="card-subtitle mb-2 text-primary">Previaturas</h6>
+                <table class="table table-sm">
+                    <tbody class="bg-primary text-white">
+                        <tr>
+                            <th class="text-center" scope="col">Materia</th>
+                            <th class="text-center" scope="col">Créditos</th>
+                            <th class="text-center" scope="col">Docente</th>
+                            <th class="text-center" scope="col">Ver</th>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

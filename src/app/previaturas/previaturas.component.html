@@ -1,53 +1,52 @@
-<div class="container mt-4">
-    <div class="row">
-      <div class="col">
-        <div class="card bg-light mb-3" >
-          <div class="card-header h4">Previaturas</div>
-          <div class="card-body">     
-            <!--input type="text" name="usuario" id="usuario" placeholder="Usuario:">
-            <input type="text" name="asignatura" id="asignatura" placeholder="Asignatura:"-->
-            <form [formGroup]="previaForm" (ngSubmit)="getPrevia()" class="mt-1">
-              <!--label>Usuario</label>
-              <input formControlName="buscUsuarios1" type="text" placeholder="Ingresar documento..." class="mb-2 form-control"-->
-              <label>Usuarios</label>
-              <input list="idUsuariosLista" formControlName="buscUsuarios" class="mb-2 custom-select" placeholder="Usuarios"/>
-
-              <datalist id="idUsuariosLista">
-                <!--option *ngFor="let usuario of usuarios; index as i" value="{{usuario.id}}:{{usuario.cedula}}:{{usuario.nombre}}:{{usuario.apellido}}" >{{usuario.nombre}} {{usuario.apellido}}</option-->
-                <option *ngFor="let usuario of usuarios; index as i" value="{{usuario.cedula}}" >{{usuario.nombre}} {{usuario.apellido}}</option>
-              </datalist>
-
-              <!--input type="text" placeholder="Ingresar documento..." class="mb-2 form-control"-->
-              <!--select  formControlName="buscUsuarios" class="mb-2 custom-select" placeholder="Usuarios">
-                <option *ngFor="let usuario of usuarios; index as i" value="{{usuario.id}}:{{usuario.cedula}}:{{usuario.nombre}}:{{usuario.apellido}}" >{{usuario.nombre}} {{usuario.apellido}}</option>
-              </select-->
-              <label>Asignatura</label>
-              <select  formControlName="buscAsignatura" class="mb-2 custom-select" placeholder="Asignatura">
-                <option *ngFor="let asignatura of asignaturas; index as i" value="{{asignatura.codigo}}:{{asignatura.nombre}}" >{{asignatura.nombre}}</option>
-              </select>
-              <div class="form-group">
-                <button class=" btn btn-primary float-right" type="submit" [disabled]="!previaForm.valid">
-                  Buscar</button>
-              </div>
-            </form><br><br>
-            <div *ngIf="puede_cursar" class="card bg-light mb-3">
-              <div class="card-header h5">
-                Resultado de la busqueda:
-              </div>
-              <div class="card-body">
-                <p>{{nombre_usuario}} {{apellido_usuario}} ({{cedula_usuario}}) {{puede_cursar}} {{asignatura}}</p>
-                <div *ngIf="puede_cursar == 'no se encuentra habilitado a cursar'" >
-                  <table class="row-border hover table  table-responsive-xl table-striped ">
-                    <tbody>
-                      <tr *ngFor="let obj of asignaturas_pendientes">
-                        <td>{{obj}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
+<div class="d-flex justify-content-center">
+    <div class="card shadow bg-light mt-2 mb-3 w-75">
+        <div class="card-header bg-primary text-white h5">Previaturas</div>
+        <div class="card-body">
+            <form [formGroup]="previaForm" (ngSubmit)="getPrevia()" class="mt-1 mb-2">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Usuarios</label>
+                        <input type="text" list="idUsuariosLista" class="form-control shadow-sm"
+                            formControlName="buscUsuarios" aria-describedby="emailHelp" placeholder="Usuarios">
+                        <datalist id="idUsuariosLista">
+                            <option *ngFor="let usuario of usuarios; index as i" value="{{usuario.cedula}}">
+                                {{usuario.nombre}}
+                                {{usuario.apellido}}</option>
+                        </datalist>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Asignatura</label>
+                        <select formControlName="buscAsignatura" class="mb-2 custom-select shadow-sm"
+                            placeholder="Asignatura">
+                            <option *ngFor="let asignatura of asignaturas; index as i"
+                                value="{{asignatura.codigo}}:{{asignatura.nombre}}">{{asignatura.nombre}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-              </div>
+                <div class="d-flex flex-row-reverse">
+                    <button class=" btn btn-primary shadow-sm" type="submit" [disabled]="!previaForm.valid">
+                        Buscar</button>
+                </div>
+            </form>
+            <div *ngIf="puede_cursar" class="card bg-light mb-3 shadow-sm">
+                <div class="card-header h6 bg-primary text-white">
+                    Resultado de la busqueda:
+                </div>
+                <div class="card-body">
+                    <p>{{nombre_usuario}} {{apellido_usuario}} ({{cedula_usuario}}) {{puede_cursar}}
+                        {{asignatura}}</p>
+                    <div *ngIf="puede_cursar == 'no se encuentra habilitado a cursar'">
+                        <table class="row-border hover table  table-responsive-xl table-striped ">
+                            <tbody>
+                                <tr *ngFor="let obj of asignaturas_pendientes">
+                                    <td>{{obj}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>

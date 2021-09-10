@@ -1,56 +1,68 @@
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" routerLink="/inicio"><i class="fa fa-comments-o" aria-hidden="true"></i></a>
     <a class="navbar-brand" routerLink="/chat">Chat</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup">
-      <ul class="navbar-nav ml-auto" *ngIf="islogin()">
-          <li *ngIf="isAdmin()" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-lock" aria-hidden="true"></i>  Administración 
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" routerLink="/usuarios"><i class="fa fa-users" aria-hidden="true"></i> Administrar Usuarios</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/estadisticas"><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadisticas Usuario</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/asignaturasAdmin"><i class="fa fa-university" aria-hidden="true"></i> Administrar Asignaturas</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/estadisticas-asignatura"><i class="fa fa-bar-chart" aria-hidden="true"></i> Estadisticas Asignatura</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/preguntas"><i class="fa fa-question-circle" aria-hidden="true"></i> Administrar Preguntas</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/feriados"><i class="fa fa-pagelines" aria-hidden="true"></i> Administrar Feriados</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/excels"><i class="fa fa-table" aria-hidden="true"></i> Cargar Excel</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" routerLink="/previaturas"><i class="fa fa-file" aria-hidden="true"></i> Buscar Previaturas</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/progreso"><i class="fa fa-graduation-cap" aria-hidden="true"></i> Progreso Academico</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" routerLink="/perfil"><i class="fa fa-user" aria-hidden="true"></i> Perfil</a>
-          </li>
-          <li *ngIf="islogin()" (click)="logOut()" class="nav-item">
-            <a class="nav-link" routerLink="/"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
-        </li>
-       
-      </ul>
+        <ul class="navbar-nav ml-auto" *ngIf="islogin()">
+            <li *ngIf="isAdmin()" class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-lock" aria-hidden="true"></i> Administración
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/usuarios"><i class="fa fa-users" aria-hidden="true"></i>
+                        Administrar Usuarios</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/estadisticas"><i class="fa fa-bar-chart"
+                            aria-hidden="true"></i> Estadisticas Usuario</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/asignaturasAdmin"><i class="fa fa-university"
+                            aria-hidden="true"></i> Administrar Asignaturas</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/estadisticas-asignatura"><i class="fa fa-bar-chart"
+                            aria-hidden="true"></i> Estadisticas Asignatura</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/preguntas"><i class="fa fa-question-circle"
+                            aria-hidden="true"></i> Administrar Preguntas</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/feriados"><i class="fa fa-pagelines" aria-hidden="true"></i>
+                        Administrar Feriados</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/excels"><i class="fa fa-table" aria-hidden="true"></i> Cargar
+                        Excel</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="/previaturas"><i class="fa fa-file" aria-hidden="true"></i>
+                        Buscar Previaturas</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="/progreso"><i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    Progreso Academico</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="/perfil"><i class="fa fa-user" aria-hidden="true"></i> Perfil</a>
+            </li>
+            <li *ngIf="islogin()" (click)="logOut()" class="nav-item">
+                <a class="nav-link active" routerLink="/"><i class="fa fa-sign-out" aria-hidden="true"></i> Salir</a>
+            </li>
 
-      <ul class="navbar-nav ml-auto" *ngIf="islogin()==false">
-      <li  class="nav-item">
-        <a class="nav-link" routerLink="/inicio"><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/register"><i class="fa fa-user-plus" aria-hidden="true"></i> Registrarse</a>
-      </li>
-      </ul>
-  </div>
-  </nav>
+        </ul>
+
+        <ul class="navbar-nav ml-auto" *ngIf="islogin()==false">
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="/inicio"><i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" routerLink="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>
+                    Registrarse</a>
+            </li>
+        </ul>
+    </div>
+</nav>

@@ -1,34 +1,29 @@
-<div class="container mt-4">
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm">
-        <div class="card bg-light mb-3" >
-            <div class="card-header h4">Lista de preguntas</div>
-            <div class="card-body">      
-              
-              <button class="btn btn-primary mb-2" routerLink="/nuevaPregunta"><i class="fa fa-plus" aria-hidden="true"></i> Nueva pregunta</button>
-              <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table  table-responsive-xl table-striped table-bordered">
-                <thead >
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Borrar</th>
-                  </tr>
+<div class="d-flex justify-content-center">
+    <div class="card bg-light shadow mt-2 mb-3 ml-2 mr-2">
+        <div class="card-header bg-primary d-flex justify-content-between">
+            <h5 class="text-white mt-1">Preguntas</h5>
+            <button class="btn btn-primary shadow" routerLink="/nuevaPregunta"><i class="fa fa-plus"
+                    aria-hidden="true"></i> Nueva</button>
+        </div>
+        <div class="card-body">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="row-border hover table table-striped">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Borrar</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pregunta of listado">
-                    <td>{{pregunta.nombre}}</td>
-                    <td><button class="btn btn-danger" (click)="borrarPregunta(pregunta.id)"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</button></td>
-                  </tr>
+                    <tr *ngFor="let pregunta of listado">
+                        <td>{{pregunta.nombre}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-danger btn-sm" (click)="borrarPregunta(pregunta.id)"><i
+                                    class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
+                        </td>
+                    </tr>
                 </tbody>
-                </table>
-             
-              
-  
-  
-  
-            </div>
+            </table>
         </div>
-      </div>
-      <div class="col-sm-1"></div>
     </div>
-  </div>
+</div>

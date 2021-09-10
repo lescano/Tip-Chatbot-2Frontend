@@ -1,41 +1,36 @@
-<div class="container mt-4">
-    <div class="row">
-      <div class="col">
-        <div class="card bg-light mb-3" >
-            <div class="card-header h4">Asignaturas</div>
-            <div class="card-body">      
-              <!--<button class="btn btn-primary mr-2" (click)="goBack()">Volver</button>-->
-              <a class="btn btn-primary" routerLink="/nuevaAsignatura"><i class="fa fa-plus" aria-hidden="true"></i> Nueva asignatura</a>
-            </div>
-
-          <div class="card-body">      
-          <!--<table class="table table-responsive-xl">-->
-          <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table  table-responsive-xl table-striped ">
-              <thead >
-                <tr>
-                  <th scope="col">Código</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Créditos</th>
-                  <th scope="col">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let asignatura of asignaturas; index as i">
-                  
-                  <td>{{asignatura.codigo}}</td>
-                  <td>{{asignatura.nombre}}</td>
-                  <td>{{asignatura.creditos}}</td>
-                  <td>
-                    <button class="btn btn-primary mr-3" (click)="editarEvaluaciones(asignatura)"><i class="fa fa-book" aria-hidden="true"></i> Evaluaciones</button>
-                    <button class="btn btn-primary mr-3" (click)="editarHorarios(asignatura)"><i class="fa fa-clock-o" aria-hidden="true"></i> Horarios</button>
-                    <button class="btn btn-warning mr-3" (click)="editarSelect(asignatura)"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
-                    <button class="btn btn-danger" (click)="borrarSelect(asignatura.id)"><i class="fa fa-trash" aria-hidden="true"></i> Borrar</button></td>
-                </tr>
-              </tbody>
-              </table>
-            
-
+<div class="d-flex justify-content-center">
+    <div class="card bg-light shadow mt-2 mb-3">
+        <div class="card-header bg-primary d-flex justify-content-between">
+            <h5 class="text-white mt-1">Asignaturas</h5>
+            <a class="btn btn-primary shadow" routerLink="/nuevaAsignatura"><i class="fa fa-plus"
+                    aria-hidden="true"></i> Nueva</a>
         </div>
-      </div>
+        <div class="card-body">
+            <div class="d-flex flex-row-reverse mt-2 mb-2">
+
+            </div>
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th class="text-center" scope="col">Código</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Créditos</th>
+                        <th class="text-center" scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let asignatura of asignaturas; index as i">
+
+                        <td class="text-center">{{asignatura.codigo}}</td>
+                        <td class="text-center">{{asignatura.nombre}}</td>
+                        <td class="text-center">{{asignatura.creditos}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-info btn-sm mr-2" (click)="goToShowSubject(asignatura)"><i
+                                    class="fa fa-eye" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>

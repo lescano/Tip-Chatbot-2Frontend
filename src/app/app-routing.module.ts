@@ -26,36 +26,38 @@ import { ExcelComponent } from './excels/excel/excel.component';
 import { PreviaturasComponent } from './previaturas/previaturas.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
-
-
+import { SubjectMaterialComponent } from './subject-material/subject-material.component';
+import { ShowSubjectComponent } from './show-subject/show-subject.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent,canActivate:[!AuthGuard] },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, canActivate: [!AuthGuard] },
   { path: 'inicio', component: InicioComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'menuadmin', component: MenuAdminComponent },
   { path: 'usuarios', component: UsuarioComponent },
-  { path: 'perfil', component: PerfilComponent,canActivate:[AuthGuard] },
-  { path: 'asignaturasAdmin', component: AsignaturasAdminComponent},
-  { path: 'nuevaAsignatura', component: NuevaAsignaturaComponent},
-  { path: 'verAsignatura', component: VerAsignaturaComponent},
-  { path: 'horarios', component: HorariosAsignaturasComponent},
-  { path: 'verHorario', component: EditarHorarioComponent},
-  { path: 'nuevoHorario', component: NuevoHorarioComponent},
-  { path: 'evaluaciones', component: EvaluacionesAsignaturaComponent},
-  { path: 'nuevaEvaluacion', component: NuevaEvaluacionComponent},
-  { path: 'progreso', component: ProgresoComponent},
-  { path: 'agregarAsig', component: AgregarAsignaturaUsuarioComponent},
-  { path: 'preguntas', component: PreguntaComponent},
-  { path: 'nuevaPregunta', component: NuevapreguntaComponent},
-  { path: 'feriados', component: FeriadoComponent},
-  { path: 'nuevoFeriado', component: NuevoFeriadoComponent},
-  { path: 'excels', component: ExcelComponent},
-  { path: 'previaturas', component: PreviaturasComponent},
-  { path: 'estadisticas', component: StatisticsComponent},
-  { path: 'estadisticas-asignatura', component: StaticsAsignaturasComponent}
+  { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
+  { path: 'asignaturasAdmin', component: AsignaturasAdminComponent },
+  { path: 'nuevaAsignatura', component: NuevaAsignaturaComponent },
+  { path: 'verAsignatura', component: VerAsignaturaComponent },
+  { path: 'horarios', component: HorariosAsignaturasComponent },
+  { path: 'verHorario', component: EditarHorarioComponent },
+  { path: 'nuevoHorario', component: NuevoHorarioComponent },
+  { path: 'evaluaciones', component: EvaluacionesAsignaturaComponent },
+  { path: 'nuevaEvaluacion', component: NuevaEvaluacionComponent },
+  { path: 'progreso', component: ProgresoComponent },
+  { path: 'agregarAsig', component: AgregarAsignaturaUsuarioComponent },
+  { path: 'preguntas', component: PreguntaComponent },
+  { path: 'nuevaPregunta', component: NuevapreguntaComponent },
+  { path: 'feriados', component: FeriadoComponent },
+  { path: 'nuevoFeriado', component: NuevoFeriadoComponent },
+  { path: 'excels', component: ExcelComponent },
+  { path: 'previaturas', component: PreviaturasComponent },
+  { path: 'estadisticas', component: StatisticsComponent },
+  { path: 'estadisticas-asignatura', component: StaticsAsignaturasComponent },
+  { path: 'material-asignatura', component: SubjectMaterialComponent },
+  { path: 'ver-asignatura', component: ShowSubjectComponent }
 ];
 
 @NgModule({

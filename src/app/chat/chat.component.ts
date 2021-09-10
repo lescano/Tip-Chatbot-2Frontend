@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../Services/chat.service';
+import { AsignaturaService } from '../Services/asignatura.service';
 import { AuthService } from '../Services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser'
 import { variablesGlobales } from '../Services/variablesGlobales';
@@ -17,21 +18,27 @@ export class ChatComponent implements OnInit {
     contenidoMensaje: string;
     mensajes = [];
     codigo = "";
+    arrayMaterials: Array<any> = [];
 
     constructor(
         private messageService: ChatService,
+        private asignaturaService: AsignaturaService,
         private authService: AuthService,
         private sanitized: DomSanitizer
     ) { }
 
     ngOnInit(): void {
-        this.messageService.loadPreviousChat().subscribe(data => {
-            data.listHistory.forEach(itemHistoy => {
-                this.mensajes.push({ id: "tu", msj: itemHistoy.pregunta, tono: "obscuro", hora: itemHistoy.hora + " " + itemHistoy.fecha });
-                this.mensajes.push({ id: "boot", botones: false, msj: itemHistoy.respuesta, tono: "claro", hora: itemHistoy.hora + " " + itemHistoy.fecha });
+        if (this.authService.getActualUser()) {
+            this.messageService.loadPreviousChat().subscribe(data => {
+                data.listHistory.forEach(itemHistoy => {
+                    this.mensajes.push({ id: "tu", msj: itemHistoy.pregunta, tono: "obscuro", hora: itemHistoy.hora + " " + itemHistoy.fecha });
+                    this.mensajes.push({ id: "boot", botones: false, msj: itemHistoy.respuesta, tono: "claro", hora: itemHistoy.hora + " " + itemHistoy.fecha });
+                });
+                this.getInitMessage();
             });
+        } else {
             this.getInitMessage();
-        });
+        }
     }
 
     getInitMessage() {
@@ -45,6 +52,45 @@ export class ChatComponent implements OnInit {
             var chatHistory = document.getElementById("chat");
             chatHistory.scrollTop = chatHistory.scrollHeight;
         }, 500);
+    }
+
+    getDetailSubjectMaterial(idMaterial) {
+        console.log(idMaterial)
+        this.asignaturaService.getDetailSubjectMaterial(idMaterial).subscribe(data => {
+            if (data.result) {
+                this.arrayMaterials.splice(0, this.arrayMaterials.length);
+                this.arrayMaterials.push({ idMaterial: data.result._id, url: data.result.url, title: data.result.titulo, codigo: data.result.asignatura.codigo });
+                let message = data.result.titulo;
+                message += "<br><br>" + data.result.descripcion;
+                this.mensajes.pop();
+                this.mensajes.push({ id: "boot", botones: false, materiales: true, msj: message, tono: "claro", hora: this.getDateTimeMesssage() });
+            }
+        });
+
+    }
+
+    showMaterial() {
+        this.asignaturaService.getSubjectMaterials(this.codigo).subscribe(data => {
+            if (data.result.length > 0) {
+                this.arrayMaterials.splice(0, this.arrayMaterials.length);
+                data.result.forEach(element => {
+                    this.arrayMaterials.push({ idMaterial: element._id, url: element.url, title: element.titulo, codigo: data.idSubject });
+                });
+                this.mensajes.pop();
+                this.mensajes.push({ id: "boot", botones: false, materiales: true, showDetail: true, msj: "Los materiales disponibles para esta materia son:", tono: "claro", hora: this.getDateTimeMesssage() });
+            } else {
+                this.mensajes.pop();
+                this.mensajes.push({ id: "boot", botones: false, msj: "Esta materia aun no cuenta con materiales.", tono: "claro", hora: this.getDateTimeMesssage() });
+            }
+        });
+    }
+
+    insertHistoryAccessMaterial(idMaterial, codigo) {
+        let dateTime = this.getDateTimeMesssage();
+        let arrayDateTime = dateTime.split(" ");
+        this.asignaturaService.newHistorySubjectMaterial(idMaterial, codigo, arrayDateTime[1], arrayDateTime[0]).subscribe(data => {
+            console.log(data);
+        });
     }
 
     horarios() {
@@ -141,7 +187,7 @@ export class ChatComponent implements OnInit {
                 chatHistory.scrollTop = chatHistory.scrollHeight;
             }, 50);
             this.messageService.add(mensaje)
-                .subscribe(data => { //aca tengo que ahcer que guarde el mensaje
+                .subscribe(data => {
                     if (data.Reply == "") {
                         this.messageService.webhook().subscribe(data => {
                             this.responder(data.Reply, false);
@@ -153,10 +199,8 @@ export class ChatComponent implements OnInit {
                     } else {
                         this.responder(data.Reply, false);
                     }
-
                 });
         }
-
     }
 
     responderErrorLargo(message) {
@@ -206,6 +250,7 @@ export class ChatComponent implements OnInit {
         let hours = currentDateTime.getHours();
         let minutes = currentDateTime.getMinutes();
         let stringHours;
+
         if (hours < 10) stringHours = "0" + hours;
         else stringHours = hours;
 
