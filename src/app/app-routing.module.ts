@@ -55,7 +55,7 @@ const routes: Routes = [
   { path: 'excels', component: ExcelComponent},
   { path: 'previaturas', component: PreviaturasComponent},
   { path: 'estadisticas', component: StatisticsComponent},
-  { path: 'estadisticas-asignatura', component: StaticsAsignaturasComponent}
+  { path: 'estadisticas-asignatura', component: StaticsAsignaturasComponent},
 ];
 
 @NgModule({

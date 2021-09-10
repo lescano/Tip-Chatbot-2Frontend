@@ -3,6 +3,7 @@ import { ChatService } from '../Services/chat.service';
 import { AuthService } from '../Services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser'
 import { variablesGlobales } from '../Services/variablesGlobales';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-chat',
@@ -21,7 +22,8 @@ export class ChatComponent implements OnInit {
     constructor(
         private messageService: ChatService,
         private authService: AuthService,
-        private sanitized: DomSanitizer
+        private sanitized: DomSanitizer,
+        private modal:NgbModal
     ) { }
 
     ngOnInit(): void {
@@ -32,6 +34,10 @@ export class ChatComponent implements OnInit {
             });
             this.getInitMessage();
         });
+    }
+
+    openModal(contenido){
+        this.modal.open(contenido);   
     }
 
     getInitMessage() {
@@ -141,22 +147,19 @@ export class ChatComponent implements OnInit {
                 chatHistory.scrollTop = chatHistory.scrollHeight;
             }, 50);
             this.messageService.add(mensaje)
-                .subscribe(data => { //aca tengo que ahcer que guarde el mensaje
-                    if (data.Reply == "") {
-                        this.messageService.webhook().subscribe(data => {
-                            this.responder(data.Reply, false);
-                        });
+                .subscribe(data => {
+                    if (data.Reply == "" || data.Reply.includes("error")) {
+                        //Crear modal que envie un correo al administrador
+                        this.responder("Completa el formulario de pregunta<br>", 2);
                     } else if (data.Reply.includes("asignatura-")) {
-                        this.responder("¿Qué deseas saber sobre esta asignatúra?<br>", true);
+                        this.responder("¿Qué deseas saber sobre esta asignatúra?<br>", 1);
                         let cod = data.Reply.split("-");
                         this.codigo = cod[1];
                     } else {
-                        this.responder(data.Reply, false);
+                        this.responder(data.Reply, 0);
                     }
-
                 });
         }
-
     }
 
     responderErrorLargo(message) {

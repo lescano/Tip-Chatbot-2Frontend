@@ -41,6 +41,7 @@ import { DataTablesModule } from 'angular-datatables';
 import { PreviaturasComponent } from './previaturas/previaturas.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asign
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     FontAwesomeModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbModule
   ],
   providers: [AuthService,AuthGuard,
   {

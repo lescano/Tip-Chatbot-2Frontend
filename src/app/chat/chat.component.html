@@ -4,7 +4,7 @@
 		<h3>{{descripcion}}</h3>-->
 	</div>
 	<div class="d-flex justify-content-center mt-4">
-		
+
 		<div class="col-9 card scrolleable" id="chat">
 
 			<div class="messages">
@@ -14,7 +14,15 @@
 							<div class="container ">
 								<div class="aling {{m.tono}}">
 									<div [innerHTML]="m.msj"></div>
-									<div *ngIf="m.botones"><button (click)='profesor()' class='option mt-1'>¿Quién la dicta?</button><button (click)='horarios()' class='option mt-1 ml-1'>Horarios</button><button (click)='evaluaciones()' class='option mt-1 ml-1'>Evaluaciones</button><button (click)="limite()" class='option mt-1 ml-1'>Límite de inscripción</button><button (click)="creditos()" class='option mt-1 ml-1'>Créditos que otorga</button><button (click)="cursada()" class='option mt-1 ml-1'>¿Puedo cursarla?</button></div>
+									<div *ngIf="m.botones==1"><button (click)='profesor()' class='option mt-1'>¿Quién la
+											dicta?</button><button (click)='horarios()'
+											class='option mt-1 ml-1'>Horarios</button><button (click)='evaluaciones()'
+											class='option mt-1 ml-1'>Evaluaciones</button><button (click)="limite()"
+											class='option mt-1 ml-1'>Límite de inscripción</button><button
+											(click)="creditos()" class='option mt-1 ml-1'>Créditos que
+											otorga</button><button (click)="cursada()" class='option mt-1 ml-1'>¿Puedo
+											cursarla?</button></div>
+									<div *ngIf="m.botones==2"><br><button type="button" class="btn btn-outline-success" (click)="openModal(contenido)">Completar formulario de pregunta</button></div>
 									<span class="time-right">{{m.hora}}</span>
 								</div>
 							</div>
@@ -27,13 +35,42 @@
 	<div class="d-flex justify-content-center mt-3">
 		<div class="col-9">
 			<div class="form-group d-flex">
-				<input type="text" [(ngModel)]="contenidoMensaje" id="entrada"
-					placeholder="Escriba aquí..." class="form-control mb-2 submit-component shadow-sm" (keydown.enter)="enviarMensaje()">
-				<input  type="submit" name="enviar" class=" btn btn-primary ml-2 submit-component mover shadow"
-					(click)="enviarMensaje()"  value="Enviar">
+				<input type="text" [(ngModel)]="contenidoMensaje" id="entrada" placeholder="Escriba aquí..."
+					class="form-control mb-2 submit-component shadow-sm" (keydown.enter)="enviarMensaje()">
+				<input type="submit" name="enviar" class=" btn btn-primary ml-2 submit-component mover shadow"
+					(click)="enviarMensaje()" value="Enviar">
 
 			</div>
 		</div>
 	</div>
 
 </body>
+
+
+<ng-template #contenido let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Formulario de pregunta</h4>
+        <button class="close" aria-label="close" type="button" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+			<div class="form-group row">
+			  <label for="correoElectronico" class="col-sm-2 col-form-label">Correo:</label>
+			  <div class="col-sm-10">
+				<input type="email" class="form-control" id="correoElectronico" placeholder="correo@ejemplo.com">
+			  </div>
+			</div>
+			<div class="form-group row">
+			  <label for="pregunta" class="col-sm-2 col-form-label">Pregunta:</label>
+			  <div class="col-sm-10">
+				<textarea class="form-control" id="pregunta" rows="4" placeholder="Ingresa tu pregunta"></textarea>
+			  </div>
+			</div>
+		  </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modal.close()">Enviar</button>
+    </div>
+</ng-template>
