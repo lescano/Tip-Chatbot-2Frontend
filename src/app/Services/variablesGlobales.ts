@@ -3,13 +3,13 @@ export namespace variablesGlobales {
     var horariosGlobales;
     
     export function getHttpUrl(){
-       return 'http://localhost:8080/';
-       // return 'https://chatbot2-tip-backend.herokuapp.com/';
+       //return 'http://localhost:8080/';
+       return 'https://chatbot2-tip-backend.herokuapp.com/';
     }
 
     export function getHttpUrlInterprete(){
-        return 'http://localhost:5000/';
-        //return 'https://chatbot2-tip-interprete.herokuapp.com/';
+       // return 'http://localhost:5000/';
+        return 'https://chatbot2-tip-interprete.herokuapp.com/';
      }
  
 

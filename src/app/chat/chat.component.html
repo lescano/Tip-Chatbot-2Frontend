@@ -24,7 +24,9 @@
 											<a class="btn btn-link btn-sm mt-1 ml-2" target="_blank"
 												(click)="insertHistoryAccessMaterial(material.idMaterial, material.codigo)"
 												href="{{ material.url }}">{{ material.title }}</a>
-											<i *ngIf="m.showDetail" class="fa fa-info-circle text-info btn" (click)="getDetailSubjectMaterial(material.idMaterial)" aria-hidden="true"></i>
+											<i *ngIf="m.showDetail" class="fa fa-info-circle text-info btn"
+												(click)="getDetailSubjectMaterial(material.idMaterial)"
+												aria-hidden="true"></i>
 										</div>
 									</ul>
 								</div>

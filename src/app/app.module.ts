@@ -44,6 +44,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
 import { SubjectMaterialComponent } from './subject-material/subject-material.component';
 import { ShowSubjectComponent } from './show-subject/show-subject.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import { ShowSubjectComponent } from './show-subject/show-subject.component';
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
     FontAwesomeModule,
-    DataTablesModule
+    DataTablesModule,
+    NgbModule
   ],
   providers: [AuthService,AuthGuard,
   {

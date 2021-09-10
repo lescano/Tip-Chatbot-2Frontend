@@ -4,6 +4,7 @@ import { AsignaturaService } from '../Services/asignatura.service';
 import { AuthService } from '../Services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser'
 import { variablesGlobales } from '../Services/variablesGlobales';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-chat',
@@ -24,7 +25,8 @@ export class ChatComponent implements OnInit {
         private messageService: ChatService,
         private asignaturaService: AsignaturaService,
         private authService: AuthService,
-        private sanitized: DomSanitizer
+        private sanitized: DomSanitizer,
+        private modal: NgbModal
     ) { }
 
     ngOnInit(): void {
@@ -41,12 +43,16 @@ export class ChatComponent implements OnInit {
         }
     }
 
+    openModal(contenido) {
+        this.modal.open(contenido);
+    }
+
     getInitMessage() {
         let message = "¡Hola! Soy el asistente virtual del Tip.";
-        message += "<br>-Puedes realizarme consultas sobre la carrera del Tecnnólogo en Informática.";
-        message += "<br>-Algunas preguntas requieren que estes registrado, me encargare de que lo sepas!";
-        message += "<br>-Consultame sobre las materias y te dare opciones.";
-        message += "<br>¡Estoy para ayudarte!";
+        message += "<br>📍 Puedes realizarme consultas sobre la carrera del Tecnólogo en Informática.";
+        message += "<br>📍 Algunas preguntas requieren que estes registrado, me encargare de que lo sepas!";
+        message += "<br>📍 Consultame sobre las materias y te dare opciones.";
+        message += "<br>¡Estoy para ayudarte! 😄";
         this.mensajes.push({ id: "boot", botones: false, msj: message, tono: "claro", hora: this.getDateTimeMesssage() });
         setTimeout(() => {
             var chatHistory = document.getElementById("chat");
@@ -99,68 +105,107 @@ export class ChatComponent implements OnInit {
         this.messageService.horarios(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
+            //el mensaje se guarda en el historial como si el usuario preguntara por el horario de la asignatura
             this.messageService.insertNewHistory("Horarios " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, false);
+                //se devuelve la respuesta a la pregunta
+                this.responder(data.Reply, 0);
+                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                //se envia este mensaje para no cortar el ciclo de comunicación
+                //por si el usuario tiene otra consulta sobre la asignatura que consultó anteriormente
+                this.responder("¿Deseas saber algo más?<br>", 1);
             });
         });
+
     }
 
-    profesor() {
+    profesor() {      //se detalla el funcionamiento en la REF(1)  
+        this.mensajes.push({ id: "tu", msj: "Profesor " + variablesGlobales.getSubjectByCode(this.codigo), tono: "obscuro", hora: this.getDateTimeMesssage() });
+
+        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.profesor(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
             this.messageService.insertNewHistory("Profesor " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, false);
+                this.responder(data.Reply, 0);
+                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                this.responder("¿Deseas saber algo más?<br>", 1);
             });
         });
     }
 
-    evaluaciones() {
+    evaluaciones() {        //se detalla el funcionamiento en la REF(1)  
+        this.mensajes.push({ id: "tu", msj: "Evaluaciones " + variablesGlobales.getSubjectByCode(this.codigo), tono: "obscuro", hora: this.getDateTimeMesssage() });
+
+        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.evaluaciones(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
             this.messageService.insertNewHistory("Evaluaciones " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, false);
+                this.responder(data.Reply, 0);
+                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                this.responder("¿Deseas saber algo más?<br>", 1);
             });
         });
     }
 
-    cursada() {
+    cursada() {        //se detalla el funcionamiento en la REF(1)  
+        this.mensajes.push({ id: "tu", msj: "¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", tono: "obscuro", hora: this.getDateTimeMesssage() });
+
+        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.cursada(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
-            this.messageService.insertNewHistory("Cursé " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, false);
+            this.messageService.insertNewHistory("¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                this.responder(data.Reply, 0);
+                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                this.responder("¿Deseas saber algo más?<br>", 1);
             });
         });
     }
 
-    creditos() {
+    creditos() {        //se detalla el funcionamiento en la REF(1)  
+        this.mensajes.push({ id: "tu", msj: "Creditos " + variablesGlobales.getSubjectByCode(this.codigo), tono: "obscuro", hora: this.getDateTimeMesssage() });
+
+        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.creditos(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
             this.messageService.insertNewHistory("Creditos " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, false);
+                this.responder(data.Reply, 0);
+                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                this.responder("¿Deseas saber algo más?<br>", 1);
             });
         });
     }
 
-    limite() {
+    limite() {              //se detalla el funcionamiento en la REF(1)  
+        this.mensajes.push({ id: "tu", msj: "Limite de inscripción " + variablesGlobales.getSubjectByCode(this.codigo), tono: "obscuro", hora: this.getDateTimeMesssage() });
+
+        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
+
         this.messageService.limite(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
             this.messageService.insertNewHistory("Limite de inscripción " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, false);
+                this.responder(data.Reply, 0);
+                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                this.responder("¿Deseas saber algo más?<br>", 1);
+
             });
         });
     }
@@ -168,7 +213,7 @@ export class ChatComponent implements OnInit {
     enviarMensaje() {
 
         if (!this.contenidoMensaje || this.contenidoMensaje == "") {
-            let errorMessage = "Escribe una consulta por favor";
+            let errorMessage = "Escribe una consulta por favor ⚠️";
             this.mensajes.push({ id: "tu", msj: this.contenidoMensaje, tono: "obscuro", hora: this.getDateTimeMesssage() });
             this.responderErrorVacio(errorMessage);
             this.contenidoMensaje = "";
@@ -188,16 +233,15 @@ export class ChatComponent implements OnInit {
             }, 50);
             this.messageService.add(mensaje)
                 .subscribe(data => {
-                    if (data.Reply == "") {
-                        this.messageService.webhook().subscribe(data => {
-                            this.responder(data.Reply, false);
-                        });
+                    if (data.Reply == "" || data.Reply.includes("error")) {
+                        //Crear modal que envie un correo al administrador
+                        this.responder("Completa el formulario de pregunta<br>", 2);
                     } else if (data.Reply.includes("asignatura-")) {
-                        this.responder("¿Qué deseas saber sobre esta asignatúra?<br>", true);
+                        this.responder("¿Qué deseas saber sobre esta asignatúra?<br>", 1);
                         let cod = data.Reply.split("-");
                         this.codigo = cod[1];
                     } else {
-                        this.responder(data.Reply, false);
+                        this.responder(data.Reply, 0);
                     }
                 });
         }
