@@ -233,9 +233,9 @@ export class ChatComponent implements OnInit {
             }, 50);
             this.messageService.add(mensaje)
                 .subscribe(data => {
-                    if (data.Reply == "" || data.Reply.includes("error")) {
-                        //Crear modal que envie un correo al administrador
-                        this.responder("Completa el formulario de pregunta<br>", 2);
+                    if (data.Reply.localeCompare("error") == 0) {
+                        let errorMessage = "No tengo una respuesta para esta pregunta 😞";
+                        this.responder(errorMessage, 0);
                     } else if (data.Reply.includes("asignatura-")) {
                         this.responder("¿Qué deseas saber sobre esta asignatúra?<br>", 1);
                         let cod = data.Reply.split("-");

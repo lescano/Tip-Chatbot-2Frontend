@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsuarioComponent } from './Usuarios/usuario/usuario.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 import { MenuAdminComponent } from './Menus/menu-admin/menu-admin.component';
 import { InicioComponent } from './Menus/inicio/inicio.component';
@@ -15,22 +15,19 @@ import { NavbarComponent } from './Menus/navbar/navbar.component';
 import { AuthService } from './Services/auth.service';
 import { AuthGuard } from './auth.guard';
 import { PerfilComponent } from './Usuarios/perfil/perfil.component';
-import { TokenInterceptorService} from './Services/token-interceptor.service';
+import { TokenInterceptorService } from './Services/token-interceptor.service';
 import { AsignaturasAdminComponent } from './Asignaturas/asignaturas-admin/asignaturas-admin.component';
 import { NuevaAsignaturaComponent } from './Asignaturas/nueva-asignatura/nueva-asignatura.component';
 import { VerAsignaturaComponent } from './Asignaturas/ver-asignatura/ver-asignatura.component';
-import { HorariosAsignaturasComponent } from './Asignaturas/horarios-asignaturas/horarios-asignaturas.component';
 import { NuevoHorarioComponent } from './Asignaturas/nuevo-horario/nuevo-horario.component';
 import { EditarHorarioComponent } from './Asignaturas/editar-horario/editar-horario.component';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
- 
+
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { EvaluacionesAsignaturaComponent } from './Asignaturas/evaluaciones-asignatura/evaluaciones-asignatura.component';
 import { NuevaEvaluacionComponent } from './Asignaturas/nueva-evaluacion/nueva-evaluacion.component';
-import { ProgresoComponent } from './Usuarios/progreso/progreso.component';
 import { AgregarAsignaturaUsuarioComponent } from './Usuarios/agregar-asignatura-usuario/agregar-asignatura-usuario.component';
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 import { NuevapreguntaComponent } from './preguntas/nuevapregunta/nuevapregunta.component';
@@ -43,7 +40,7 @@ import { PreviaturasComponent } from './previaturas/previaturas.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
 import { SubjectMaterialComponent } from './subject-material/subject-material.component';
-import { ShowSubjectComponent } from './show-subject/show-subject.component';
+import { ShowSubjectComponent } from './Asignaturas/show-subject/show-subject.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -55,8 +52,25 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     InicioComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent, 
-    PerfilComponent, AsignaturasAdminComponent, NuevaAsignaturaComponent, VerAsignaturaComponent, HorariosAsignaturasComponent, NuevoHorarioComponent, EditarHorarioComponent, EvaluacionesAsignaturaComponent, NuevaEvaluacionComponent, ProgresoComponent, AgregarAsignaturaUsuarioComponent, PreguntaComponent, NuevapreguntaComponent, FeriadoComponent, NuevoFeriadoComponent, ExcelComponent, PreviaturasComponent, StatisticsComponent, StaticsAsignaturasComponent, SubjectMaterialComponent, ShowSubjectComponent,
+    NavbarComponent,
+    PerfilComponent,
+    AsignaturasAdminComponent,
+    NuevaAsignaturaComponent,
+    VerAsignaturaComponent,
+    NuevoHorarioComponent,
+    EditarHorarioComponent,
+    NuevaEvaluacionComponent,
+    AgregarAsignaturaUsuarioComponent,
+    PreguntaComponent,
+    NuevapreguntaComponent,
+    FeriadoComponent,
+    NuevoFeriadoComponent,
+    ExcelComponent,
+    PreviaturasComponent,
+    StatisticsComponent,
+    StaticsAsignaturasComponent,
+    SubjectMaterialComponent,
+    ShowSubjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,20 +80,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
     CommonModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FontAwesomeModule,
     DataTablesModule,
     NgbModule
   ],
-  providers: [AuthService,AuthGuard,
-  {
-    provide:HTTP_INTERCEPTORS,
-    useClass:TokenInterceptorService,
-    multi:true
-  }], 
+  providers: [AuthService, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
-  
+
 })
 
 export class AppModule { }

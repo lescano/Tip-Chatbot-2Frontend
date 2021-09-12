@@ -1,23 +1,34 @@
 export namespace variablesGlobales {
     var actualUser;
     var horariosGlobales;
-    
-    export function getHttpUrl(){
-       //return 'http://localhost:8080/';
-       return 'https://chatbot2-tip-backend.herokuapp.com/';
+
+    export function getHttpUrl() {
+        //return 'http://localhost:8080/';
+        return 'https://chatbot2-tip-backend.herokuapp.com/';
     }
 
-    export function getHttpUrlInterprete(){
+    export function getHttpUrlInterprete() {
        // return 'http://localhost:5000/';
         return 'https://chatbot2-tip-interprete.herokuapp.com/';
-     }
- 
+    }
 
-    export function getActualUser(){
+
+    export function getActualUser() {
         return this.actualUser;
     }
-    export function setActualUser(id:string){ 
-        this.actualUser=id;
+    export function setActualUser(id: string) {
+        this.actualUser = id;
+    }
+
+    export function getSemesterName(semester) {
+        switch (semester) {
+            case "1": return "Primer";
+            case "2": return "Segundo";
+            case "3": return "Tercer";
+            case "4": return "Cuarto";
+            case "5": return "Quinto";
+            case "6": return "Sexto";
+        }
     }
 
     export function getSubjectByCode(code) {

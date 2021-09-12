@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <div class="card bg-light shadow mt-2 mb-3 ml-2 mr-2">
+    <div class="card bg-light shadow m-3">
         <div class="card-header bg-primary d-flex justify-content-between">
             <h5 class="text-white mt-1">Preguntas</h5>
             <button class="btn btn-primary shadow" routerLink="/nuevaPregunta"><i class="fa fa-plus"
@@ -10,16 +10,18 @@
                 class="row-border hover table table-striped">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th scope="col">Nombre</th>
+                        <th scope="col">Pregunta</th>
+                        <th scope="col">Respuesta</th>
                         <th class="text-center" scope="col">Borrar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let pregunta of listado">
                         <td>{{pregunta.nombre}}</td>
+                        <td>{{pregunta.respuesta}}</td>
                         <td class="text-center">
                             <button class="btn btn-danger btn-sm" (click)="borrarPregunta(pregunta.id)"><i
-                                    class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
+                                    class="fa fa-trash" aria-hidden="true"></i></button>
                         </td>
                     </tr>
                 </tbody>

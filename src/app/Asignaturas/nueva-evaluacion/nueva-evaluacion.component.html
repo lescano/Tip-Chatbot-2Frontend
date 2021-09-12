@@ -1,54 +1,47 @@
-<div class="container">
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm">
-        <div class="card mt-4">
-          <div class="card-body">
-            <div class="card-title h3">
-              Agregar Evaluacion            
-            </div>
-            <div class="container">
-              <div class="d-flex justify-content-center">
-                <div class="col">
-                    <form [formGroup]="profileForm" (ngSubmit)="addEvaluacion()" class="mt-1">
-                      <label>Nombre:</label>
-                    <input formControlName="nombre"  class="form-control" type="text"   placeholder="Nombre" ><br>
-
-                    <label>Tipo:</label>
-                    <select formControlName="tipo" class="mb-2 form-control custom-select" (change)="select($event.target.value)">
-                      <option value="Parcial">Parcial</option>
-                      <option value="Examen">Examen</option>
-                      <option value="Laboratorio">Laboratorio</option>         
+<div class="d-flex justify-content-center">
+    <div class="card bg-light shadow mt-2 mb-3 w-25">
+        <div class="card-header bg-primary text-white h5">
+            Agregar Evaluación
+        </div>
+        <div class="card-body">
+            <form [formGroup]="profileForm" (ngSubmit)="addEvaluacion()" class="mt-1">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nombre</label>
+                    <input formControlName="nombre" class="form-control shadow-sm" type="text">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Tipo</label>
+                    <select formControlName="tipo" class="form-control custom-select shadow-sm"
+                        (change)="select($event.target.value)">
+                        <option value="Parcial">Parcial</option>
+                        <option value="Examen">Examen</option>
+                        <option value="Laboratorio">Laboratorio</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Fecha</label>
+                    <input formControlName="fecha" class="form-control shadow-sm" type="date">
+                </div>
 
-                    <br>
-                    <label>Fecha:</label>
-                    <input formControlName="fecha"  class="form-control" type="date" ><br>
-
-
-                    <div *ngIf="creandoLab">
-                        <label>Fecha Entrega:</label>
-                        <input formControlName="fechaEntrega" class="form-control" type="date"><br>
-                        <label>Fecha Defensa:</label>
-                        <input formControlName="fechaDefensa" class="form-control" type="date"><br> 
+                <div *ngIf="creandoLab" class="border border-dark rounded mb-2 p-2">
+                    <h6 class="card-title mb-2">Fechas laboratorio</h6>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha entrega</label>
+                        <input formControlName="fechaEntrega" class="form-control shadow-sm" type="date">
                     </div>
-                    <br>
-                    <button type="button" class="btn btn-primary float-left" (click)="cancelar()" > Cancelar</button> 
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Fecha defensa</label>
+                        <input formControlName="fechaDefensa" class="form-control shadow-sm" type="date">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-danger shadow-sm" (click)="cancelar()">
+                        Cancelar</button>
 
-                    <button class=" btn btn-primary float-right" type="submit" [disabled]="!profileForm.valid"> Guardar</button> 
-                  </form>
-                
-              </div>
-            </div>
-            
-            
-  
-          </div>
-      </div>
-      </div>
-      <div class="col-sm-1"></div>
+                    <button class=" btn btn-success shadow-sm" type="submit" [disabled]="!profileForm.valid">
+                        Guardar</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-  
-  
-  
+</div>

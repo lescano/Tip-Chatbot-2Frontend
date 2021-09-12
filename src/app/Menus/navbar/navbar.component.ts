@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
     idAdmin = false;
+    userSesion: String;
+
     constructor(private authService: AuthService,
         private router: Router) {
         this.pedirAdmin();
@@ -17,8 +19,9 @@ export class NavbarComponent implements OnInit {
 
     ngOnInit(): void {
         this.pedirAdmin();
+        this.userSesion = this.authService.getUserName();   
     }
-    
+
     islogin() {
         return this.authService.loggedIn();
     }
@@ -37,7 +40,6 @@ export class NavbarComponent implements OnInit {
                 this.idAdmin = data.data;
             })
         }
-
     }
 
 }

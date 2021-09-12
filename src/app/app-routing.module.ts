@@ -11,12 +11,9 @@ import { AuthGuard } from './auth.guard';
 import { AsignaturasAdminComponent } from './Asignaturas/asignaturas-admin/asignaturas-admin.component';
 import { NuevaAsignaturaComponent } from './Asignaturas/nueva-asignatura/nueva-asignatura.component';
 import { VerAsignaturaComponent } from './Asignaturas/ver-asignatura/ver-asignatura.component';
-import { HorariosAsignaturasComponent } from './Asignaturas/horarios-asignaturas/horarios-asignaturas.component';
 import { EditarHorarioComponent } from './Asignaturas/editar-horario/editar-horario.component';
 import { NuevoHorarioComponent } from './Asignaturas/nuevo-horario/nuevo-horario.component';
-import { EvaluacionesAsignaturaComponent } from './Asignaturas/evaluaciones-asignatura/evaluaciones-asignatura.component';
 import { NuevaEvaluacionComponent } from './Asignaturas/nueva-evaluacion/nueva-evaluacion.component';
-import { ProgresoComponent } from './Usuarios/progreso/progreso.component';
 import { AgregarAsignaturaUsuarioComponent } from './Usuarios/agregar-asignatura-usuario/agregar-asignatura-usuario.component';
 import { PreguntaComponent } from './preguntas/pregunta/pregunta.component';
 import { FeriadoComponent } from './feriados/feriado/feriado.component';
@@ -27,7 +24,7 @@ import { PreviaturasComponent } from './previaturas/previaturas.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
 import { SubjectMaterialComponent } from './subject-material/subject-material.component';
-import { ShowSubjectComponent } from './show-subject/show-subject.component';
+import { ShowSubjectComponent } from './Asignaturas/show-subject/show-subject.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -41,12 +38,9 @@ const routes: Routes = [
   { path: 'asignaturasAdmin', component: AsignaturasAdminComponent },
   { path: 'nuevaAsignatura', component: NuevaAsignaturaComponent },
   { path: 'verAsignatura', component: VerAsignaturaComponent },
-  { path: 'horarios', component: HorariosAsignaturasComponent },
   { path: 'verHorario', component: EditarHorarioComponent },
   { path: 'nuevoHorario', component: NuevoHorarioComponent },
-  { path: 'evaluaciones', component: EvaluacionesAsignaturaComponent },
   { path: 'nuevaEvaluacion', component: NuevaEvaluacionComponent },
-  { path: 'progreso', component: ProgresoComponent },
   { path: 'agregarAsig', component: AgregarAsignaturaUsuarioComponent },
   { path: 'preguntas', component: PreguntaComponent },
   { path: 'nuevaPregunta', component: NuevapreguntaComponent },

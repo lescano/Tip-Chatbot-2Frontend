@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <div *ngIf="!editandoPerfil&&!cambiandoContrasenia" class="w-50">
+    <div *ngIf="!editandoPerfil&&!cambiandoContrasenia" class="w-75">
         <div class="card bg-light shadow mt-2 mb-3">
             <div class="card-header bg-primary d-flex justify-content-between">
                 <h5 class="text-white mt-1">Perfil</h5>
@@ -27,6 +27,29 @@
                         <input type="text" class="form-control disabled" value="{{apellido}}">
                     </div>
                 </fieldset>
+                <hr>
+                <div class="text-primary h6 mb-2">
+                    Progreso Académico
+                </div>
+                <table class="table table-striped hover">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="text-center" scope="col">Asignatura</th>
+                            <th class="text-center" scope="col">Créditos</th>
+                            <th class="text-center" scope="col">Docente</th>
+                            <th class="text-center" scope="col">Método de aprobación</th>
+                            <th class="text-center" scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let subject of arraySubjectProgress; index as i">
+                            <td class="text-center">{{ subject.subject }}</td>
+                            <td class="text-center">{{ subject.credits}}</td>
+                            <td class="text-center">{{ subject.teacher }}</td>
+                            <td class="text-center">{{ subject.approval}}</td>
+                            <td class="text-center">{{ subject.state }}</td>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -1,59 +1,47 @@
-<div class="container">
-    <div class="row">
-      <div class="col-sm-1"></div>
-      <div class="col-sm">
-        <div class="card mt-4">
-          <div class="card-body">
-            <div class="card-title h3">
-              Agregar Horario            
-            </div>
-            <div class="container">
-              <div class="d-flex justify-content-center">
-                <div class="col">
-                    <form [formGroup]="profileForm" (ngSubmit)="addHorario()" class="mt-1">
-                      <label>Semetre:</label>
-                      <select formControlName="semestre" class="mb-2 form-control custom-select">
+<div class="d-flex justify-content-center">
+    <div class="card bg-light shadow mb-3 mt-2 w-25">
+        <div class="card-header bg-primary text-white h5">
+            Agregar Horario
+        </div>
+        <div class="card-body">
+            <form [formGroup]="profileForm" (ngSubmit)="addHorario()" class="mt-1">
+                <div class="form-group">
+                    <label>Semestre</label>
+                    <select formControlName="semestre" class="form-control custom-select shadow-sm">
                         <option value="1">Primer</option>
                         <option value="2">Segundo</option>
                         <option value="3">Tercer</option>
                         <option value="4">Cuarto</option>
                         <option value="5">Quinto</option>
                         <option value="6">Sexto</option>
-                      </select>
-                    
-                    <label>Dia:</label>
-                    <select formControlName="dia" class="mb-2 form-control custom-select">
-                      <option value="Lunes">Lunes</option>
-                      <option value="Martes">Martes</option>
-                      <option value="Miércoles">Miércoles</option>
-                      <option value="Jueves">Jueves</option>
-                      <option value="Viernes">Viernes</option>
                     </select>
-                    <br>
-                    <label>Hora desde:</label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Día</label>
+                    <select formControlName="dia" class="form-control custom-select shadow-sm">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Inicio de clase</label>
+                    <input formControlName="horaDesde" class="form-control shadow-sm" type="time" placeholder="Desde">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Finalización de clase</label>
+                    <input formControlName="horaHasta" class="form-control shadow-sm" type="time" placeholder="Hasta">
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-danger shadow-sm" (click)="cancelar()">
+                        Cancelar</button>
 
-                    <input formControlName="horaDesde" class="form-control" type="number"  placeholder="Desde" ><br>
-                    <label>Hora hasta:</label>
-
-                    <input formControlName="horaHasta" class="form-control" type="number" placeholder="Hasta"><br> 
-        
-                    <br>
-                    <button type="button" class="btn btn-primary float-left" (click)="cancelar()" > Cancelar</button> 
-
-                    <button class=" btn btn-primary float-right" type="submit" [disabled]="!profileForm.valid"> Guardar</button> 
-                  </form>
-                
-              </div>
-            </div>
-            
-            
-  
-          </div>
-      </div>
-      </div>
-      <div class="col-sm-1"></div>
+                    <button class=" btn btn-success shadow-sm" type="submit" [disabled]="!profileForm.valid">
+                        Guardar</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
-  
-  
-  
+</div>
