@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center">
+    <div class="card bg-light shadow m-3">
+        <div class="card-header bg-primary d-flex justify-content-between">
+            <h5 class="text-white mt-1">Preguntas pendientes</h5>
+        </div>
+        <div class="card-body">
+            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                class="row-border hover table table-striped">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th class="w-75" scope="col">Pregunta</th>
+                        <th class="text-center" scope="col">Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of arrayQuestions">
+                        <td>{{ item.question}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-success btn-sm mr-2"
+                                (click)="sendToResolveQuestion(item.question, item.idQuestion)"><i
+                                    class="fa fa-share-square-o" aria-hidden="true"></i></button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteQuestion(item.idQuestion)">
+                                <i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

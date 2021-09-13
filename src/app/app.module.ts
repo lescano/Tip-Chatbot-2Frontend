@@ -42,6 +42,7 @@ import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asign
 import { SubjectMaterialComponent } from './subject-material/subject-material.component';
 import { ShowSubjectComponent } from './Asignaturas/show-subject/show-subject.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UnansweredQuestionComponent } from './preguntas/unanswered-question/unanswered-question.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     StaticsAsignaturasComponent,
     SubjectMaterialComponent,
     ShowSubjectComponent,
+    UnansweredQuestionComponent,
   ],
   imports: [
     BrowserModule,

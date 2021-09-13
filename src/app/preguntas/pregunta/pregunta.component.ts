@@ -34,17 +34,10 @@ export class PreguntaComponent implements OnInit, OnDestroy {
     listar(): void {
         this.preguntaService.listar().subscribe(data => {
             data.Reply[0].forEach(element => {
-                if (element.displayName.includes("Cantidad"))
-                    console.log(element)
                 let identificador = element.name.split("/");
                 this.listado.push({ id: identificador[4], nombre: element.displayName, respuesta: element.messages[0].text.text });
                 this.dtTrigger.next();
             });
-            // for (var i = 0; i < data.Reply[0].length; i++) {
-            //   var identificador = data.Reply[0][i].name.split("/");
-            // this.listado.push({ id: identificador[4], nombre: data.Reply[0][i].displayName });
-
-            //}
         });
     }
 

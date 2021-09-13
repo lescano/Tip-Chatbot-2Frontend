@@ -25,6 +25,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { StaticsAsignaturasComponent } from './statics-asignaturas/statics-asignaturas.component';
 import { SubjectMaterialComponent } from './subject-material/subject-material.component';
 import { ShowSubjectComponent } from './Asignaturas/show-subject/show-subject.component';
+import { UnansweredQuestionComponent } from './preguntas/unanswered-question/unanswered-question.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -51,7 +52,8 @@ const routes: Routes = [
   { path: 'estadisticas', component: StatisticsComponent },
   { path: 'estadisticas-asignatura', component: StaticsAsignaturasComponent },
   { path: 'material-asignatura', component: SubjectMaterialComponent },
-  { path: 'ver-asignatura', component: ShowSubjectComponent }
+  { path: 'ver-asignatura', component: ShowSubjectComponent },
+  { path: 'preguntas-pendientes', component: UnansweredQuestionComponent }
 ];
 
 @NgModule({

@@ -7,7 +7,7 @@
             <form [formGroup]="profileForm" (ngSubmit)="addPregunta()" class="mt-1">
                 <div class="form-group w-75">
                     <label for="inputAddress">Pregunta</label>
-                    <input formControlName="nombre" type="text" class="form-control shadow-sm">
+                    <input formControlName="nombre" type="text" class="form-control shadow-sm" [(ngModel)]="newQuestion" value={{newQuestion}}>
                 </div>
                 <div class="form-group">
                     <label>Agregar formas de preguntar</label>
