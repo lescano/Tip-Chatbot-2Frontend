@@ -233,6 +233,7 @@ export class ChatComponent implements OnInit {
             }, 50);
             this.messageService.add(mensaje)
                 .subscribe(data => {
+                    console.log(data);
                     if (data.Reply.localeCompare("error") == 0) {
                         let errorMessage = "No tengo una respuesta para esta pregunta 😞";
                         this.responder(errorMessage, 0);
