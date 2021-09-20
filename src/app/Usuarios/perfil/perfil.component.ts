@@ -70,7 +70,7 @@ export class PerfilComponent implements OnInit {
         this.obtenerDatos();
         this.noCoinciden = false;
         this.actualIncorrecta = false;
-        //this.getAsignaturas();
+        this.getAsignaturas();
     }
 
     getAsignaturas(): void {
