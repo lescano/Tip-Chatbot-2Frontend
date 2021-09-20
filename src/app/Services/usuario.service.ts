@@ -60,4 +60,12 @@ export class UsuarioService {
       codigo:codigo_asignatura
       });
   }
+
+  verificarUsuarioTelegram(idusuario, activotelegram){
+    return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/verifyTelegram', {
+      id:idusuario,
+      activo_telegram:activotelegram,
+      frontend:true
+    });
+  }
 }
