@@ -3,6 +3,7 @@ import { EstadisticasService } from '../Services/estadisticas.service';
 import { AsignaturaService } from '../Services/asignatura.service';
 import { AuthService } from '../Services/auth.service';
 import { variablesGlobales } from '../Services/variablesGlobales';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-statistics',
@@ -13,9 +14,18 @@ export class StatisticsComponent implements OnInit {
     rowArrayConsults: Array<any> = [];
     rowArrayUsers: Array<any> = [];
 
+    formGroupInterval = new FormGroup({
+        dateInit: new FormControl('',
+            Validators.required
+        ),
+        dateFinish: new FormControl('',
+            Validators.required
+        )
+    });
+
     textToSearchUser: String;
-    startDate: Date;
-    endDate: Date;
+    startDate: String;
+    endDate: String;
 
     constructor(
         private asignaturaService: AsignaturaService,
@@ -27,27 +37,25 @@ export class StatisticsComponent implements OnInit {
     ngOnInit(): void {
         this.startDate;
 
-        let startDate = this.getDateFilter(8);
-        let endDate = this.getDateFilter(null);
-        this.staticsService.getCountQuestionByDate(this.getDateNoFormat(startDate), this.getDateNoFormat(endDate)).subscribe(data => {
+        this.startDate = this.getDateFilter(8);
+        this.endDate = this.getDateFilter(null);
+        this.staticsService.getCountQuestionByDate(this.getDateNoFormat(this.startDate), this.getDateNoFormat(this.endDate)).subscribe(data => {
             this.rowArrayConsults.splice(1);
-            this.rowArrayConsults.push({ period: "Inicio: " + startDate + " Fin: " + endDate, value: data.countQuestions });
+            this.rowArrayConsults.push({ period: "Inicio: " + this.startDate + " Fin: " + this.endDate, value: data.countQuestions });
         })
 
-        this.staticsService.getCountQuestionsByUser("").subscribe(data => {
+        this.staticsService.getCountQuestionsByUser("", this.getDateNoFormat(this.startDate), this.getDateNoFormat(this.endDate)).subscribe(data => {
             data.listResult.forEach(element => {
-                this.rowArrayUsers.push({ ci: element.ci, nombre: element.nombre, cantQuerys: element.cantQuerys });
+                this.rowArrayUsers.push({ ci: element.cedula, nombre: element.nombre + " " + element.apellido, cantQuerys: element.historialChat.length });
             });
         })
     }
 
     filterUserTable(value) {
-        this.staticsService.getCountQuestionsByUser(value).subscribe(data => {
-            console.log(value);
-            console.log(data)
+        this.staticsService.getCountQuestionsByUser(value, this.getDateNoFormat(this.startDate), this.getDateNoFormat(this.endDate)).subscribe(data => {
             this.rowArrayUsers.splice(0, this.rowArrayUsers.length);
             data.listResult.forEach(element => {
-                this.rowArrayUsers.push({ ci: element.ci, nombre: element.nombre, cantQuerys: element.cantQuerys });
+                this.rowArrayUsers.push({ ci: element.cedula, nombre: element.nombre, cantQuerys: element.cantQuerys });
             });
         })
     }
@@ -61,8 +69,8 @@ export class StatisticsComponent implements OnInit {
                 this.rowArrayConsults.splice(0);
                 this.rowArrayConsults.push({ period: "Inicio: " + this.startDate + " Fin: " + this.endDate, value: data.countQuestions });
             })
-        } else {
-            console.log("mensaje error");
+
+            this.filterUserTable("");
         }
     }
 

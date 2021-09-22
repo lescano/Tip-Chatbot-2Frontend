@@ -8,7 +8,7 @@ export namespace variablesGlobales {
     }
 
     export function getHttpUrlInterprete() {
-       // return 'http://localhost:5000/';
+        //return 'http://localhost:5000/';
         return 'https://chatbot2-tip-interprete.herokuapp.com/';
     }
 

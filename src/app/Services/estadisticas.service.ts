@@ -15,18 +15,23 @@ export class EstadisticasService {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getCountQuestionByDate", { startDate: startDate, endDate: endDate });
     }
 
-    getCountQuestionsByUser(value) {
+    getCountQuestionsByUser(value, startDate, endDate) {
         const headers = { 'Authorization': '*' };
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getCountQuestionsByUser", { textToSearch: value });
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getCountQuestionsByUser", { textToSearch: value, startDate: startDate, endDate: endDate });
     }
 
-    getCountSubjectConsult() {
+    getCountSubjectConsult(startDate, endDate) {
         const headers = { 'Authorization': '*' };
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getCountSubjectConsult", {});
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getCountSubjectConsult", { startDate: startDate, endDate: endDate });
     }
 
     getConsultsBySubject(codeSubject) {
         const headers = { 'Authorization': '*' };
         return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getConsultsBySubject", { codeSubject: codeSubject });
+    }
+
+    getHistoryMaterials(idSubject, startDate, endDate) {
+        const headers = { 'Authorization': '*' };
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getHistoryMaterials", { idSubject: idSubject, startDate: startDate, endDate: endDate });
     }
 }
