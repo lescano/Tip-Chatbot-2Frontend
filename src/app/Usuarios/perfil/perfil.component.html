@@ -10,6 +10,8 @@
                             class="fa fa-unlock-alt" aria-hidden="true"></i> Cambiar Contraseña</button>
                     <button class="btn btn-info btn-sm shadow mr-2" (click)="habilitarEditarPerfil()"><i
                             class="fa fa-pencil" aria-hidden="true"></i> Editar Perfil</button>
+                    <button *ngIf = "!activoTelegram" class="btn btn-light btn-sm shadow mr-2" (click)="verificarTelegram()"><i
+                            class="fa fa-telegram" aria-hidden="true"></i> Activar Telegram</button>
                 </div>
             </div>
             <div class="card-body">

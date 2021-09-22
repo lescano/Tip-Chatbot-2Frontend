@@ -14,6 +14,7 @@ export class PerfilComponent implements OnInit {
     nombre: string;
     apellido: string;
     cedula: string;
+    activoTelegram: boolean;
     editando: boolean;
 
     arraySubjectProgress: Array<any> = [];
@@ -75,7 +76,8 @@ export class PerfilComponent implements OnInit {
     getAsignaturas(): void {
         this.authService.getUser().subscribe(data => {
             data.usuario.usuarioAsignaturas.forEach(element => {
-                this.usuarioService.getUsuarioAsignatura(element)
+                    console.log(element)
+                    this.usuarioService.getUsuarioAsignatura(element)
                     .subscribe(dataStatus => {
                         this.asignaturaService.getDetalleAsignatura(dataStatus.usuarioAsignatura.asignatura)
                             .subscribe(dataInfoSubject => {
@@ -98,6 +100,13 @@ export class PerfilComponent implements OnInit {
             this.nombre = data.usuario.nombre;
             this.apellido = data.usuario.apellido;
             this.cedula = data.usuario.cedula;
+            console.log(data.usuario);
+            if(data.usuario.activo_telegram == false && data.usuario.id_telegram != ""){
+                this.activoTelegram = false;
+            }
+            else{
+                this.activoTelegram = true;
+            }
         })
     }
 
@@ -155,6 +164,19 @@ export class PerfilComponent implements OnInit {
                 this.authService.logOut();
             })
         }
+    }
+
+    verificarTelegram() {
+        //console.log("ok");
+        this.usuarioService.verificarUsuarioTelegram(this.id, true)
+            .subscribe((res) => {
+                if(!res.ok){
+                    console.log(res.err);
+                    this.toastr.error("Ha ocurrido un error, por favor intente nuevamente más tarde.");
+                }
+                this.activoTelegram = true;
+                this.toastr.success("Se ha activado su usuario de Telegram");
+            })
     }
 
 }
