@@ -66,8 +66,8 @@ export class ShowSubjectComponent implements OnInit {
 
     deletePrevious(idSubjectPrevious, index) {
         this.asignaturaService.deletePrevious(this.subjectSelected._id, idSubjectPrevious).subscribe(response => {
-            console.log(response);
             this.arrayPrevious.splice(index, 1);
+            this.getSubjectsNoPrevious();
         });
     }
 
@@ -78,6 +78,7 @@ export class ShowSubjectComponent implements OnInit {
             else {
                 this.arrayPrevious.push({ idPrevious: response.newPrevia.idPrevious, nameSubject: response.newPrevia.materia, teacher: response.newPrevia.docente, credits: response.newPrevia.creditos, approvalType: response.newPrevia.condicion, approvalPrevious: response.newPrevia.aprobacion });
                 this.toastr.success(response.result);
+                this.getSubjectsNoPrevious();
             }
             this.closebutton.nativeElement.click();
         });

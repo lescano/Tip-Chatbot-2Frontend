@@ -77,7 +77,6 @@ export class VerAsignaturaComponent implements OnInit {
             this.asignaturaEditar.nombreDoc = this.profileForm.value.nombreDocente;
             this.asignaturaEditar.correoDoc = this.profileForm.value.correoDocente;
             this.asignaturaEditar.fechaInscripcion = this.profileForm.value.fechaInscripcion;
-            //alert(this.profileForm.value.fechaInscripcion);
             this.subjectService.editarAsignatura(this.asignaturaEditar).subscribe(data => {
                 this.toastr.success(data.data);
                 this.router.navigateByUrl('/asignaturasAdmin');
