@@ -13,7 +13,7 @@ export namespace variablesGlobales {
     }
 
     export function getHeader(){
-        return { Authorization:'*', 'Access-Control-Allow-Origin': 'https://herokuapp.com', 'content-type':'*' };
+        return { Authorization:'*', 'Access-Control-Allow-Origin': 'https://chatbot2-tip-frontend.herokuapp.com/', 'content-type':'*' };
     }
 
 
