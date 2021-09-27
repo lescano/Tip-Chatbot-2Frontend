@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-    <div class="card shadow mt-2 w-75">
+    <div class="card shadow mt-2">
         <div class="card-header bg-primary text-white h5">
             Registrar nueva asignatura
         </div>
@@ -18,8 +18,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Creditos</label>
-                        <input formControlName="creditos" type="number"
-                            class="form-control shadow-sm"
+                        <input formControlName="creditos" type="number" class="form-control shadow-sm"
                             onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
                     </div>
                     <div class="form-group col-md-4">
@@ -34,20 +33,28 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="inputEmail4">Fecha inscripción límite</label>
-                        <input formControlName="fechaInscripcion" type="date"
-                            class="form-control shadow-sm">
+                        <input formControlName="fechaInscripcion" type="date" class="form-control shadow-sm">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputPassword4">Semestre</label>
+                        <select formControlName="semestre" class="mb-2 custom-select shadow-sm">
+                            <option value="1">Primero</option>
+                            <option value="2">Segundo</option>
+                            <option value="3">Tercero</option>
+                            <option value="4">Cuarto</option>
+                            <option value="5">Quinto</option>
+                            <option value="6">Sexto</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
                         <label for="inputEmail4">Nombre docente</label>
-                        <input formControlName="nombreDocente" type="text"
-                            class="form-control shadow-sm">
+                        <input formControlName="nombreDocente" type="text" class="form-control shadow-sm">
                     </div>
                     <div class="form-group col">
                         <label for="inputPassword4">Correo docente</label>
-                        <input formControlName="correoDocente" type="text"
-                            class="form-control shadow-sm">
+                        <input formControlName="correoDocente" type="text" class="form-control shadow-sm">
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">

@@ -6,31 +6,30 @@
                     aria-hidden="true"></i> Nueva</a>
         </div>
         <div class="card-body">
-            <div class="d-flex flex-row-reverse mt-2 mb-2">
+            <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="text-center" scope="col">Código</th>
+                            <th class="text-center" scope="col">Nombre</th>
+                            <th class="text-center" scope="col">Créditos</th>
+                            <th class="text-center" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let asignatura of asignaturas; index as i">
 
+                            <td class="text-center">{{asignatura.codigo}}</td>
+                            <td class="text-center">{{asignatura.nombre}}</td>
+                            <td class="text-center">{{asignatura.creditos}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-info btn-sm mr-2" (click)="goToShowSubject(asignatura)"><i
+                                        class="fa fa-eye" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th class="text-center" scope="col">Código</th>
-                        <th class="text-center" scope="col">Nombre</th>
-                        <th class="text-center" scope="col">Créditos</th>
-                        <th class="text-center" scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let asignatura of asignaturas; index as i">
-
-                        <td class="text-center">{{asignatura.codigo}}</td>
-                        <td class="text-center">{{asignatura.nombre}}</td>
-                        <td class="text-center">{{asignatura.creditos}}</td>
-                        <td class="text-center">
-                            <button class="btn btn-info btn-sm mr-2" (click)="goToShowSubject(asignatura)"><i
-                                    class="fa fa-eye" aria-hidden="true"></i></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>

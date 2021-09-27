@@ -1,29 +1,31 @@
 <div class="d-flex justify-content-center mt-2">
-    <div class="card shadow mb-3">
+    <div class="card shadow m-2">
         <div class="card-header bg-primary">
             <h5 class="text-white mt-1">Lista de Usuarios</h5>
         </div>
         <div class="card-body">
-            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
-                <thead class="bg-primary text-white">
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Cédula</th>
-                        <th class="text-center" scope="col">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let usuario of usuarios">
+            <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cédula</th>
+                            <th class="text-center" scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
 
-                        <td>{{usuario.nombre}} {{usuario.apellido}} </td>
-                        <td>{{usuario.cedula}}</td>
-                        <td class="text-center">
-                            <button class="btn btn-sm btn-danger" (click)="borrarUsuario(usuario.id)"><i
-                                    class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <td>{{usuario.nombre}} {{usuario.apellido}} </td>
+                            <td>{{usuario.cedula}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-danger" (click)="borrarUsuario(usuario.id)"><i
+                                        class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

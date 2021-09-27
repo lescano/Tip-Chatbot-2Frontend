@@ -41,6 +41,7 @@ export class AuthService {
             contrasenia: password,
         });
     }
+    
     getUser() {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/detalle', {
             id: this.getActualUser(),

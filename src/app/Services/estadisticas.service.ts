@@ -25,9 +25,9 @@ export class EstadisticasService {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getCountSubjectConsult", { startDate: startDate, endDate: endDate });
     }
 
-    getConsultsBySubject(codeSubject) {
+    getConsultsBySubject(codeSubject, startDate, endDate) {
         const headers = { 'Authorization': '*' };
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getConsultsBySubject", { codeSubject: codeSubject });
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "historial/getConsultsBySubject", { codeSubject: codeSubject, startDate: startDate, endDate: endDate });
     }
 
     getHistoryMaterials(idSubject, startDate, endDate) {

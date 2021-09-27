@@ -39,15 +39,15 @@ export class LoginComponent implements OnInit {
         this.enviados = true;
         this.auth.loginUser(this.profileForm.value.cedula, this.profileForm.value.password)
             .subscribe(data => {
-                console.log(data)
                 this.enviados = false;
                 if (data.ok) {
+                    console.log(data)
                     this.auth.setActualUser(data.usuario.id);
+                    localStorage.setItem('soyAdmin', data.usuario.admin);
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("usuario", data.usuario.nombre + " " + data.usuario.apellido);
-                    this.router.navigate(['/chat']);
+                    window.location.reload(); 
                 } else {
-
                     this.datosMal = true;
                 }
             }

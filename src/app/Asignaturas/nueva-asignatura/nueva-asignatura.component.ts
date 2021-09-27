@@ -27,6 +27,9 @@ export class NuevaAsignaturaComponent implements OnInit {
     apruebaPor: new FormControl('', [
       Validators.required
     ]),
+    semestre: new FormControl('', [
+      Validators.required
+    ]),
     nombreDocente: new FormControl('', [
       Validators.required
     ]),
@@ -61,6 +64,7 @@ export class NuevaAsignaturaComponent implements OnInit {
         this.profileForm.value.creditos,
         this.profileForm.value.programa,
         this.profileForm.value.apruebaPor,
+        this.profileForm.value.semestre,
         this.profileForm.value.nombreDocente,
         this.profileForm.value.correoDocente,
         this.profileForm.value.fechaInscripcion

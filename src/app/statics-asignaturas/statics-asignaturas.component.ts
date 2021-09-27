@@ -64,10 +64,10 @@ export class StaticsAsignaturasComponent implements OnInit {
     }
 
     filterQuestionsBySubject(value) {
-        this.staticsService.getConsultsBySubject(value).subscribe(data => {
+        this.staticsService.getConsultsBySubject(value, this.getDateNoFormat(this.startDate), this.getDateNoFormat(this.endDate)).subscribe(data => {
             this.arrayConsultBySubjects.splice(0, this.arrayConsultBySubjects.length);
             data.listResult.forEach(element => {
-                this.arrayConsultBySubjects.push({ pregunta: element._id, ocurrencias: element.cantidad });
+                this.arrayConsultBySubjects.push({ pregunta: element._id.pregunta, ocurrencias: element.cantidad });
             });
         });
 

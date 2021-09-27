@@ -14,12 +14,11 @@ export class NavbarComponent implements OnInit {
 
     constructor(private authService: AuthService,
         private router: Router) {
-        this.pedirAdmin();
     }
 
     ngOnInit(): void {
-        this.pedirAdmin();
-        this.userSesion = this.authService.getUserName();   
+        this.idAdmin = localStorage.getItem('soyAdmin') === 'true';
+        this.userSesion = localStorage.getItem('usuario'); 
     }
 
     islogin() {

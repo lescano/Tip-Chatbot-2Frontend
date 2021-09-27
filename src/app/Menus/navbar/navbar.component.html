@@ -13,8 +13,8 @@
     </button>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup">
         <ul class="navbar-nav ml-auto" *ngIf="islogin()">
-            <li class="nav-item dropdown">
-                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
+            <li *ngIf="isAdmin()" class="nav-item dropdown">
+                <a  class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-graduation-cap"
                         aria-hidden="true"></i> Asignaturas</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -25,7 +25,7 @@
                             class="fa fa-bar-chart" aria-hidden="true"></i> Estadísticas</a>
                 </div>
             </li>
-            <li class="nav-item dropdown">
+            <li *ngIf="isAdmin()" class="nav-item dropdown">
                 <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true"><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     Usuarios

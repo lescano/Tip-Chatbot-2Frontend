@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../Services/chat.service';
 import { AsignaturaService } from '../Services/asignatura.service';
+import { UsuarioService } from '../Services/usuario.service';
 import { AuthService } from '../Services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser'
 import { variablesGlobales } from '../Services/variablesGlobales';
@@ -24,6 +25,7 @@ export class ChatComponent implements OnInit {
     constructor(
         private messageService: ChatService,
         private asignaturaService: AsignaturaService,
+        private usuarioService: UsuarioService,
         private authService: AuthService,
         private sanitized: DomSanitizer,
         private modal: NgbModal
@@ -61,7 +63,6 @@ export class ChatComponent implements OnInit {
     }
 
     getDetailSubjectMaterial(idMaterial) {
-        console.log(idMaterial)
         this.asignaturaService.getDetailSubjectMaterial(idMaterial).subscribe(data => {
             if (data.result) {
                 this.arrayMaterials.splice(0, this.arrayMaterials.length);
@@ -95,7 +96,6 @@ export class ChatComponent implements OnInit {
         let dateTime = this.getDateTimeMesssage();
         let arrayDateTime = dateTime.split(" ");
         this.asignaturaService.newHistorySubjectMaterial(idMaterial, codigo, arrayDateTime[1], arrayDateTime[0]).subscribe(data => {
-            console.log(data);
         });
     }
 
@@ -154,9 +154,8 @@ export class ChatComponent implements OnInit {
         });
     }
 
-    cursada() {        //se detalla el funcionamiento en la REF(1)  
+    cursada() {
         this.mensajes.push({ id: "tu", msj: "¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", tono: "obscuro", hora: this.getDateTimeMesssage() });
-
         this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
 
         this.mensajes[this.mensajes.length - 1].botones = false;
@@ -165,11 +164,26 @@ export class ChatComponent implements OnInit {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
             this.messageService.insertNewHistory("¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.responder(data.Reply, 0);
-                this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
-                this.responder("¿Deseas saber algo más?<br>", 1);
+                this.usuarioService.getAsignaturasPendientes(this.authService.getActualUser(), this.codigo).subscribe(response => {
+                    if (Array.isArray(response.Reply)) {
+                        let messageDetail = data.Reply + "</br>";
+                        response.Reply.forEach(element => {
+                            messageDetail += element + "</br>";
+                        });
+
+                        this.responder(messageDetail, 0);
+                        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                        this.responder("¿Deseas saber algo más?<br>", 1);
+                    } else {
+
+                    }
+                })
+
+
             });
         });
+
+
     }
 
     creditos() {        //se detalla el funcionamiento en la REF(1)  

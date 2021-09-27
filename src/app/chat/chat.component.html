@@ -1,6 +1,6 @@
 <div class="chat mt-2">
 	<div class="d-flex justify-content-center">
-		<div class="col-9 card scrolleable" id="chat">
+		<div class="col-10 card scrolleable" id="chat">
 			<div class="messages">
 				<ul class="enviados">
 					<div *ngFor="let m of mensajes">
@@ -12,10 +12,10 @@
 								<div *ngIf="m.botones">
 									<button (click)='profesor()' class='option mt-1'>Docente</button>
 									<button (click)='horarios()' class='option mt-1 ml-1'>Horarios</button>
+									<button (click)="creditos()" class='option mt-1 ml-1'>Créditos</button>
 									<button (click)='showMaterial()' class='option mt-1 ml-1'>Materiales</button>
 									<button (click)='evaluaciones()' class='option mt-1 ml-1'>Evaluaciones</button>
 									<button (click)="limite()" class='option mt-1 ml-1'>Límite de inscripción</button>
-									<button (click)="creditos()" class='option mt-1 ml-1'>Créditos</button>
 									<button (click)="cursada()" class='option mt-1 ml-1'>¿Puedo cursarla?</button>
 								</div>
 								<div *ngIf="m.materiales">
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="d-flex justify-content-center mt-2">
-		<div class="col-9">
+		<div class="col-10">
 			<div class="form-group d-flex">
 				<input type="text" [(ngModel)]="contenidoMensaje" id="entrada" placeholder="Escriba aquí..."
 					class="form-control mb-2 submit-component shadow-sm" (keydown.enter)="enviarMensaje()">

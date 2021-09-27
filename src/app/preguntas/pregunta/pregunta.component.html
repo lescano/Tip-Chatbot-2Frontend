@@ -1,100 +1,106 @@
 <div class="d-flex justify-content-center">
-  <div class="card bg-light shadow m-3">
-    <div class="card-header bg-primary d-flex justify-content-between">
-      <h5 class="text-white mt-1">Preguntas</h5>
-      <button class="btn btn-primary shadow" routerLink="/nuevaPregunta"><i class="fa fa-plus" aria-hidden="true"></i>
-        Nueva</button>
+    <div class="card bg-light shadow m-3">
+        <div class="card-header bg-primary d-flex justify-content-between">
+            <h5 class="text-white mt-1">Preguntas</h5>
+            <button class="btn btn-primary shadow" routerLink="/nuevaPregunta"><i class="fa fa-plus"
+                    aria-hidden="true"></i>
+                Nueva</button>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                    class="row-border hover table table-striped">
+                    <thead class="bg-primary text-white">
+                        <tr>
+                            <th class="w-25" scope="col">Pregunta</th>
+                            <th scope="col">Respuesta</th>
+                            <th class="text-center" scope="col">Editar</th>
+                            <th class="text-center" scope="col">Borrar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let pregunta of listado">
+                            <td>{{pregunta.nombre}}</td>
+                            <td>{{pregunta.respuesta}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-warning btn-sm" data-toggle="modal"
+                                    (click)="abrirModal(pregunta.id, pregunta.nombre, pregunta.respuesta)"
+                                    data-target="#editarPreguntaModal"><i class="fa fa-edit"
+                                        aria-hidden="true"></i></button>
+                            </td>
+                            <td class="text-center">
+                                <button class="btn btn-danger btn-sm" (click)="borrarPregunta(pregunta.id)"><i
+                                        class="fa fa-trash" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="card-body">
-      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover table table-striped">
-        <thead class="bg-primary text-white">
-          <tr>
-            <th class="w-25" scope="col">Pregunta</th>
-            <th scope="col">Respuesta</th>
-            <th class="text-center" scope="col">Editar</th>
-            <th class="text-center" scope="col">Borrar</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let pregunta of listado">
-            <td>{{pregunta.nombre}}</td>
-            <td>{{pregunta.respuesta}}</td>
-            <td class="text-center">
-              <button class="btn btn-warning btn-sm" data-toggle="modal" (click)="abrirModal(pregunta.id, pregunta.nombre, pregunta.respuesta)" data-target="#editarPreguntaModal"><i
-                  class="fa fa-edit" aria-hidden="true"></i></button>
-            </td>
-            <td class="text-center">
-              <button class="btn btn-danger btn-sm" (click)="borrarPregunta(pregunta.id)"><i class="fa fa-trash"
-                  aria-hidden="true"></i></button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
 
 <!-- Modal -->
 <div class="modal fade" id="editarPreguntaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <span class="modal-title text-white">Editar pregunta</span>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="profileForm" (ngSubmit)="editarPregunta()" class="mt-1">
-          <div class="form-group mt-1">
-            <label for="inputAddress">Pregunta</label>
-            <input formControlName="nombre" type="text" id="pregutaEditInput" class="form-control shadow-sm"
-              [(ngModel)]="newQuestion" value={{newQuestion}}>
-          </div>
-          <div class="form-group">
-            <label>Agregar formas de preguntar</label>
-            <div class="form-group mt-1">
-              <form [formGroup]="secondForm" class="mt-1">
-                <textarea formControlName="pregunta" class="form-control rounded shadow-sm" style="resize: none;"
-                  rows="2"></textarea>
-              </form>
-              <br>
-              <div style="float: right;">
-                <button type="button" class="btn btn-primary btn-sm shadow-sm ml-3 font-weight-bold"
-                  (click)="agregarForma()">
-                  +
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary">
+                <span class="modal-title text-white">Editar pregunta</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
-                <button type="button" class="btn btn-primary btn-sm shadow-sm ml-3 font-weight-bold" (click)="quitar()">
-                  -
-                </button>
-              </div>
-              <br>
             </div>
-            <div *ngFor="let pregunta of formasPregunta">
-              <div>
-                <h5><span class="badge badge-pill badge-primary">{{pregunta}}</span></h5>
-              </div>
+            <div class="modal-body">
+                <form [formGroup]="profileForm" (ngSubmit)="editarPregunta()" class="mt-1">
+                    <div class="form-group mt-1">
+                        <label for="inputAddress">Pregunta</label>
+                        <input formControlName="nombre" type="text" id="pregutaEditInput" class="form-control shadow-sm"
+                            [(ngModel)]="newQuestion" value={{newQuestion}}>
+                    </div>
+                    <div class="form-group">
+                        <label>Agregar formas de preguntar</label>
+                        <div class="form-group mt-1">
+                            <form [formGroup]="secondForm" class="mt-1">
+                                <textarea formControlName="pregunta" class="form-control rounded shadow-sm"
+                                    style="resize: none;" rows="2"></textarea>
+                            </form>
+                            <br>
+                            <div style="float: right;">
+                                <button type="button" class="btn btn-primary btn-sm shadow-sm ml-3 font-weight-bold"
+                                    (click)="agregarForma()">
+                                    +
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm shadow-sm ml-3 font-weight-bold"
+                                    (click)="quitar()">
+                                    -
+                                </button>
+                            </div>
+                            <br>
+                        </div>
+                        <div *ngFor="let pregunta of formasPregunta">
+                            <div>
+                                <h5><span class="badge badge-pill badge-primary">{{pregunta}}</span></h5>
+                            </div>
+                        </div>
+                        <div class="form-group mt-1">
+                            <label>Respuesta</label>
+                            <textarea formControlName="respuesta" class="form-control rounded shadow-sm"
+                                id="respuestaEditInput" style="resize: none;" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group border shadow-sm rounded">
+                        <button type="button" class="btn btn-default btn-xs" *ngFor="let emoji of emojis, index as i"
+                            (click)="addEmoji(i)">{{emoji.em}}
+                        </button>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-danger shadow-sm" data-dismiss="modal">
+                            Cancelar</button>
+                        <button class=" btn btn-success shadow-sm" type="submit" [disabled]="!profileForm.valid">
+                            Guardar</button>
+                    </div>
+                </form>
             </div>
-            <div class="form-group mt-1">
-              <label>Respuesta</label>
-              <textarea formControlName="respuesta" 
-                class="form-control rounded shadow-sm" id="respuestaEditInput" style="resize: none;" rows="5"></textarea>
-            </div>
-          </div>
-          <div class="form-group border shadow-sm rounded">
-            <button type="button" class="btn btn-default btn-xs" *ngFor="let emoji of emojis, index as i"
-              (click)="addEmoji(i)">{{emoji.em}}
-            </button>
-          </div>
-          <div class="d-flex justify-content-between">
-            <button type="button" class="btn btn-danger shadow-sm" data-dismiss="modal">
-              Cancelar</button>
-            <button class=" btn btn-success shadow-sm" type="submit"
-              [disabled]="!profileForm.valid">
-              Guardar</button>
-          </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>

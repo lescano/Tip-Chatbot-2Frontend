@@ -16,6 +16,14 @@ export class AsignaturaService {
         private auth: AuthService
     ) { }
 
+    deletePrevious(idSubject, idPrevious) {
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "asignaturas/deletePrevia", { idSubject: idSubject, idPrevious: idPrevious });
+    }
+
+    nuevaPrevia(idSubject, idSubjectPrevious, typeAprov) {
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "asignaturas/nuevaPrevia", { idSubject: idSubject, idSubjectPrevious: idSubjectPrevious, typeAprov: typeAprov });
+    }
+
     getSubjectDetail(idSubject) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectDetail', { idSubject: idSubject });
     }
@@ -39,14 +47,14 @@ export class AsignaturaService {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectMaterials', { codeSubject: codeSubject });
     }
 
-    nuevaAsignatura(codigo, nombre, creditos, programa, apruebaPor, nombreDocente, correoDocente, fechaIncripcion) {
+    nuevaAsignatura(codigo, nombre, creditos, programa, apruebaPor, semestre, nombreDocente, correoDocente, fechaIncripcion) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/nueva', {
             codigo: codigo,
             nombre: nombre,
             creditos: creditos,
             programa: programa,
-
             apruebaPor: apruebaPor,
+            semestre: semestre,
             nombreDoc: nombreDocente,
             correoDoc: correoDocente,
             fechaInscripcion: fechaIncripcion,
@@ -131,6 +139,10 @@ export class AsignaturaService {
             id: id,
             tipo: tipo
         });
+    }
+
+    getAsignaturasNoVinculadas(idSubject) {
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getAsignaturasNoVinculadas', { idSubject: idSubject });
     }
 
     getDetalleAsignatura(id) { ///detalle

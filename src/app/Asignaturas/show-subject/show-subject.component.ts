@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AsignaturaService } from '../../Services/asignatura.service';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,8 @@ import { variablesGlobales } from 'src/app/Services/variablesGlobales';
     styleUrls: ['./show-subject.component.css']
 })
 export class ShowSubjectComponent implements OnInit {
+    @ViewChild('closebutton') closebutton;
+    @ViewChild('closebuttonMaterial') closebuttonMaterial;
     subjectSelected: any;
     fechaInscripcion: String;
 
@@ -18,11 +20,17 @@ export class ShowSubjectComponent implements OnInit {
     arraySchedules: Array<any> = [];
     arrayPrevious: Array<any> = [];
     arrayEvaluations: Array<any> = [];
+    arrayListSubject: Array<any> = [];
 
     newMaterial = new FormGroup({
         titleMaterial: new FormControl('', Validators.required),
         urlMaterial: new FormControl('', Validators.required),
         descriptionMaterial: new FormControl('', Validators.required)
+    });
+
+    controlNewPrevia = new FormGroup({
+        subjectPrevia: new FormControl('', Validators.required),
+        typeAprov: new FormControl('', Validators.required)
     });
 
     constructor(
@@ -40,7 +48,39 @@ export class ShowSubjectComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getSubjectsNoPrevious();
+    }
 
+    getSubjectsNoPrevious() {
+        this.asignaturaService.getAsignaturasNoVinculadas(this.subjectSelected._id).subscribe(data => {
+            if (data.errorResult)
+                this.toastr.error(data.errorResult);
+            else {
+                this.arrayListSubject.splice(0, this.arrayListSubject.length);
+                data.listResult.forEach(element => {
+                    this.arrayListSubject.push({ idSubject: element._id, nameSubject: element.nombre });
+                });
+            }
+        });
+    }
+
+    deletePrevious(idSubjectPrevious, index) {
+        this.asignaturaService.deletePrevious(this.subjectSelected._id, idSubjectPrevious).subscribe(response => {
+            console.log(response);
+            this.arrayPrevious.splice(index, 1);
+        });
+    }
+
+    addNewPrevia() {
+        this.asignaturaService.nuevaPrevia(this.subjectSelected._id, this.controlNewPrevia.value.subjectPrevia, this.controlNewPrevia.value.typeAprov).subscribe(response => {
+            if (response.errorResult)
+                this.toastr.error(response.errorResult);
+            else {
+                this.arrayPrevious.push({ idPrevious: response.newPrevia.idPrevious, nameSubject: response.newPrevia.materia, teacher: response.newPrevia.docente, credits: response.newPrevia.creditos, approvalType: response.newPrevia.condicion, approvalPrevious: response.newPrevia.aprobacion });
+                this.toastr.success(response.result);
+            }
+            this.closebutton.nativeElement.click();
+        });
     }
 
     createSubjectMaterial() {
@@ -50,9 +90,14 @@ export class ShowSubjectComponent implements OnInit {
             this.newMaterial.value.urlMaterial,
             this.newMaterial.value.descriptionMaterial
         ).subscribe(data => {
-            this.toastr.success(data.result);
-            if (data.result)
-                this.arrayMaterials.push({ titulo: this.newMaterial.value.titleMaterial, descripcion: this.newMaterial.value.descriptionMaterial, url: this.newMaterial.value.url });
+            if (data.errorResult)
+                this.toastr.error(data.errorResult);
+            else {
+                this.toastr.success(data.result);
+                if (data.result)
+                    this.arrayMaterials.push({ titulo: this.newMaterial.value.titleMaterial, descripcion: this.newMaterial.value.descriptionMaterial, url: this.newMaterial.value.url });
+                this.closebuttonMaterial.nativeElement.click();
+            }
         });
     }
 
@@ -67,6 +112,7 @@ export class ShowSubjectComponent implements OnInit {
 
     getSubjectDetail(idSubjectSelected) {
         this.asignaturaService.getSubjectDetail(idSubjectSelected).subscribe(data => {
+            console.log(data)
             if (data.result) {
                 this.loadTableMaterials(data.result.materiales);
                 this.loadTablePrevious(data.result.previas);
@@ -91,7 +137,7 @@ export class ShowSubjectComponent implements OnInit {
 
     loadTablePrevious(listPrevious) {
         listPrevious.forEach(element => {
-            this.arrayPrevious.push({ nameSubject: element.asignatura.nombre, teacher: element.asignatura.nombreDoc, credits: element.asignatura.creditos, approvalType: element.tipo, approvalPrevious: element.asignatura.apruebaPor });
+            this.arrayPrevious.push({ idPrevious: element._id, nameSubject: element.asignatura.nombre, teacher: element.asignatura.nombreDoc, credits: element.asignatura.creditos, approvalType: element.tipo, approvalPrevious: element.asignatura.apruebaPor });
         });
     }
 

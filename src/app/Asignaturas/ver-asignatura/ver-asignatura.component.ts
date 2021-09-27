@@ -61,6 +61,7 @@ export class VerAsignaturaComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        
     }
 
     editarAsignatura() {

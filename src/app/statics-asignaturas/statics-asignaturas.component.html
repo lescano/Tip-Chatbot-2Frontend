@@ -1,67 +1,76 @@
 <div class="d-flex justify-content-center">
-    <div class="card mt-2 mb-3 shadow w-75">
+    <div class="card m-2 shadow">
         <div class="card-header bg-primary text-white">
             <h5 class="text-white mt-1">Estadísticas de Asignatura</h5>
         </div>
         <div class="card-body">
-            <form [formGroup]="formGroupInterval" (ngSubmit)="filterResultByInterval()">
-                <div class="d-flex flex-row-reverse">
-                    <button class="btn btn-primary shadow-sm mb-3 ml-2" (click) ="filterResultByInterval()" type="submit">Filtrar</button>
-                    <div class="form-group row ">
-                        <label for="inputEndDate" class="mt-2">Hasta</label>
-                        <div class="col-sm-10">
-                            <input type="date" class="form-control shadow-sm" formControlName="dateFinish"
-                                [(ngModel)]="endDate" value={{endDate}}>
-                        </div>
-                    </div>
-                    <div class="form-group row mr-3">
-                        <label for="inputInitDate" class="mt-2">Desde</label>
-                        <div class="col-sm-10">
+            <form [formGroup]="formGroupInterval" (ngSubmit)="filterResultByInterval()" class="m-3">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputInitDate" class="mt-2">Desde</label>
                             <input type="date" class="form-control shadow-sm" formControlName="dateInit"
                                 [(ngModel)]="startDate" value={{startDate}}>
                         </div>
                     </div>
-
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="inputEndDate" class="mt-2">Hasta</label>
+                            <input type="date" class="form-control shadow-sm" formControlName="dateFinish"
+                                [(ngModel)]="endDate" value={{endDate}}>
+                        </div>
+                    </div>
                 </div>
+                <div class="d-flex flex-row-reverse">
+                    <button class="btn btn-primary shadow-sm mb-3 ml-2" (click)="filterResultByInterval()"
+                        type="submit">Filtrar</button>
+                </div>
+
             </form>
             <h6 class="card-subtitle mb-2 text-muted mb-2">Cantidad de preguntas por materia</h6>
             <div class="d-flex justify-content-center mt-2">
-                <table class="table table-sm w-75">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <td class="text-center">Asignatura</td>
-                            <td class="text-center">Cantidad preguntas</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let row of rowArrayConsultBySubject; let i = index">
-                            <td class="text-center"><button class="btn btn-link" (click)="filterQuestionsBySubject(row.idSubject)">{{ row.materia }}</button></td>
-                            <td class="text-center">{{ row.cantPreguntas }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <td class="text-center">Asignatura</td>
+                                <td class="text-center">Cantidad preguntas</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of rowArrayConsultBySubject; let i = index">
+                                <td class="text-center"><button class="btn btn-link"
+                                        (click)="filterQuestionsBySubject(row.idSubject)">{{ row.materia }}</button>
+                                </td>
+                                <td class="text-center">{{ row.cantPreguntas }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <h6 class="card-subtitle mb-2 text-muted mt-4">Preguntas realizadas por asignatura</h6>
             <hr>
             <div class="d-flex justify-content-center">
-                <table class="table table-sm w-75">
-                    <thead class="bg-primary text-white">
-                        <tr>
-                            <td class="text-center">Preguntas</td>
-                            <td class="text-center">Ocurrencias</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let row of arrayConsultBySubjects; let i = index">
-                            <td class="text-center">{{ row.pregunta }}</td>
-                            <td class="text-center">{{ row.ocurrencias }}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="bg-primary text-white">
+                            <tr>
+                                <td class="text-center">Preguntas</td>
+                                <td class="text-center">Ocurrencias</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let row of arrayConsultBySubjects; let i = index">
+                                <td class="text-center">{{ row.pregunta }}</td>
+                                <td class="text-center">{{ row.ocurrencias }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <h6 class="card-subtitle mb-2 text-muted mb-2">Acceso a Materiales</h6>
-            <div class="d-flex justify-content-center mt-2">
-                <table class="table table-sm w-75">
+            <div class="table-responsive">
+                <table class="table table-sm">
                     <thead class="bg-primary text-white">
                         <tr>
                             <td class="text-center">Material</td>

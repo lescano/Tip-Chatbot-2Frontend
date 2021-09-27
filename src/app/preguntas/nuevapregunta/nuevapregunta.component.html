@@ -1,13 +1,14 @@
 <div class="d-flex justify-content-center">
-    <div class="card bg-light mt-2 mb-3 shadow w-75">
+    <div class="card bg-light m-2 shadow" style="max-width: 900px;">
         <div class="card-header bg-primary text-white h5">
             Nueva pregunta
         </div>
         <div class="card-body">
             <form [formGroup]="profileForm" (ngSubmit)="addPregunta()" class="mt-1">
-                <div class="form-group w-75">
+                <div class="form-group">
                     <label for="inputAddress">Pregunta</label>
-                    <input formControlName="nombre" type="text" class="form-control shadow-sm" [(ngModel)]="newQuestion" value={{newQuestion}}>
+                    <input formControlName="nombre" type="text" class="form-control shadow-sm" [(ngModel)]="newQuestion"
+                        value={{newQuestion}}>
                 </div>
                 <div class="form-group">
                     <label>Agregar formas de preguntar</label>
@@ -24,10 +25,10 @@
                             <h5><span class="badge badge-pill badge-primary">{{pregunta}}</span></h5>
                         </div>
                     </div>
-                    <div class="form-group w-75">
+                    <div class="form-group">
                         <label>Respuesta</label>
                         <textarea formControlName="respuesta" class="form-control rounded shadow-sm"
-                            style="resize: none;" rows="5"></textarea>
+                            style="resize: none;" rows="3"></textarea>
                     </div>
                 </div>
                 <div class="form-group border shadow-sm rounded">
@@ -58,8 +59,8 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="secondForm" class="mt-1">
-                    <textarea formControlName="pregunta" class="form-control rounded shadow-sm"
-                    style="resize: none;" rows="2"></textarea>
+                    <textarea formControlName="pregunta" class="form-control rounded shadow-sm" style="resize: none;"
+                        rows="2"></textarea>
                 </form>
             </div>
             <div class="modal-footer d-flex justify-content-between">
