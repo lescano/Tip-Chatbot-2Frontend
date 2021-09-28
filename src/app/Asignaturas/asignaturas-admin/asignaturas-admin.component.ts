@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 
 @Component({
     selector: 'app-asignaturas-admin',
@@ -22,7 +23,10 @@ export class AsignaturasAdminComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private location: Location,
         private router: Router,
-        private toastr: ToastrService) { }
+        private toastr: ToastrService) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
+    }
 
 
     ngOnInit(): void {

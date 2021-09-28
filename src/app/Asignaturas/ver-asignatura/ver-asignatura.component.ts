@@ -45,6 +45,9 @@ export class VerAsignaturaComponent implements OnInit {
         private subjectService: AsignaturaService,
         private toastr: ToastrService) {
 
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
+            
         const navigation = this.router.getCurrentNavigation();
         if (navigation.extras.state) {
             this.asignatura = navigation.extras.state.asignatura;
@@ -61,7 +64,7 @@ export class VerAsignaturaComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        
+
     }
 
     editarAsignatura() {

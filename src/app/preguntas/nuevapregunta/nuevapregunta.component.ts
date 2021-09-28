@@ -4,6 +4,7 @@ import { PreguntaService } from '../../Services/pregunta.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 
 @Component({
     selector: 'app-nuevapregunta',
@@ -38,6 +39,9 @@ export class NuevapreguntaComponent implements OnInit {
         private _location: Location,
         private router: Router,
         private toastr: ToastrService) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
+
         const navigation = this.router.getCurrentNavigation();
         this.formasPregunta = new Array();
 
@@ -45,7 +49,7 @@ export class NuevapreguntaComponent implements OnInit {
             this.newQuestion = navigation.extras.state.newQuestion;
             this.idQuestion = navigation.extras.state.idQuestion;
         }
-        console.log(this.idQuestion)
+
     }
 
     ngOnInit(): void {

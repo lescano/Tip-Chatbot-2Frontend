@@ -38,13 +38,14 @@ export class ShowSubjectComponent implements OnInit {
         private router: Router,
         private toastr: ToastrService
     ) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
         const navigation = this.router.getCurrentNavigation();
         if (navigation.extras.state) {
             this.subjectSelected = navigation.extras.state.asignatura;
             this.fechaInscripcion = this.getFechaWithFormat(this.subjectSelected.fechaInscripcion);
             this.getSubjectDetail(this.subjectSelected._id);
         } else this.router.navigateByUrl('/asignaturasAdmin', {});
-
     }
 
     ngOnInit(): void {

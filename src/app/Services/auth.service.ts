@@ -36,7 +36,6 @@ export class AuthService {
     }
 
     loginUser(cedula, password) {
-        const headers = { 'Authorization': '*' };
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/login', {
             cedula: cedula,
             contrasenia: password,

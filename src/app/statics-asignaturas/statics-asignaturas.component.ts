@@ -3,6 +3,8 @@ import { EstadisticasService } from '../Services/estadisticas.service';
 import { AsignaturaService } from '../Services/asignatura.service';
 import { variablesGlobales } from '../Services/variablesGlobales';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { element } from 'protractor';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-statics-asignaturas',
@@ -27,9 +29,12 @@ export class StaticsAsignaturasComponent implements OnInit {
     endDate: String;
 
     constructor(
+        private router: Router,
         private staticsService: EstadisticasService,
         private subjectService: AsignaturaService
     ) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
         this.startDate = this.getDateFilter(8);
         this.endDate = this.getDateFilter(null);
     }

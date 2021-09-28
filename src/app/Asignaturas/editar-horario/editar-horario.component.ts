@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Horario } from '../../Clases/horario';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 
 @Component({
     selector: 'app-editar-horario',
@@ -35,6 +36,8 @@ export class EditarHorarioComponent implements OnInit {
         private asignaturaService: AsignaturaService,
         private _location: Location,
         private toastr: ToastrService) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
 
         const navigation = this.router.getCurrentNavigation();
         this.horario = navigation.extras.state.horario;
@@ -44,9 +47,9 @@ export class EditarHorarioComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        //alert(this.horarioEditar.dia);
+
     }
-    
+
     editarHorario() {
 
         this.horarioEditar.semestre = this.profileForm.value.semestre;

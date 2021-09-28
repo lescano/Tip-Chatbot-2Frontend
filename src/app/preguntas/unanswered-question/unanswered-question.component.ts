@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { PreguntaService } from 'src/app/Services/pregunta.service';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 
 @Component({
     selector: 'app-unanswered-question',
@@ -15,7 +16,10 @@ export class UnansweredQuestionComponent implements OnInit {
     dtTrigger = new Subject();
     arrayQuestions: Array<any> = [];
 
-    constructor(private preguntaService: PreguntaService, private router: Router, private toastr: ToastrService) { }
+    constructor(private preguntaService: PreguntaService, private router: Router, private toastr: ToastrService) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
+    }
 
     ngOnInit(): void {
         this.listar();

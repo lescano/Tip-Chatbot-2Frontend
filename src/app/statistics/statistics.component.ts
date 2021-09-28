@@ -4,6 +4,7 @@ import { AsignaturaService } from '../Services/asignatura.service';
 import { AuthService } from '../Services/auth.service';
 import { variablesGlobales } from '../Services/variablesGlobales';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-statistics',
@@ -28,10 +29,13 @@ export class StatisticsComponent implements OnInit {
     endDate: String;
 
     constructor(
+        private router: Router,
         private asignaturaService: AsignaturaService,
         private staticsService: EstadisticasService,
         private authService: AuthService,
     ) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
     }
 
     ngOnInit(): void {

@@ -4,6 +4,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from 'src/app/Services/usuario.service';
 import { AsignaturaService } from 'src/app/Services/asignatura.service';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
+import { Router } from '@angular/router';
 @Component({
     selector: 'app-perfil',
     templateUrl: './perfil.component.html',
@@ -76,8 +78,8 @@ export class PerfilComponent implements OnInit {
     getAsignaturas(): void {
         this.authService.getUser().subscribe(data => {
             data.usuario.usuarioAsignaturas.forEach(element => {
-                    console.log(element)
-                    this.usuarioService.getUsuarioAsignatura(element)
+                console.log(element)
+                this.usuarioService.getUsuarioAsignatura(element)
                     .subscribe(dataStatus => {
                         this.asignaturaService.getDetalleAsignatura(dataStatus.usuarioAsignatura.asignatura)
                             .subscribe(dataInfoSubject => {
@@ -101,10 +103,10 @@ export class PerfilComponent implements OnInit {
             this.apellido = data.usuario.apellido;
             this.cedula = data.usuario.cedula;
             console.log(data.usuario);
-            if(data.usuario.activo_telegram == false && data.usuario.id_telegram != ""){
+            if (data.usuario.activo_telegram == false && data.usuario.id_telegram != "") {
                 this.activoTelegram = false;
             }
-            else{
+            else {
                 this.activoTelegram = true;
             }
         })
@@ -170,7 +172,7 @@ export class PerfilComponent implements OnInit {
         //console.log("ok");
         this.usuarioService.verificarUsuarioTelegram(this.id, true)
             .subscribe((res) => {
-                if(!res.ok){
+                if (!res.ok) {
                     console.log(res.err);
                     this.toastr.error("Ha ocurrido un error, por favor intente nuevamente más tarde.");
                 }

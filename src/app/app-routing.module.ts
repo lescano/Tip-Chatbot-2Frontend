@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsuarioComponent } from './Usuarios/usuario/usuario.component';
 import { ChatComponent } from './chat/chat.component';
-import { MenuAdminComponent } from './Menus/menu-admin/menu-admin.component';
 import { InicioComponent } from './Menus/inicio/inicio.component';
 import { LoginComponent } from './Usuarios/login/login.component';
 import { RegisterComponent } from './Usuarios/register/register.component';
@@ -33,7 +32,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [!AuthGuard] },
   { path: 'inicio', component: InicioComponent },
   { path: 'chat', component: ChatComponent },
-  { path: 'menuadmin', component: MenuAdminComponent },
   { path: 'usuarios', component: UsuarioComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'asignaturasAdmin', component: AsignaturasAdminComponent },

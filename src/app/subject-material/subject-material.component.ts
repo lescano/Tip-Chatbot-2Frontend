@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
 import { AsignaturaService } from '../Services/asignatura.service';
+import { variablesGlobales } from '../Services/variablesGlobales';
 
 @Component({
     selector: 'app-subject-material',
@@ -25,6 +26,8 @@ export class SubjectMaterialComponent implements OnInit {
         private toastr: ToastrService,
         private _location: Location
     ) {
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
         const navigation = this.router.getCurrentNavigation();
         if (navigation.extras.state)
             this.idSubject = navigation.extras.state.asignatura._id;

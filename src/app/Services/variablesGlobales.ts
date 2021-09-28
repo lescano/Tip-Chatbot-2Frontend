@@ -8,14 +8,9 @@ export namespace variablesGlobales {
     }
 
     export function getHttpUrlInterprete() {
-       // return 'http://localhost:5000/';
+        //return 'http://localhost:5000/';
         return 'https://chatbot2-tip-interprete.herokuapp.com/';
     }
-
-   /* export function getHeader(){
-        return { Authorization:'*', 'Access-Control-Allow-Origin': 'https://chatbot2-tip-frontend.herokuapp.com/', 'content-type':'*' };
-    }
-*/
 
     export function getActualUser() {
         return this.actualUser;
@@ -23,6 +18,11 @@ export namespace variablesGlobales {
     export function setActualUser(id: string) {
         this.actualUser = id;
     }
+
+    export function getAdminValue(){
+        return localStorage.getItem('soyAdmin') === 'true';
+    }
+
 
     export function getSemesterName(semester) {
         switch (semester) {

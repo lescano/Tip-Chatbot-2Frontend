@@ -13,7 +13,6 @@ export class PreguntaService {
     }
 
     listar() {
-        const headers = { 'Authorization': '*' };
         return this.http.get<any>(variablesGlobales.getHttpUrlInterprete() + 'listar-intent');
     }
 

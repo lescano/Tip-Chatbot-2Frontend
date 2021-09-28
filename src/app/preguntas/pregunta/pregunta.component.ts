@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 
 @Component({
     selector: 'app-pregunta',
@@ -47,7 +48,8 @@ export class PreguntaComponent implements OnInit, OnDestroy {
         private _location: Location,
         private router: Router,
         private modal: NgbModal) {
-
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
         const navigation = this.router.getCurrentNavigation();
         this.formasPregunta = new Array();
 

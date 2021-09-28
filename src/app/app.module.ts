@@ -7,7 +7,6 @@ import { UsuarioComponent } from './Usuarios/usuario/usuario.component';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
-import { MenuAdminComponent } from './Menus/menu-admin/menu-admin.component';
 import { InicioComponent } from './Menus/inicio/inicio.component';
 import { LoginComponent } from './Usuarios/login/login.component';
 import { RegisterComponent } from './Usuarios/register/register.component';
@@ -49,7 +48,6 @@ import { UnansweredQuestionComponent } from './preguntas/unanswered-question/una
     AppComponent,
     UsuarioComponent,
     ChatComponent,
-    MenuAdminComponent,
     InicioComponent,
     LoginComponent,
     RegisterComponent,
