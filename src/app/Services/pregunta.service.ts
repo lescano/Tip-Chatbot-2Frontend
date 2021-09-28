@@ -8,8 +8,6 @@ import { variablesGlobales } from './variablesGlobales';
 })
 export class PreguntaService {
 
-    //private httpUrl = 'https://chatbot-tip-backend.herokuapp.com/';
-
     constructor(private http: HttpClient, private auth: AuthService) {
 
     }
