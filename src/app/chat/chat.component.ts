@@ -50,10 +50,10 @@ export class ChatComponent implements OnInit {
     }
 
     getInitMessage() {
-        let message = "¡Hola! Soy el asistente virtual del Tip.";
+        let message = "¡Hola! Soy el asistente virtual del TIP.";
         message += "<br>📍 Puedes realizarme consultas sobre la carrera del Tecnólogo en Informática.";
-        message += "<br>📍 Algunas preguntas requieren que estes registrado, me encargare de que lo sepas!";
-        message += "<br>📍 Consultame sobre las materias y te dare opciones.";
+        message += "<br>📍 Algunas preguntas requieren que estés registrado, me encargaré de que lo sepas!";
+        message += "<br>📍 Consultame sobre las materias y te daré opciones.";
         message += "<br>¡Estoy para ayudarte! 😄";
         this.mensajes.push({ id: "boot", botones: false, msj: message, tono: "claro", hora: this.getDateTimeMesssage() });
         setTimeout(() => {
