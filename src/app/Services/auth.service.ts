@@ -32,8 +32,7 @@ export class AuthService {
             apellido: apellido,
             contrasenia: password,
             admin: false,
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     loginUser(cedula, password) {
@@ -41,15 +40,13 @@ export class AuthService {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/login', {
             cedula: cedula,
             contrasenia: password,
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
     
     getUser() {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/detalle', {
             id: this.getActualUser(),
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     loggedIn() {
@@ -59,8 +56,7 @@ export class AuthService {
     isAdmin() {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/verify', {
             id: this.getActualUser(),
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     getToken() {
@@ -73,8 +69,7 @@ export class AuthService {
             cedula: cedula,
             nombre: nombre,
             apellido: apellido,
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     updateContrasenia(actual, contrasenia) {
@@ -82,15 +77,13 @@ export class AuthService {
             id: this.getActualUser(),
             actual: actual,
             contrasenia: contrasenia,
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     eliminarUsuario() {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'usuario/delete', {
             id: this.getActualUser(),
-        }, {headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     logOut() {

@@ -17,51 +17,38 @@ export class AsignaturaService {
     ) { }
 
     deletePrevious(idSubject, idPrevious) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + "asignaturas/deletePrevia", 
-        {idSubject: idSubject, idPrevious: idPrevious }, 
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "asignaturas/deletePrevia",
+            { idSubject: idSubject, idPrevious: idPrevious });
     }
 
     nuevaPrevia(idSubject, idSubjectPrevious, typeAprov) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + "asignaturas/nuevaPrevia", 
-        { idSubject: idSubject, idSubjectPrevious: idSubjectPrevious, typeAprov: typeAprov }, 
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + "asignaturas/nuevaPrevia",
+            { idSubject: idSubject, idSubjectPrevious: idSubjectPrevious, typeAprov: typeAprov });
     }
 
     getSubjectDetail(idSubject) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectDetail', { idSubject: idSubject }, {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectDetail', { idSubject: idSubject });
     }
 
     getDetailSubjectMaterial(idMaterial) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getDetailSubjectMaterial', { idMaterial: idMaterial }
-        , {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getDetailSubjectMaterial', { idMaterial: idMaterial });
     }
 
     newHistorySubjectMaterial(idSubjectMaterial, codeSubject, currentDate, currentTime) {
         let idUser = this.auth.getActualUser();
         let arrayCurrentDate = currentDate.split('/');
         currentDate = arrayCurrentDate[2] + "" + arrayCurrentDate[1] + "" + arrayCurrentDate[0];
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/newHistorySubjectMaterial', 
-        { idUser: idUser, codeSubject: codeSubject, idSubjectMaterial: idSubjectMaterial, currentDate: currentDate, currentTime: currentTime },
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/newHistorySubjectMaterial',
+            { idUser: idUser, codeSubject: codeSubject, idSubjectMaterial: idSubjectMaterial, currentDate: currentDate, currentTime: currentTime });
     }
 
     newSubjectMaterial(idSubject, titleMaterial, urlMaterial, descriptionMaterial) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/insertSubjectMaterial', 
-        { idSubject: idSubject, titleMaterial: titleMaterial, url: urlMaterial, description: descriptionMaterial }, 
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/insertSubjectMaterial',
+            { idSubject: idSubject, titleMaterial: titleMaterial, url: urlMaterial, description: descriptionMaterial });
     }
 
     getSubjectMaterials(codeSubject) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectMaterials', { codeSubject: codeSubject },
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectMaterials', { codeSubject: codeSubject });
     }
 
     nuevaAsignatura(codigo, nombre, creditos, programa, apruebaPor, semestre, nombreDocente, correoDocente, fechaIncripcion) {
@@ -75,14 +62,11 @@ export class AsignaturaService {
             nombreDoc: nombreDocente,
             correoDoc: correoDocente,
             fechaInscripcion: fechaIncripcion,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     getAsignaturas() {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/listado', {},
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/listado', {});
     }
 
     editarAsignatura(asignatura) {
@@ -96,22 +80,19 @@ export class AsignaturaService {
             nombreDoc: asignatura.nombreDoc,
             correoDoc: asignatura.correoDoc,
             fechaInscripcion: asignatura.fechaInscripcion,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     borrarAsignatura(id) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/delete', {
             id: id,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     getHorario(id) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/detalleHorario', {
             id: id,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     editarHorario(horario) {
@@ -121,7 +102,7 @@ export class AsignaturaService {
             dia: horario.dia,
             horaDesde: horario.horaDesde,
             horaHasta: horario.horaHasta,
-        },{headers:variablesGlobales.getHeader()}
+        }
         );
     }
 
@@ -132,22 +113,19 @@ export class AsignaturaService {
             horaDesde: horaDesde,
             horaHasta: horaHasta,
             idAsig: asignatura,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     borrarHorario(id) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/deleteHorario', {
             id: id,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     getEvaluacion(id) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/detalleEvaluacion', {
             id: id,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     nuevaEvaluacion(nombre, fecha, tipo, fechaEntrega, fechaDefensa, id) {
@@ -158,30 +136,25 @@ export class AsignaturaService {
             fechaEntrega: fechaEntrega,
             fechaDefensa: fechaDefensa,
             idAsig: id
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     borrarEvaluacion(id, tipo) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/deleteEvaluacion', {
             id: id,
             tipo: tipo
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
     getAsignaturasNoVinculadas(idSubject) {
-        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getAsignaturasNoVinculadas', 
-        { idSubject: idSubject },
-        {headers:variablesGlobales.getHeader()}
-        );
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getAsignaturasNoVinculadas',
+            { idSubject: idSubject });
     }
 
     getDetalleAsignatura(id) { ///detalle
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/detalle', {
             id: id,
-        },{headers:variablesGlobales.getHeader()}
-        );
+        });
     }
 
 
