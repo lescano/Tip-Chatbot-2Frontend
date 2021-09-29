@@ -3,9 +3,10 @@ import { Usuario } from '../../Clases/usuario';
 import { UsuarioService } from '../../Services/usuario.service';
 import { Location } from '@angular/common';
 import { AuthService } from '../../Services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 @Component({
     selector: 'app-usuario',
     templateUrl: './usuario.component.html',
@@ -20,8 +21,12 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     constructor(private usuarioSevice: UsuarioService,
         private route: ActivatedRoute,
         private location: Location,
+        private router: Router,
         private authService: AuthService,
         private toastr: ToastrService) {
+
+        if (!variablesGlobales.getAdminValue())
+            this.router.navigateByUrl('/inicio', {});
         this.idAdmin = localStorage.getItem('soyAdmin') === 'true';
     }
 
