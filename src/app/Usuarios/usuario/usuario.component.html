@@ -15,11 +15,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let usuario of usuarios">
-
                             <td>{{usuario.nombre}} {{usuario.apellido}} </td>
                             <td>{{usuario.cedula}}</td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-danger" (click)="borrarUsuario(usuario.id)"><i
+                                <button *ngIf="isAdmin()" (click)="changeAdminPrivi(usuario.id, usuario.admin)"
+                                    class="btn btn-sm m-1" [ngClass]="{'btn-info': usuario.admin === false, 'btn-success':usuario.admin === true}">Administrador</button>
+                                <button class="btn btn-sm btn-danger m-1" (click)="borrarUsuario(usuario.id)"><i
                                         class="fa fa-trash" aria-hidden="true"></i> Borrar</button>
                             </td>
                         </tr>

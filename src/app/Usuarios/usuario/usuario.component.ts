@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 })
 export class UsuarioComponent implements OnInit, OnDestroy {
     usuarios: Usuario[];
-    //selectedUser: Usuario;
+    idAdmin = false;
     dtOptions: DataTables.Settings = {};
     dtTrigger = new Subject();
 
@@ -21,7 +21,9 @@ export class UsuarioComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private location: Location,
         private authService: AuthService,
-        private toastr: ToastrService) { }
+        private toastr: ToastrService) {
+        this.idAdmin = localStorage.getItem('soyAdmin') === 'true';
+    }
 
 
     ngOnInit() {
@@ -34,6 +36,24 @@ export class UsuarioComponent implements OnInit, OnDestroy {
             }
         };
     }
+
+    isAdmin() {
+        return this.idAdmin;
+    }
+
+    changeAdminPrivi(idUser, admin) {
+        let newValue = true;
+        if (admin)
+            newValue = false;
+
+        this.usuarioSevice.addAdminUser(idUser, newValue).subscribe(response => {
+            if (response.result)
+                this.toastr.success(response.result);
+            else
+                this.toastr.error(response.errorResult);
+        })
+    }
+
     ngOnDestroy(): void {
         this.dtTrigger.unsubscribe();
     }
@@ -44,6 +64,7 @@ export class UsuarioComponent implements OnInit, OnDestroy {
     getUsuarios(): void {
         this.usuarioSevice.getUsuarios()
             .subscribe(usuarios => {
+                console.log(usuarios)
                 this.usuarios = usuarios.data;
                 this.dtTrigger.next();
             });
