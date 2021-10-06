@@ -17,13 +17,17 @@ import { variablesGlobales } from 'src/app/Services/variablesGlobales';
 export class NuevaAsignaturaComponent implements OnInit {
     profileForm = new FormGroup({
         codigo: new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.maxLength(4)
         ]),
         nombre: new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.maxLength(50),
         ]),
         creditos: new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.max(20),
+            Validators.min(1)
         ]),
         apruebaPor: new FormControl('', [
             Validators.required
@@ -35,7 +39,8 @@ export class NuevaAsignaturaComponent implements OnInit {
             Validators.required
         ]),
         correoDocente: new FormControl('', [
-            Validators.required
+            Validators.required,
+            Validators.email,
         ]),
         fechaInscripcion: new FormControl('', [
             Validators.required
@@ -61,23 +66,33 @@ export class NuevaAsignaturaComponent implements OnInit {
         if (!re.test(String(this.profileForm.value.correoDocente).toLowerCase())) {
             this.toastr.error("No has ingresado un correo electrónico válido");
         } else {
-            this.asignaturaService.nuevaAsignatura(
-                this.profileForm.value.codigo,
-                this.profileForm.value.nombre,
-                this.profileForm.value.creditos,
-                this.profileForm.value.programa,
-                this.profileForm.value.apruebaPor,
-                this.profileForm.value.semestre,
-                this.profileForm.value.nombreDocente,
-                this.profileForm.value.correoDocente,
-                this.profileForm.value.fechaInscripcion
-            )
-                .subscribe(data => {
-                    //alert(data.data);
-                    this.toastr.success(data.data);
-                    this.router.navigate(['/asignaturasAdmin']);
+            this.asignaturaService.getSubjectByCode(this.profileForm.value.codigo).subscribe(responseCode => {
+                if (!responseCode.result) {
+                    this.asignaturaService.getSubjectByName(this.profileForm.value.nombre).subscribe(responseName => {
+                        console.log(responseName)
+                        if (!responseName.result) {
+                            this.asignaturaService.nuevaAsignatura(
+                                this.profileForm.value.codigo,
+                                this.profileForm.value.nombre,
+                                this.profileForm.value.creditos,
+                                this.profileForm.value.programa,
+                                this.profileForm.value.apruebaPor,
+                                this.profileForm.value.semestre,
+                                this.profileForm.value.nombreDocente,
+                                this.profileForm.value.correoDocente,
+                                this.profileForm.value.fechaInscripcion
+                            ).subscribe(data => {
+                                this.toastr.success(data.data);
+                                this.router.navigate(['/asignaturasAdmin']);
+                            });
+                        }else{
+                            this.toastr.error("Ya existe una asignatura con el nombre que intenta ingresar.");
+                        }
+                    });
+                } else {
+                    this.toastr.error('El codigo ingresado pertenece a otra asignatura.');
                 }
-                );
+            });
         }
 
 

@@ -8,6 +8,7 @@ import { ChatService } from '../Services/chat.service';
 import { UsuarioService } from '../Services/usuario.service';
 import { variablesGlobales } from '../Services/variablesGlobales';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -44,6 +45,7 @@ export class PreviaturasComponent implements OnInit {
         private asignaturaService: AsignaturaService,
         private chatService: ChatService,
         private router: Router,
+        private toastr: ToastrService,
         private usuarioService: UsuarioService) {
         if (!variablesGlobales.getAdminValue())
             this.router.navigateByUrl('/inicio', {});
@@ -87,43 +89,43 @@ export class PreviaturasComponent implements OnInit {
 
     //esta funcion se llama cuando se hace el submit del form
     async getPrevia() {
-        console.log("a" + this.previaForm.value.buscUsuarios);
-        console.log("p" + this.previaForm.value.buscAsignatura);
-        if (this.previaForm.value.buscUsuarios != "" && this.previaForm.value.buscAsignatura != "") {
 
-            //en el value del form traigo todos los datos de la asignatura como del usuario para presentarlos mejor
-            //datos asignatura
-            let buscAsignatura = this.previaForm.value.buscAsignatura.split(":");
-            this.codigo_asignatura = buscAsignatura[0];
-            this.asignatura = buscAsignatura[1];
+        if (variablesGlobales.validateIdentificationNumber(this.previaForm.value.buscUsuarios)) {
+            if (this.previaForm.value.buscAsignatura != "") {
+                //en el value del form traigo todos los datos de la asignatura como del usuario para presentarlos mejor
+                //datos asignatura
+                let buscAsignatura = this.previaForm.value.buscAsignatura.split(":");
+                this.codigo_asignatura = buscAsignatura[0];
+                this.asignatura = buscAsignatura[1];
 
-            //con la cedula del alumno que es la que traigo en el value, 
-            //hago una consulta al backend para traer todos los dato de ese objeto usuario
-            this.cedula_usuario = this.previaForm.value.buscUsuarios;
+                //con la cedula del alumno que es la que traigo en el value, 
+                //hago una consulta al backend para traer todos los dato de ese objeto usuario
+                this.cedula_usuario = this.previaForm.value.buscUsuarios;
 
-            let usuario_objeto;
-            this.usuarioService.getUsuario(this.cedula_usuario).subscribe(data => {
-                usuario_objeto = data.usuario;
-                this.id_usuario = usuario_objeto.id;
-                this.nombre_usuario = usuario_objeto.nombre;
-                this.apellido_usuario = usuario_objeto.apellido;
+                let usuario_objeto;
+                this.usuarioService.getUsuario(this.cedula_usuario).subscribe(data => {
+                    usuario_objeto = data.usuario;
+                    this.id_usuario = usuario_objeto.id;
+                    this.nombre_usuario = usuario_objeto.nombre;
+                    this.apellido_usuario = usuario_objeto.apellido;
 
-                //llamada al chat service para que resuva la consulta
-                this.chatService.cursada2(this.codigo_asignatura, usuario_objeto.id)
-                    .subscribe(
-                        dato => {
-                            if (dato.Reply == "No, no estás en condiciones de realizar esta materia") {
-                                this.puede_cursar = "no se encuentra habilitado a cursar";
-                                this.buscarAsignaturasPendientes();
+                    //llamada al chat service para que resuva la consulta
+                    this.chatService.cursada2(this.codigo_asignatura, usuario_objeto.id)
+                        .subscribe(
+                            dato => {
+                                if (dato.Reply == "No, no estás en condiciones de realizar esta materia") {
+                                    this.puede_cursar = "no se encuentra habilitado a cursar";
+                                    this.buscarAsignaturasPendientes();
+                                }
+                                else {
+                                    this.puede_cursar = "se encuentra habilitado a cursar";
+                                }
+                                this.dtTrigger.next();
                             }
-                            else {
-                                this.puede_cursar = "se encuentra habilitado a cursar";
-                            }
-                            this.dtTrigger.next();
-                        }
-                    );
-            });
-        }
+                        );
+                });
+            }else this.toastr.error("Debe seleccionar una asignatura para verificar las previaturas del usuario seleccionado.");
+        }else this.toastr.error("El documento ingresado no es valido, por favor vuelva a ingresarlo.");
     }
 
 

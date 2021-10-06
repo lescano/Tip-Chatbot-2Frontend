@@ -138,8 +138,10 @@ export class ShowSubjectComponent implements OnInit {
     }
 
     loadTablePrevious(listPrevious) {
+        console.log(listPrevious)
         listPrevious.forEach(element => {
-            this.arrayPrevious.push({ idPrevious: element._id, nameSubject: element.asignatura.nombre, teacher: element.asignatura.nombreDoc, credits: element.asignatura.creditos, approvalType: element.tipo, approvalPrevious: element.asignatura.apruebaPor });
+            if (element.asignatura)
+                this.arrayPrevious.push({ idPrevious: element._id, nameSubject: element.asignatura.nombre, teacher: element.asignatura.nombreDoc, credits: element.asignatura.creditos, approvalType: element.tipo, approvalPrevious: element.asignatura.apruebaPor });
         });
     }
 
@@ -185,14 +187,11 @@ export class ShowSubjectComponent implements OnInit {
         if (confirm("Estas seguro que desea eliminar esta asignatúra? esta accion es permantente")) {
             this.asignaturaService.borrarAsignatura(this.subjectSelected._id).subscribe(data => {
                 this.toastr.success(data.data);
-                this.getAsignaturas();
+                this.router.navigateByUrl('/asignaturasAdmin');
             })
         }
     }
 
-    getAsignaturas() {
-        throw new Error('Method not implemented.');
-    }
 
     editarEvaluaciones() {
         this.router.navigateByUrl('/nuevaEvaluacion', { state: { asignatura: this.subjectSelected } });

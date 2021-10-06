@@ -26,6 +26,14 @@ export class AsignaturaService {
             { idSubject: idSubject, idSubjectPrevious: idSubjectPrevious, typeAprov: typeAprov });
     }
 
+    getSubjectByName(nameSubject) {
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectByName', { nameSubject: nameSubject });
+    }
+
+    getSubjectByCode(codeSubject) {
+        return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectByCode', { codeSubject: codeSubject });
+    }
+
     getSubjectDetail(idSubject) {
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'asignaturas/getSubjectDetail', { idSubject: idSubject });
     }

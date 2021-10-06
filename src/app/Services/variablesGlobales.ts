@@ -80,4 +80,44 @@ export namespace variablesGlobales {
         }
     }
 
+
+    export function validateIdentificationNumber(idNumber){
+        const ci = typeof idNumber === 'number' ? idNumber.toString() : idNumber;
+
+        if (ci.length < 7 || ci.length > 8)
+            return false;
+
+        const cleanNumber = ci.replace(/\D/g, '');
+        const possibleValidationDigit = parseInt(
+            cleanNumber[cleanNumber.length - 1],
+            10
+        );
+
+        const validableNumber = cleanNumber.replace(/[0-9]$/, '');
+        const actualValidationDigit = this.generateValidationDigit(validableNumber);
+
+        return possibleValidationDigit === actualValidationDigit;
+    };
+
+    export function generateValidationDigit(idNumber){
+        let ci = typeof idNumber === 'number' ? idNumber.toString() : idNumber;
+
+        for (let i = 0; i < 7 - ci.length; i++)
+            ci = '0' + ci;
+
+        return this.safeGenerateValidationDigit(ci);
+    };
+
+    export function safeGenerateValidationDigit(idNumber){
+        let ci = idNumber;
+        let sum = 0;
+
+        for (let i = 0; i < 7; i++)
+            sum += parseInt('2987634'[i]) * parseInt(ci[i]);
+
+        if (sum % 10 === 0)
+            return 0;
+
+        return 10 - (sum % 10);
+    };
 }
