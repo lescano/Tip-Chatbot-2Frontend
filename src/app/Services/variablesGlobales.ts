@@ -3,7 +3,7 @@ export namespace variablesGlobales {
     var horariosGlobales;
 
     export function getHttpUrl() {
-        //return 'http://localhost:8080/';
+       // return 'http://localhost:8080/';
         return 'https://chatbot2-tip-backend.herokuapp.com/';
     }
 

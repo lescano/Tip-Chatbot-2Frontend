@@ -6,6 +6,8 @@ import { AuthService } from '../Services/auth.service';
 import { DomSanitizer } from '@angular/platform-browser'
 import { variablesGlobales } from '../Services/variablesGlobales';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FeriadoService } from '../Services/feriado.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-chat',
@@ -27,6 +29,7 @@ export class ChatComponent implements OnInit {
         private asignaturaService: AsignaturaService,
         private usuarioService: UsuarioService,
         private authService: AuthService,
+        private feriadosService: FeriadoService,
         private sanitized: DomSanitizer,
         private modal: NgbModal
     ) { }
@@ -155,35 +158,37 @@ export class ChatComponent implements OnInit {
     }
 
     cursada() {
-        this.mensajes.push({ id: "tu", msj: "¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", tono: "obscuro", hora: this.getDateTimeMesssage() });
-        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+        if (this.authService.getActualUser()) {
+            this.mensajes.push({ id: "tu", msj: "¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", tono: "obscuro", hora: this.getDateTimeMesssage() });
+            this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
 
-        this.mensajes[this.mensajes.length - 1].botones = false;
-        this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
-        this.messageService.cursada(this.codigo).subscribe(data => {
-            let dateTime = this.getDateTimeMesssage();
-            let arrayDateTime = dateTime.split(" ");
-            this.messageService.insertNewHistory("¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                this.usuarioService.getAsignaturasPendientes(this.authService.getActualUser(), this.codigo).subscribe(response => {
-                    if (Array.isArray(response.Reply)) {
-                        let messageDetail = data.Reply + "</br>";
-                        response.Reply.forEach(element => {
-                            messageDetail += element + "</br>";
-                        });
+            this.mensajes[this.mensajes.length - 1].botones = false;
+            this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
+            this.messageService.cursada(this.codigo).subscribe(data => {
+                let dateTime = this.getDateTimeMesssage();
+                let arrayDateTime = dateTime.split(" ");
+                this.messageService.insertNewHistory("¿Puedo cursar " + variablesGlobales.getSubjectByCode(this.codigo) + "?", data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    this.usuarioService.getAsignaturasPendientes(this.authService.getActualUser(), this.codigo).subscribe(response => {
+                        if (Array.isArray(response.Reply)) {
+                            let messageDetail = data.Reply + "</br>";
+                            response.Reply.forEach(element => {
+                                messageDetail += element + "</br>";
+                            });
 
-                        this.responder(messageDetail, 0);
-                        this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
-                        this.responder("¿Deseas saber algo más?<br>", 1);
-                    } else {
+                            this.responder(messageDetail, 0);
+                            this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                            this.responder("¿Deseas saber algo más?<br>", 1);
+                        } else {
 
-                    }
-                })
-
-
+                        }
+                    })
+                });
             });
-        });
-
-
+        } else {
+            this.responder("Para consultar si estas habilitado para cursar una asignatura debes iniciar sesión.", 0);
+            this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+            this.responder("¿Deseas saber algo más?<br>", 1);
+        }
     }
 
     creditos() {        //se detalla el funcionamiento en la REF(1)  
@@ -224,6 +229,25 @@ export class ChatComponent implements OnInit {
         });
     }
 
+    getFeriados() {
+        this.feriadosService.listar().subscribe(response => {
+            if (Array.isArray(response.data)) {
+                let stringFeriados = "Los feriados son: <br>";
+                response.data.forEach(element => {
+                    stringFeriados += "📍 " + moment(element.fecha).utc().format('DD/MM/YYYY') + " " + element.motivo + "<br>";
+                });
+                this.responder(stringFeriados, 0);
+                if (this.authService.getActualUser()) {
+                    let dateTime = this.getDateTimeMesssage();
+                    let arrayDateTime = dateTime.split(" ");
+                    this.messageService.insertNewHistory("feriados", stringFeriados, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+
+                    });
+                }
+            }
+        });
+    }
+
     enviarMensaje() {
 
         if (!this.contenidoMensaje || this.contenidoMensaje == "") {
@@ -247,14 +271,15 @@ export class ChatComponent implements OnInit {
             }, 50);
             this.messageService.add(mensaje)
                 .subscribe(data => {
-                    console.log(data);
                     if (data.Reply.localeCompare("error") == 0) {
                         let errorMessage = "No tengo una respuesta para esta pregunta 😞";
                         this.responder(errorMessage, 0);
                     } else if (data.Reply.includes("asignatura-")) {
-                        this.responder("¿Qué deseas saber sobre esta asignatúra?<br>", 1);
+                        this.responder("¿Qué deseas saber sobre esta asignatura?<br>", 1);
                         let cod = data.Reply.split("-");
                         this.codigo = cod[1];
+                    } else if (data.Reply.localeCompare("getFeriados") == 0) {
+                        this.getFeriados();
                     } else {
                         this.responder(data.Reply, 0);
                     }

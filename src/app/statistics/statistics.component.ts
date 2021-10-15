@@ -50,7 +50,7 @@ export class StatisticsComponent implements OnInit {
 
         this.staticsService.getCountQuestionsByUser("", this.getDateNoFormat(this.startDate), this.getDateNoFormat(this.endDate)).subscribe(data => {
             data.listResult.forEach(element => {
-                this.rowArrayUsers.push({ ci: element.cedula, nombre: element.nombre + " " + element.apellido, cantQuerys: element.historialChat.length });
+                this.rowArrayUsers.push({ ci: element.cedula, nombre: element.nombre, cantQuerys: element.cantQuerys });
             });
         })
     }

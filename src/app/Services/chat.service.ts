@@ -48,21 +48,25 @@ export class ChatService {
 
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'preguntas/FAQcal11', { codigo: codigo });
     }
+
     horarios(codigo) {
         const headers = { 'Authorization': '*' };
 
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'preguntas/FAQcal9', { codigo: codigo });
     }
+
     evaluaciones(codigo) {
         const headers = { 'Authorization': '*' };
 
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'preguntas/FAQcal10', { codigo: codigo });
     }
+
     creditos(codigo) {
         const headers = { 'Authorization': '*' };
 
         return this.http.post<any>(variablesGlobales.getHttpUrl() + 'preguntas/FAQcal13', { codigo: codigo });
     }
+
     limite(codigo) {
         const headers = { 'Authorization': '*' };
 
@@ -81,9 +85,7 @@ export class ChatService {
     clear() {
         //this.messages = [];
     }
-    //es exactamente la misma llamada que la anterior, 
-    //solo que el id del usuario que se quiere buscar es distinto del usuario logueado
-    //por lo que el id es necesario paraslo como parametro
+    
     cursada2(codigo, id) {
         const headers = { 'Authorization': '*' };
         //var id= this.auth.getActualUser();
