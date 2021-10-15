@@ -6,7 +6,7 @@
     <a class="navbar-brand" routerLink="/inicio">
         <img src="../../../assets/botimg.png" width="35px"> Tip ChatBot
     </a>
-    <a class="navbar-brand" routerLink="/chat"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</a>
+    <a *ngIf="islogin()" class="navbar-brand" routerLink="/chat"><i class="fa fa-comments-o" aria-hidden="true"></i> Chat</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

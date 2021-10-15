@@ -108,34 +108,40 @@ export class ChatComponent implements OnInit {
         this.messageService.horarios(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
-            //el mensaje se guarda en el historial como si el usuario preguntara por el horario de la asignatura
-            this.messageService.insertNewHistory("Horarios " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
-                //se devuelve la respuesta a la pregunta
+            if (this.authService.getActualUser()) {
+                this.messageService.insertNewHistory("Horarios " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    this.responder(data.Reply, 0);
+                    this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                    this.responder("¿Deseas saber algo más?<br>", 1);
+                });
+            } else {
                 this.responder(data.Reply, 0);
                 this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
-                //se envia este mensaje para no cortar el ciclo de comunicación
-                //por si el usuario tiene otra consulta sobre la asignatura que consultó anteriormente
                 this.responder("¿Deseas saber algo más?<br>", 1);
-            });
+            }
         });
 
     }
 
     profesor() {      //se detalla el funcionamiento en la REF(1)  
         this.mensajes.push({ id: "tu", msj: "Profesor " + variablesGlobales.getSubjectByCode(this.codigo), tono: "obscuro", hora: this.getDateTimeMesssage() });
-
         this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
-
         this.mensajes[this.mensajes.length - 1].botones = false;
         this.mensajes[this.mensajes.length - 1].msj = "Escribiendo...";
         this.messageService.profesor(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
-            this.messageService.insertNewHistory("Profesor " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+            if (this.authService.getActualUser()) {
+                this.messageService.insertNewHistory("Profesor " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    this.responder(data.Reply, 0);
+                    this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                    this.responder("¿Deseas saber algo más?<br>", 1);
+                });
+            } else {
                 this.responder(data.Reply, 0);
                 this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
                 this.responder("¿Deseas saber algo más?<br>", 1);
-            });
+            }
         });
     }
 
@@ -149,11 +155,17 @@ export class ChatComponent implements OnInit {
         this.messageService.evaluaciones(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
-            this.messageService.insertNewHistory("Evaluaciones " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+            if (this.authService.getActualUser()) {
+                this.messageService.insertNewHistory("Evaluaciones " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    this.responder(data.Reply, 0);
+                    this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                    this.responder("¿Deseas saber algo más?<br>", 1);
+                });
+            } else {
                 this.responder(data.Reply, 0);
                 this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
                 this.responder("¿Deseas saber algo más?<br>", 1);
-            });
+            }
         });
     }
 
@@ -201,11 +213,17 @@ export class ChatComponent implements OnInit {
         this.messageService.creditos(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
-            this.messageService.insertNewHistory("Creditos " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+            if (this.authService.getActualUser()) {
+                this.messageService.insertNewHistory("Creditos " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    this.responder(data.Reply, 0);
+                    this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                    this.responder("¿Deseas saber algo más?<br>", 1);
+                });
+            } else {
                 this.responder(data.Reply, 0);
                 this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
                 this.responder("¿Deseas saber algo más?<br>", 1);
-            });
+            }
         });
     }
 
@@ -220,12 +238,18 @@ export class ChatComponent implements OnInit {
         this.messageService.limite(this.codigo).subscribe(data => {
             let dateTime = this.getDateTimeMesssage();
             let arrayDateTime = dateTime.split(" ");
-            this.messageService.insertNewHistory("Limite de inscripción " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+            if (this.authService.getActualUser()) {
+                this.messageService.insertNewHistory("Limite de inscripción " + variablesGlobales.getSubjectByCode(this.codigo), data.Reply, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    this.responder(data.Reply, 0);
+                    this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
+                    this.responder("¿Deseas saber algo más?<br>", 1);
+
+                });
+            } else {
                 this.responder(data.Reply, 0);
                 this.mensajes.push({ id: "temporal", msj: "Escribiendo...", tono: "claro", hora: "" });
                 this.responder("¿Deseas saber algo más?<br>", 1);
-
-            });
+            }
         });
     }
 
@@ -240,9 +264,11 @@ export class ChatComponent implements OnInit {
                 if (this.authService.getActualUser()) {
                     let dateTime = this.getDateTimeMesssage();
                     let arrayDateTime = dateTime.split(" ");
-                    this.messageService.insertNewHistory("feriados", stringFeriados, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
+                    if (this.authService.getActualUser()) {
+                        this.messageService.insertNewHistory("feriados", stringFeriados, arrayDateTime[1], arrayDateTime[0], this.codigo).subscribe(response => {
 
-                    });
+                        });
+                    }
                 }
             }
         });
